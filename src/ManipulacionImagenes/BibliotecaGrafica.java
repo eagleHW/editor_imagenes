@@ -97,73 +97,55 @@ public class BibliotecaGrafica {
          return imagen;
 
     }
-
-    /*
+ 
     public BufferedImage filtro_mosaico(File file_image, int tam_matrix) throws IOException{
 
         double[][] blur_matrix = {{1,1,1},{1,1,1},{1,1,1}};
         return filtro_convolucion(file_image,blur_matrix,9);
 
     }
-*/
+    
     public BufferedImage filtro_reduccion(File file_image, int tam_matrix) throws IOException{
-
+        
         BufferedImage imagen_original = ImageIO.read(file_image);
         BufferedImage imagen_creada;
-
-        int heigth = imagen_original.getHeight();
-        int width = imagen_original.getWidth();
         
-        imagen_creada = new BufferedImage(
-                (int)Math.round((width*1.0/tam_matrix))+1, (int) Math.round(heigth*1.0/tam_matrix)+1,BufferedImage.TYPE_INT_ARGB);
-
+        double width = imagen_original.getWidth() / (tam_matrix * 1.0);
+        double heigth = imagen_original.getHeight() / (tam_matrix * 1.0);
+        
+        int new_width = (int) Math.ceil(width);
+        int new_heigth = (int) Math.ceil(heigth);
+        
+        imagen_creada = new BufferedImage(new_width,new_heigth,BufferedImage.TYPE_INT_ARGB);
+                                    //Dividir
         int alpha,red,green,blue;
-     
-        int[] argb_matrix;
-        int matrix_tam;
+        int [][] matrix;
+        int [][][] argbs_matrix;
         int argb = 0;
-
-        int x_red = 0;
-        int y_red = 0;
-
-        for( int x = (tam_matrix/2); x + 1 < width ; x+= tam_matrix){
-            for(int y = (tam_matrix/2); y + 1 < heigth; y+= tam_matrix){
-
-                alpha = 0;
-                red = 0;
-                green = 0;
-                blue = 0;
-
-                argb_matrix = getMatrix(y,x,tam_matrix,tam_matrix,imagen_original);
-                matrix_tam = argb_matrix.length;
-
-                for(int pixel = 0; pixel < matrix_tam ; pixel++ ){
-
-                    alpha += getAlphaNum(argb_matrix[pixel]);
-                    red += getRedNum(argb_matrix[pixel]);
-                    green += getGreenNum(argb_matrix[pixel]);
-                    blue += getBlueNum(argb_matrix[pixel]);
-                }
-
-                argb = getARGBNum(255,red/matrix_tam,
-                                            green/matrix_tam,blue/matrix_tam);
-
-                y_red++;
-
-                imagen_creada.setRGB(x_red, y_red, argb);
-
+                
+        for(int j = 0; j < imagen_original.getWidth(); j += tam_matrix){
+            for(int i = 0; i < imagen_original.getHeight(); i += tam_matrix){
+             
+                matrix = getEdgeCompMatrix(i,j,tam_matrix,tam_matrix,imagen_original);
+                argbs_matrix = getRGBMatrixs(matrix);
+                
+                red = getAverage(argbs_matrix[0]);
+                green = getAverage(argbs_matrix[1]);
+                blue = getAverage(argbs_matrix[2]);
+                
+                argb = getARGBNum(255,red,green,blue);
+                     
+                imagen_creada.setRGB(j/tam_matrix , i/tam_matrix , argb );
+                
             }
             
-            x_red++;
-            y_red = 0;
         }
-
-        
         
         return imagen_creada;
-
+        
     }
-/*
+    
+    
     public BufferedImage filtro_convolucion(File file_image, double[][] valores, int factor) throws IOException{
         
       BufferedImage imagen_original = ImageIO.read(file_image);
@@ -203,7 +185,7 @@ public class BibliotecaGrafica {
       return imagen_modificada;
       
     }
-  */  
+    
     
     // Sigue regresando -1
     public int getAlphaNum(int argb){
@@ -264,6 +246,20 @@ public class BibliotecaGrafica {
 
     }
 
+    
+    public int getAverage(int[][] matrix){
+        
+        int average = 0;
+        
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                average += matrix[i][j];
+            }
+        }
+        
+        return (int) ( average / (matrix.length * matrix[0].length ));
+        
+    }
     
     //Revisar (Matriz hexadecimales)
     public int[][][] getRGBMatrixs(int[][] img_matrix){
@@ -362,8 +358,7 @@ public class BibliotecaGrafica {
         }
 
     }
-   
-    // Tiene problemas con matrices de tamaño par que salen de los bordes
+  
     public int[][] getCompMatrix(int y, int x, int heigth_mat, int width_mat, BufferedImage imagen ){
     
         int heigth_img = imagen.getHeight();
@@ -413,6 +408,54 @@ public class BibliotecaGrafica {
         
     }
  
+    public int[][] getEdgeCompMatrix(int y, int x, int heigth_mat, int width_mat, BufferedImage imagen){
+    
+        int heigth_img = imagen.getHeight();
+        int width_img =  imagen.getWidth();
+                
+        int[][] matrix = new int[heigth_mat][width_mat];
+        
+        int val_x = 0;
+        int val_y = 0;
+                
+        // j corresponde con x
+        // i corresponde con y
+        
+        for(int i = 0; i < heigth_mat; i++){
+            for(int j = 0; j < width_mat; j++ ){
+                
+                if(x + j > 0 && x + j < width_img){
+                    val_x = x + j;
+                }else{
+                    val_x = (x +j) < 0 ? width_img + (x + j) : (x + j) % width_img;    
+                
+                    // En caso de que heigth_img + (y_init + j) sea menor que 0 
+                    if(val_x < 0){
+                        val_x = -(val_x) % width_img;
+                    }             
+                }
+                     
+                
+                if(y + i > 0 && y + i < heigth_img){
+                    val_y = y + i;
+                }else{
+                    val_y = (y + i) < 0 ? heigth_img + (y + i) : (y + i) % heigth_img; 
+                
+                    // En caso de que width_img + (x + i) sea menor que 0
+                    if(val_y < 0){
+                        val_y = -(val_y) % heigth_img;
+                    }          
+                }
+                
+                matrix[i][j] =  imagen.getRGB(val_x,val_y);
+              
+            }
+        }   
+    
+        return matrix;
+        
+    }
+    
     public int convolucion(int[][] pixel, double[][] values, int factor){
        
         int width;
