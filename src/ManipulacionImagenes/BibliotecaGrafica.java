@@ -98,13 +98,14 @@ public class BibliotecaGrafica {
 
     }
 
+    /*
     public BufferedImage filtro_mosaico(File file_image, int tam_matrix) throws IOException{
 
         double[][] blur_matrix = {{1,1,1},{1,1,1},{1,1,1}};
         return filtro_convolucion(file_image,blur_matrix,9);
 
     }
-
+*/
     public BufferedImage filtro_reduccion(File file_image, int tam_matrix) throws IOException{
 
         BufferedImage imagen_original = ImageIO.read(file_image);
@@ -162,7 +163,7 @@ public class BibliotecaGrafica {
         return imagen_creada;
 
     }
-
+/*
     public BufferedImage filtro_convolucion(File file_image, double[][] valores, int factor) throws IOException{
         
       BufferedImage imagen_original = ImageIO.read(file_image);
@@ -202,7 +203,7 @@ public class BibliotecaGrafica {
       return imagen_modificada;
       
     }
-    
+  */  
     
     // Sigue regresando -1
     public int getAlphaNum(int argb){
@@ -370,9 +371,7 @@ public class BibliotecaGrafica {
         
         int x_init = x - (width_mat / 2);
         int y_init = y - (heigth_mat / 2);
-        
-        int x_init_cont = x_init;
-        
+                
         int[][] matrix = new int[heigth_mat][width_mat];
         
         int val_x = 0;
@@ -380,18 +379,34 @@ public class BibliotecaGrafica {
         
         for(int i = 0; i < heigth_mat; i++){
             for(int j = 0; j < width_mat; j++ ){
-                     
-                val_x = x_init_cont < 0 ? (width_img + x_init_cont) : ( x_init_cont % width_img);
-                val_y = y_init < 0 ? (heigth_img + y_init) : ( y_init % heigth_img );
+                            
+                if(x_init + i > 0 && x_init + i < width_img){
+                    val_x = x_init + i;
+                }else{
+                    val_x = (x_init + i) < 0 ? width_img + (x_init + i) : (x_init + i) % width_img; 
+                
+                    // En caso de que width_img + (x_init + i) sea menor que 0
+                    if(val_x < 0){
+                        val_x = -(val_x) % width_img;
+                    }          
+                }
+                
+                if(y_init + j > 0 && y_init + j < heigth_img){
+                    val_y = y_init + j;
+                }else{
+                    val_y = (y_init +j) < 0 ? heigth_img + (y_init + j) : (y_init + j) % heigth_img;    
+                
+                    // En caso de que heigth_img + (y_init + j) sea menor que 0 
+                    if(val_y < 0){
+                        val_y = -(val_y) % heigth_img;
+                    }
+                    
+                }
                 
                 matrix[i][j] =  imagen.getRGB(val_x,val_y);
                 
-                x_init_cont++;
-                
             }
             
-            x_init_cont = x_init;
-            y_init++;
         }
         
         return matrix;
