@@ -23,14 +23,15 @@ public class EditorGrafico {
         
        new Interfaz(); 
    
-        /*
+       /*
        BibliotecaGrafica bg = new BibliotecaGrafica();
-        
-       int[][] matrizA = {{1,  2, 3,4,  5},
-                          {6,  7, 8,9, 10},
-                          {11,12,13,14,15},
-                          {16,17,18,19,20},
-                          {21,22,23,24,25}};
+       
+       
+       int[][] matrizA = {{1,  2, 3,4,  5,1},
+                          {6,  7, 8,9, 10,1},
+                          {11,12,13,14,15,1},
+                          {16,17,18,19,20,1},
+                          {21,22,23,24,25,1}};
        
        int[][] matrizB = {{1,  0, 0, 0, 0},
                           {0,  1, 0, 0, 0},
@@ -39,21 +40,17 @@ public class EditorGrafico {
                           { 0, 0, 0, 0, 1}};
        
        
-       //int[][] res = bg.getCompMatrix(3, 2, 5, 5, matrizA);
+       
+       int[][] res = bg.getEdgeCompMatrix(0, 0, 5, 6, matrizA);
         
-       
-       Matriz matA = new Matriz(res); 
-       //Matriz matB = new Matriz(matrizB);
-      
-       //new Matriz(bg.getCompMatrix(4,4,5,5, matrizA)).print();
-       
-       
-       matA.print();
-       //matB.print();
-       //matB.multiplicar(matA).print();
+       int[][] matrizC = res;
+        
+       for(int i = 0; i < matrizC.length; i++){
+           
+            System.out.println(Arrays.toString(matrizC[i]));
+           
+       }
        */
-       
-       
     }    
     
 }
