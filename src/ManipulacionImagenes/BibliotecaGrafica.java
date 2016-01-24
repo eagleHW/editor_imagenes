@@ -375,10 +375,10 @@ public class BibliotecaGrafica {
         for(int i = 0; i < heigth_mat; i++){
             for(int j = 0; j < width_mat; j++ ){
                             
-                if(x_init + i > 0 && x_init + i < width_img){
-                    val_x = x_init + i;
+                if(x_init + j > 0 && x_init + j < width_img){
+                    val_x = x_init + j;
                 }else{
-                    val_x = (x_init + i) < 0 ? width_img + (x_init + i) : (x_init + i) % width_img; 
+                    val_x = (x_init + j) < 0 ? width_img + (x_init + j) : (x_init + j) % width_img; 
                 
                     // En caso de que width_img + (x_init + i) sea menor que 0
                     if(val_x < 0){
@@ -386,10 +386,10 @@ public class BibliotecaGrafica {
                     }          
                 }
                 
-                if(y_init + j > 0 && y_init + j < heigth_img){
-                    val_y = y_init + j;
+                if(y_init + i > 0 && y_init + i < heigth_img){
+                    val_y = y_init + i;
                 }else{
-                    val_y = (y_init +j) < 0 ? heigth_img + (y_init + j) : (y_init + j) % heigth_img;    
+                    val_y = (y_init +i) < 0 ? heigth_img + (y_init + i) : (y_init + i) % heigth_img;    
                 
                     // En caso de que heigth_img + (y_init + j) sea menor que 0 
                     if(val_y < 0){
