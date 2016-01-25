@@ -116,7 +116,7 @@ public class BibliotecaGrafica {
         int new_width = (int) Math.ceil(width);
         int new_heigth = (int) Math.ceil(heigth);
         
-        imagen_creada = new BufferedImage(new_width,new_heigth,BufferedImage.TYPE_INT_ARGB);
+        imagen_creada = new BufferedImage(new_width,new_heigth,BufferedImage.TYPE_INT_RGB);
                                     //Dividir
         int alpha,red,green,blue;
         int [][] matrix;
@@ -144,8 +144,7 @@ public class BibliotecaGrafica {
         return imagen_creada;
         
     }
-    
-    
+   
     public BufferedImage filtro_convolucion(File file_image, double[][] valores, int factor) throws IOException{
         
       BufferedImage imagen_original = ImageIO.read(file_image);
@@ -246,7 +245,6 @@ public class BibliotecaGrafica {
 
     }
 
-    
     public int getAverage(int[][] matrix){
         
         int average = 0;
@@ -487,7 +485,7 @@ public class BibliotecaGrafica {
                               BufferedImage bottom_rigth){
         
         BufferedImage imagen_creada = new BufferedImage(top_left.getWidth() + top_rigth.getWidth(),
-                                               top_left.getHeight() + bottom_left.getHeight(),BufferedImage.TYPE_INT_ARGB);
+                                               top_left.getHeight() + bottom_left.getHeight(),BufferedImage.TYPE_INT_RGB);
         
         
         BufferedImage[] imagenes = {top_left,top_rigth,bottom_left,bottom_rigth};
