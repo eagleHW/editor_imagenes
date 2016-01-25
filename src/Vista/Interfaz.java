@@ -8,6 +8,7 @@ import Controlador.GrisesListener;
 import Controlador.RotacionListener;
 import Controlador.WarholMouseListener;
 import ManipulacionImagenes.BibliotecaGrafica;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -340,8 +341,11 @@ public class Interfaz extends JFrame {
             this.setLayout(new GridLayout(1,2,5,10));
 
             warhol_panel_izq = new JPanel(new GridLayout(2,2,5,10));
-            warhol_panel_der = new JPanel();
+            warhol_panel_der = new JPanel(new BorderLayout());
 
+            warhol_panel_der.add(scroll_img_der, BorderLayout.CENTER);
+            warhol_panel_der.add(button_generar, BorderLayout.PAGE_START);
+            
             warhol_label_1.setHorizontalAlignment(JLabel.CENTER);
             warhol_label_2.setHorizontalAlignment(JLabel.CENTER);
             warhol_label_3.setHorizontalAlignment(JLabel.CENTER);
@@ -376,14 +380,13 @@ public class Interfaz extends JFrame {
             
             button_generar.addActionListener((ActionEvent e) -> {
                 
-                img_der.remove(button_generar);
-                //poner_imagen_der(bg.pegar_imagenes(img0, img1, img2, img3));
+                poner_imagen_der(bg.pegar_imagenes(img0, img1, img2, img3));
                 prueba();
                 
             });
             
             this.add(warhol_panel_izq);
-            this.add(new JScrollPane(img_der.add(button_generar)));
+            this.add(warhol_panel_der);
             this.revalidate();
 
         }

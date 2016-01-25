@@ -71,7 +71,7 @@ public class FiltrosListener implements ActionListener{
             case "Warhol":
                 
                     ventana_principal.warholizate();
-                    ventana_principal.repaint();
+                    //ventana_principal.repaint();
                 
                 break;
              
