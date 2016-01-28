@@ -23,33 +23,83 @@ public class FiltrosRotacion {
     
     public FiltrosRotacion(){}
     
-    public BufferedImage filtro_rotacion90(File file_imagen){
+    public BufferedImage filtro_rotacion90(File file_imagen) throws IOException{
         
         BufferedImage imagen_original;
-        try {
+        
             imagen_original = ImageIO.read(file_imagen);
        
             BufferedImage imagen_creada = new BufferedImage(imagen_original.getHeight(),
-                                                            imagen_original.getWidth(),BufferedImage.TYPE_INT_ARGB);
+                                                            imagen_original.getWidth(),BufferedImage.TYPE_INT_RGB);
             int heigth = imagen_original.getHeight();
             int width = imagen_original.getWidth();
         
-            int argb;
+            int rgb;
         
             for(int x = 0; x < width; x++){ 
                 for(int y = 0; y < heigth; y++){
                     
-                    argb = imagen_original.getRGB(x, y);
-                    imagen_creada.setRGB(x, y, argb);
+                    rgb = imagen_original.getRGB(x, y);
+                    imagen_creada.setRGB(y, (width-1) - x , rgb);
                 
                 }
             }
+            
+            return imagen_creada;
+    
+    }
+    
+    public BufferedImage filtro_rotacion180(File file_imagen) throws IOException{
         
-        }  catch (IOException ex) {
-            Logger.getLogger(FiltrosRotacion.class.getName()).log(Level.SEVERE, null, ex);
-       }
+         BufferedImage imagen_original;
+        
+            imagen_original = ImageIO.read(file_imagen);
        
-        return null;
+            BufferedImage imagen_creada = new BufferedImage(imagen_original.getWidth(),
+                                                            imagen_original.getHeight(),BufferedImage.TYPE_INT_RGB);
+            int heigth = imagen_original.getHeight();
+            int width = imagen_original.getWidth();
+        
+            int rgb;
+        
+            for(int x = 0; x < width; x++){ 
+                for(int y = 0; y < heigth; y++){
+                    
+                    rgb = imagen_original.getRGB(x, y);
+                    imagen_creada.setRGB(x, (heigth -1) - y , rgb);
+                
+                }
+            }
+            
+            return imagen_creada;
         
     }
+
+    public BufferedImage filtro_rotacion270(File file_imagen) throws IOException{
+    
+          BufferedImage imagen_original;
+        
+            imagen_original = ImageIO.read(file_imagen);
+       
+            BufferedImage imagen_creada = new BufferedImage(imagen_original.getHeight(),
+                                                            imagen_original.getWidth(),BufferedImage.TYPE_INT_RGB);
+            int heigth = imagen_original.getHeight();
+            int width = imagen_original.getWidth();
+        
+            int rgb;
+        
+            for(int x = 0; x < width; x++){ 
+                for(int y = 0; y < heigth; y++){
+                    
+                    rgb = imagen_original.getRGB(x, y);
+                    imagen_creada.setRGB(  (heigth -1) - y  , x , rgb);
+                
+                }
+            }
+            
+            return imagen_creada;
+        
+    
+    }
+    
 }

@@ -79,7 +79,7 @@ public class FiltrosListener implements ActionListener{
             case "Warhol":
                 
                  ventana_principal.eliminar_imagen_der();
-                ventana_principal.warholizate();
+                 ventana_principal.warholizate();
                 
                 break;
              
