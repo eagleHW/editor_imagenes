@@ -26,6 +26,9 @@ public class RotacionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        
+        ventana_principal.eliminar_imagen_der();
+        ventana_principal.undo_warhol(); 
+        
        switch(e.getActionCommand()){
            
             case "90":

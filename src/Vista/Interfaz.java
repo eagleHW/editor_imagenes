@@ -42,7 +42,7 @@ public class Interfaz extends JFrame {
     JLabel img_der = new JLabel();
     JScrollPane scroll_img_izq = new JScrollPane(img_izq);
     JScrollPane scroll_img_der = new JScrollPane(img_der);
-    
+       
     // Formato Interfaz Warhol
     
     boolean warhol_bool = false;
@@ -298,6 +298,13 @@ public class Interfaz extends JFrame {
         img_der.setIcon(new ImageIcon(imagen));
     }
     
+    public void eliminar_imagen_der(){
+        
+        this.imagen = null;
+        img_der.setIcon(null);
+        
+    }
+    
     public void poner_imagen_espera(){
         BufferedImage imagen;
         try {
@@ -362,7 +369,7 @@ public class Interfaz extends JFrame {
               warhol_label_2.setIcon(new ImageIcon(img1));
               warhol_label_3.setIcon(new ImageIcon(img2));
               warhol_label_4.setIcon(new ImageIcon(img3));
-
+      
               warhol_label_1.addMouseListener(warhol_listener);
               warhol_label_2.addMouseListener(warhol_listener);
               warhol_label_3.addMouseListener(warhol_listener);
@@ -381,7 +388,6 @@ public class Interfaz extends JFrame {
             button_generar.addActionListener((ActionEvent e) -> {
                 
                 poner_imagen_der(bg.pegar_imagenes(img0, img1, img2, img3));
-                prueba();
                 
             });
             
@@ -391,9 +397,26 @@ public class Interfaz extends JFrame {
 
         }
     }
-    
-    public void prueba(){
-        this.repaint();
+
+    public void undo_warhol(){
+         
+        if(warhol_bool == true){
+            
+         this.remove(warhol_panel_izq);
+         this.remove(warhol_panel_der);
+            
+         this.setLayout(new GridLayout(1,2,5,10));
+
+         this.add(scroll_img_izq);
+         this.add(scroll_img_der);   
+         this.revalidate();
+         
+         warhol_bool = false;
+        
+        }
+        
     }
-    
+
+
 }
+

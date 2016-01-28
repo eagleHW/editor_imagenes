@@ -29,7 +29,10 @@ public class GrisesListener implements ActionListener{
     
         FiltrosGrises fg = new FiltrosGrises();
        
-         try {
+        ventana_principal.eliminar_imagen_der();
+        ventana_principal.undo_warhol();
+         
+        try {
        
         
             switch(e.getActionCommand()){
