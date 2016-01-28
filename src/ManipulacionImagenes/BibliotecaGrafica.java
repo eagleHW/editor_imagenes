@@ -46,7 +46,12 @@ public class BibliotecaGrafica {
     public BufferedImage filtro_rgb(File file_image,int red,int green,int blue) throws IOException{
 
         BufferedImage imagen = ImageIO.read(file_image);
+        return filtro_rgb(imagen,red,green,blue);
+        
+    }
 
+    public BufferedImage filtro_rgb(BufferedImage imagen, int red, int green, int blue) throws IOException{
+        
         int heigth = imagen.getHeight();
         int width = imagen.getWidth();
 
@@ -63,8 +68,9 @@ public class BibliotecaGrafica {
             }
         }
          return imagen;
+        
     }
-
+    
     public BufferedImage filtro_brillo(File file_image, int constante) throws IOException{
 
         BufferedImage imagen = ImageIO.read(file_image);

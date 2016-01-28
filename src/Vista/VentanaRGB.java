@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +34,7 @@ public class VentanaRGB extends JFrame {
     Interfaz ventana_principal;
     boolean warhol = false;
     int num;
+    BufferedImage imagen_warhol;
     
     public VentanaRGB(Interfaz ventana_principal){
         
@@ -42,11 +44,12 @@ public class VentanaRGB extends JFrame {
         
     }
     
-    public VentanaRGB(Interfaz ventana_principal, int num){
+    public VentanaRGB(Interfaz ventana_principal, int num, BufferedImage imagen_warhol){
         
         super("Modificar RGB");
         this.ventana_principal = ventana_principal;
         this.num = num;
+        this.imagen_warhol = imagen_warhol;
         warhol = true;
         
         cargar_elementos();
@@ -119,7 +122,7 @@ public class VentanaRGB extends JFrame {
                 if(!warhol){
                     ventana_principal.poner_imagen_der(bg.filtro_rgb(ventana_principal.getFile(),red,green,blue));
                 }else{
-                    ventana_principal.poner_imagen_warhol(num,bg.filtro_rgb(ventana_principal.getFile(),red,green,blue) );
+                    ventana_principal.poner_imagen_warhol(num,bg.filtro_rgb(imagen_warhol,red,green,blue) );
                 }
                           
             } catch (IOException ex) {

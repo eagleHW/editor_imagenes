@@ -10,6 +10,8 @@ import Vista.Interfaz;
 import Vista.VentanaRGB;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -28,9 +30,10 @@ public class WarholMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         
-        int num_ventana = Integer.parseInt(((JLabel)e.getSource()).getName());
-        
-        new VentanaRGB(ventana_principal,num_ventana);
+        int num_ventana = Integer.parseInt(((JLabel)e.getSource()).getName()); 
+        BufferedImage imagen = (BufferedImage)((ImageIcon)(((JLabel)e.getSource()).getIcon())).getImage(); 
+ 
+        new VentanaRGB(ventana_principal,num_ventana,imagen);
        
     }
 
