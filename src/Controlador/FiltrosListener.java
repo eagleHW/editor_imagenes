@@ -38,21 +38,21 @@ public class FiltrosListener implements ActionListener{
             case "Azar":
    
                     ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_warhol();
+                    ventana_principal.undo_all();
                     ventana_principal.poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
                 
                 break;
             case "RGB":
                 
                     ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_warhol();
+                    ventana_principal.undo_all();
                     new VentanaRGB(ventana_principal);
                    
                 break;
             case "Brillo":
                   
                     ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_warhol();
+                    ventana_principal.undo_all();
                     new VentanaBrillo(ventana_principal);
                   
                 break;
@@ -65,24 +65,42 @@ public class FiltrosListener implements ActionListener{
         
                  //ventana_principal.poner_imagen_espera();
                  ventana_principal.eliminar_imagen_der();
-                 ventana_principal.undo_warhol();
+                 ventana_principal.undo_all();
                  ventana_principal.poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
                 
                 break;
             case "Reduccion": 
                 
                  ventana_principal.eliminar_imagen_der();
-                 ventana_principal.undo_warhol();
+                 ventana_principal.undo_all();
                 new VentanaReduccion(ventana_principal);
                 
                 break;
             case "Warhol":
-                
+                  
                  ventana_principal.eliminar_imagen_der();
+                 ventana_principal.undo_all();
                  ventana_principal.warholizate();
                 
                 break;
-             
+            case "Rotacion": 
+                 // Para ver las acciones del subMenu Rotacion ir a RotacionListener.java
+                break;
+            
+            case "Blending":
+              
+                ventana_principal.undo_all();
+                ventana_principal.eliminar_imagen_der();
+                ventana_principal.do_blending();
+                
+                break;
+            case "Favicom":
+                
+                ventana_principal.undo_all();
+                ventana_principal.eliminar_imagen_der();
+                ventana_principal.do_favicom();
+                
+                break;
             default:
                 System.out.println(e.getActionCommand());    
         

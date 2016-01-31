@@ -30,7 +30,7 @@ public class GrisesListener implements ActionListener{
         FiltrosGrises fg = new FiltrosGrises();
        
         ventana_principal.eliminar_imagen_der();
-        ventana_principal.undo_warhol();
+        ventana_principal.undo_all();
          
         try {
        

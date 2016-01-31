@@ -10,7 +10,10 @@ import Controlador.WarholMouseListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,14 +31,23 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author rae
  */
 public class Interfaz extends JFrame {
+    
+    File file_imagen = null;
+    BufferedImage imagen = null;
     
     // Formato Interfaz Normal
     
@@ -65,10 +78,54 @@ public class Interfaz extends JFrame {
     // Imagenes Warhol
     BufferedImage img0,img1,img2,img3;
     
-    File file_imagen = null;
-    BufferedImage imagen = null;
+    // Formato Interfaz blending
 
-       
+    boolean blending_bool = false;
+    
+    JPanel blending_panel_izq;
+    JPanel blending_panel_der;
+   
+    JLabel blending_label_sup = new JLabel();
+    JLabel blending_label_inf = new JLabel();
+    
+    JScrollPane blending_scroll_label_sup = new JScrollPane(blending_label_sup);
+    JScrollPane blending_scroll_label_inf = new JScrollPane(blending_label_inf);
+            
+    JSlider blending_slider = new JSlider(SwingConstants.HORIZONTAL,0,100,1);
+    
+    // Imagenes Blending
+    BufferedImage blending_img_sup, blending_img_inf;
+    
+    // Formato Interfaz Favicom 
+    
+    boolean favicom_bool = false;
+    
+    JPanel favicom_panel_izq_inf_radio = new JPanel();
+    JPanel favicom_panel_izq_inf = new JPanel();
+    JPanel favicom_panel_der = new JPanel();
+    JPanel favicom_panel_izq = new JPanel(); 
+    
+    JLabel favicom_label_sup = new JLabel();
+    JLabel favicom_label_inf = new JLabel();
+    
+    JScrollPane favicom_scroll_label_sup = new JScrollPane(favicom_label_sup);
+    JScrollPane favicom_scroll_label_inf = new JScrollPane(favicom_label_inf);
+    
+    JRadioButton izq_sup = new JRadioButton("Esquina superior izquierda",true);
+    JRadioButton der_sup = new JRadioButton("Esquina superior derecha",false);
+    JRadioButton izq_inf = new JRadioButton("Esquina inferior izquierda",false);
+    JRadioButton der_inf = new JRadioButton("Esquina inferior derecha",false);
+    ButtonGroup opciones = new ButtonGroup();
+    
+    JButton favicom_boton = new JButton("Aceptar");
+    
+    JLabel favicom_spinner_label = new JLabel("Nivel de transparencia (%)");
+    SpinnerModel favicom_spinner_model = new SpinnerNumberModel(0,0,100,1);
+    JSpinner favicom_spinner = new JSpinner(favicom_spinner_model);
+    
+    //Imagenes Favicom
+    BufferedImage favicom_img_sup, favicom_img_inf;
+    
     
     public Interfaz(){
     
@@ -148,7 +205,9 @@ public class Interfaz extends JFrame {
         JMenuItem itemMosaico = new JMenuItem("Mosaico");
         JMenuItem itemReduccion = new JMenuItem("Reduccion");
         JMenuItem itemWarhol = new JMenuItem("Warhol");
-        
+        JMenuItem itemBlending = new JMenuItem("Blending");
+        JMenuItem itemFavicom = new JMenuItem("Favicom");
+                
         // Creamos el submenu Grises
     
         JMenu menuGrises = new JMenu("Grises");
@@ -177,6 +236,8 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemWarhol);
         menuFiltros.add(menuConvolucion);
         menuFiltros.add(menuRotacion);
+        menuFiltros.add(itemBlending);
+        menuFiltros.add(itemFavicom);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -188,7 +249,9 @@ public class Interfaz extends JFrame {
         itemMosaico.addActionListener(filtros_listener);
         itemReduccion.addActionListener(filtros_listener);
         itemWarhol.addActionListener(filtros_listener);
-            
+        itemBlending.addActionListener(filtros_listener);
+        itemFavicom.addActionListener(filtros_listener);
+        
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
         barra.add(menuFiltros);
@@ -262,7 +325,6 @@ public class Interfaz extends JFrame {
         itemConvolucion9x9.addActionListener(convolucion_listener);
         
     }
-    
     
     public void crear_submenu_rotacion(JMenu menuRotacion){
         
@@ -416,7 +478,264 @@ public class Interfaz extends JFrame {
         }
         
     }
+    
+    public void do_blending(){
+        
+        if(blending_bool != true){
+         
+            blending_bool = true;
+            
+            this.remove(scroll_img_izq);
+            this.remove(scroll_img_der);
+            
+            this.setLayout(new GridLayout(1,2,5,10));
 
+            blending_panel_izq = new JPanel(new GridBagLayout()); 
+            blending_panel_der = new JPanel(new BorderLayout());
+            
+            blending_panel_der.add(scroll_img_der,BorderLayout.CENTER);
+            
+            blending_label_sup.setHorizontalAlignment(JLabel.CENTER);
+            blending_label_inf.setHorizontalAlignment(JLabel.CENTER);
+            
+            blending_label_inf.setText("Click para agregar imagen");
+            
+            try{
+             
+                blending_img_sup = ImageIO.read(file_imagen);
+                //blending_img_inf = ImageIO.read(file_imagen);
+                
+                blending_label_sup.setIcon(new ImageIcon(blending_img_sup));
+                //blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
+             
+            }catch (IOException ex) {
+                System.out.println("Error al cargar imagen");
+            }
+        
+            GridBagConstraints especif = new GridBagConstraints(); 
 
+            especif.gridx = 1;
+            especif.gridy = 1;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 1.0;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+        
+            blending_panel_izq.add(blending_scroll_label_sup,especif);
+           
+            especif.gridx = 1;
+            especif.gridy = 2;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 1.0;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+        
+            
+            blending_panel_izq.add(blending_scroll_label_inf,especif);
+        
+            especif.gridx = 0;
+            especif.gridy = 3;
+            especif.gridwidth = 3;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 0.5;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.HORIZONTAL;
+            especif.anchor = GridBagConstraints.NORTH;
+            
+            blending_panel_izq.add(blending_slider,especif);
+        
+            blending_slider.setPaintLabels(true);
+            blending_slider.setPaintTicks(true);
+            blending_slider.setMajorTickSpacing(10);
+            
+            this.add(blending_panel_izq);
+            this.add(blending_panel_der);
+            this.revalidate();
+            
+        }
+        
+    }
+    
+    public void undo_blending(){
+        
+        if(blending_bool == true){
+            
+            this.remove(blending_panel_izq);
+            this.remove(blending_panel_der);
+ 
+            this.setLayout(new GridLayout(1,2,5,10));
+
+            this.add(scroll_img_izq);
+            this.add(scroll_img_der);   
+            this.revalidate();
+            
+            blending_bool = false;
+            
+        }
+        
+    }
+    
+    public void do_favicom(){
+        
+        if(favicom_bool != true){
+            
+            this.remove(scroll_img_izq);
+            this.remove(scroll_img_der);
+            
+            this.setLayout(new GridLayout(1,2,5,10));
+
+            favicom_bool = true;
+            
+            favicom_spinner_label.setHorizontalAlignment(JLabel.CENTER);
+            
+            favicom_panel_izq = new JPanel(new GridBagLayout()); 
+            favicom_panel_der = new JPanel(new BorderLayout());
+            
+            favicom_panel_der.add(scroll_img_der,BorderLayout.CENTER);
+            
+            opciones.add(izq_sup);
+            opciones.add(der_sup);
+            opciones.add(izq_inf);
+            opciones.add(der_inf);
+            
+            favicom_label_sup.setHorizontalAlignment(JLabel.CENTER);
+            favicom_label_inf.setHorizontalAlignment(JLabel.CENTER);
+            
+            try{
+                
+                favicom_img_sup = ImageIO.read(file_imagen);
+                favicom_img_inf = ImageIO.read(file_imagen);
+                        
+                favicom_label_sup.setIcon(new ImageIcon(favicom_img_sup));
+                favicom_label_inf.setIcon(new ImageIcon(favicom_img_inf));
+                
+            }catch(IOException ex) {
+                System.out.println("Error al cargar imagen"); 
+            }
+            
+            GridBagConstraints especif = new GridBagConstraints();
+            
+            especif.gridx = 0;
+            especif.gridy = 0;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 1.0;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+            
+            
+            favicom_panel_izq.add(favicom_scroll_label_sup,especif);
+            
+            especif.gridx = 0;
+            especif.gridy = 1;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 0.5;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+            especif.ipadx = 0;
+            
+            favicom_panel_izq.add(favicom_panel_izq_inf,especif);
+        
+            especif.gridx = 0;
+            especif.gridy = 2;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 0.10;
+            especif.insets = new Insets(20,10,20,0);
+            especif.fill = GridBagConstraints.NONE;
+            especif.anchor = GridBagConstraints.CENTER;
+            
+            
+            favicom_panel_izq.add(favicom_boton,especif);
+            
+            // Aqui empieza la comfiguracion del subpanel inferior del lado izquierdo
+            
+            favicom_panel_izq_inf.setLayout(new GridBagLayout());
+            
+            
+            favicom_panel_izq_inf_radio.setLayout(new GridLayout(6,1));
+            favicom_panel_izq_inf_radio.add(favicom_spinner_label);
+            favicom_panel_izq_inf_radio.add(favicom_spinner);
+            favicom_panel_izq_inf_radio.add(izq_sup);
+            favicom_panel_izq_inf_radio.add(der_sup);
+            favicom_panel_izq_inf_radio.add(izq_inf);
+            favicom_panel_izq_inf_radio.add(der_inf);
+            
+            
+           
+            especif.gridx = 0;
+            especif.gridy = 0;
+            especif.gridwidth = 2;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 1.0;
+            //especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+            
+             
+            favicom_panel_izq_inf.add(favicom_scroll_label_inf,especif);
+            
+            especif.gridx = 2;
+            especif.gridy = 0;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 0.1;  
+            especif.weighty = 1.0;
+            //especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.VERTICAL;
+            especif.anchor = GridBagConstraints.CENTER;
+            
+            
+            favicom_panel_izq_inf.add(favicom_panel_izq_inf_radio,especif);
+            
+            
+            this.add(favicom_panel_izq);
+            this.add(favicom_panel_der);
+            this.revalidate();
+        
+        }
+        
+    }
+    
+    public void undo_favicom(){
+        
+        
+        if(favicom_bool == true){
+        
+            this.remove(favicom_panel_izq);
+            this.remove(favicom_panel_der);
+            
+            this.setLayout(new GridLayout(1,2,5,10));
+
+            this.add(scroll_img_izq);
+            this.add(scroll_img_der);   
+            this.revalidate();
+            
+            favicom_bool = false;
+            
+        }
+        
+    }
+    
+    public void undo_all(){
+        undo_warhol();
+        undo_blending();
+        undo_favicom();
+    }
+    
 }
 
