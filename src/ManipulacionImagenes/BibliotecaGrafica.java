@@ -260,6 +260,31 @@ public class BibliotecaGrafica {
     
     }
     
+    public BufferedImage filtro_sepia(BufferedImage imagen, int constante) throws IOException{
+       
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+ 
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int red, green, blue;
+        
+         for(int j = 0; j < imagen.getWidth() ; j++){
+            for(int i = 0; i < imagen.getHeight(); i++){
+            
+                red = getRedNum(imagen.getRGB(j,i)) +  ( 2 * constante );
+                green = getGreenNum(imagen.getRGB(j, i)) + constante;
+                blue = getBlueNum(imagen.getRGB(j, i));
+                
+                nueva_imagen.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+            
+            }
+         }
+          
+        return nueva_imagen;
+    }
+    
     // Sigue regresando -1
     public int getAlphaNum(int argb){
 

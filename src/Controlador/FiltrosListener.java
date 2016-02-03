@@ -101,6 +101,14 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.do_favicom();
                 
                 break;
+            
+            case "Sepia":
+                
+                ventana_principal.undo_all();
+                ventana_principal.eliminar_imagen_der();
+                ventana_principal.do_sepia();
+                
+                
             default:
                 System.out.println(e.getActionCommand());    
         

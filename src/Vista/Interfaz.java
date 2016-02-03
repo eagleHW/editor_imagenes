@@ -41,6 +41,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -130,7 +131,19 @@ public class Interfaz extends JFrame {
     //Imagenes Favicom
     BufferedImage favicom_img_sup, favicom_img_inf;
     
+    // Formato Interfaz Sepia 
     
+    boolean sepia_bool = false;
+    
+    JPanel sepia_panel_izq = new JPanel();
+    JPanel sepia_panel_der = new JPanel();
+    
+    JLabel sepia_label = new JLabel();
+    
+    JScrollPane sepia_scroll_label = new JScrollPane(sepia_label);
+    
+    JSlider sepia_slider = new JSlider(SwingConstants.HORIZONTAL,0,255,1);
+        
     public Interfaz(){
     
         super("Editor gráfico");
@@ -211,6 +224,8 @@ public class Interfaz extends JFrame {
         JMenuItem itemWarhol = new JMenuItem("Warhol");
         JMenuItem itemBlending = new JMenuItem("Blending");
         JMenuItem itemFavicom = new JMenuItem("Favicom");
+        JMenuItem itemSepia = new JMenuItem("Sepia");
+        JMenuItem itemAltoContraste = new JMenuItem("Alto Contraste");
                 
         // Creamos el submenu Grises
     
@@ -242,6 +257,8 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuRotacion);
         menuFiltros.add(itemBlending);
         menuFiltros.add(itemFavicom);
+        menuFiltros.add(itemSepia);
+        menuFiltros.add(itemAltoContraste);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -255,6 +272,8 @@ public class Interfaz extends JFrame {
         itemWarhol.addActionListener(filtros_listener);
         itemBlending.addActionListener(filtros_listener);
         itemFavicom.addActionListener(filtros_listener);
+        itemSepia.addActionListener(filtros_listener);
+        itemAltoContraste.addActionListener(filtros_listener);
         
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
@@ -351,23 +370,23 @@ public class Interfaz extends JFrame {
     
     public void poner_imagen_izq(File file_imagen){
         try {
-            imagen = ImageIO.read(file_imagen);
+            this.imagen = ImageIO.read(file_imagen);
             img_izq.setIcon(new ImageIcon(imagen));
             img_der.setIcon(null);
-            this.file_imagen = file_imagen;
+            this.file_imagen = file_imagen;  
         } catch (IOException ex) {
             System.out.println("Problema al cargar la imagen");
         }
     }
     
     public void poner_imagen_der(BufferedImage imagen){
-        this.imagen = imagen;
+        //this.imagen = imagen;  // Revisar ---------------------------------------------------------///////
         img_der.setIcon(new ImageIcon(imagen));
     }
     
     public void eliminar_imagen_der(){
         
-        this.imagen = null;
+       // this.imagen = null; // Revisar ---------------------------------------------------------///////
         img_der.setIcon(null);
         
     }
@@ -392,6 +411,8 @@ public class Interfaz extends JFrame {
     public File getFile(){
         return file_imagen;
     }
+    
+    // Warhol
     
     public void warholizate(){
           
@@ -483,6 +504,8 @@ public class Interfaz extends JFrame {
         imgs[i].setIcon(new ImageIcon(imagen));
         
     }
+    
+    // Blending
     
     public void do_blending(){
         
@@ -615,6 +638,8 @@ public class Interfaz extends JFrame {
         repaint();
         
     }
+    
+    // Favicom
     
     public void do_favicom(){
         
@@ -764,12 +789,105 @@ public class Interfaz extends JFrame {
         }
         
     }
+        
+    // Sepia
+    
+    public void do_sepia(){
+        
+        if(sepia_bool != true){
+         
+            this.remove(scroll_img_izq);
+            this.remove(scroll_img_der);
+            
+            this.setLayout(new GridLayout(1,2,5,10));
+            
+            sepia_bool = true;
+            
+            sepia_panel_izq = new JPanel(new GridBagLayout()); 
+            sepia_panel_der = new JPanel(new BorderLayout());
+            
+            sepia_panel_der.add(scroll_img_der,BorderLayout.CENTER);
+            
+            
+            
+             sepia_slider.addChangeListener((ChangeEvent e) -> {
+                try {
+                    
+                    Interfaz.this.poner_imagen_der(bg.filtro_sepia(this.imagen,sepia_slider.getValue()));
+             
+                } catch (IOException ex) {
+                    System.out.println("Errro el cargar la imagen");
+                }
+                
+             });
+            
+           
+             
+            GridBagConstraints especif = new GridBagConstraints();
+         
+            especif.gridx = 0;
+            especif.gridy = 0;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 1.0;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+        
+            sepia_panel_izq.add(scroll_img_izq,especif);
+            
+            especif.gridx = 0;
+            especif.gridy = 1;
+            especif.gridwidth = 1;
+            especif.gridheight = 1;
+            especif.weightx = 1.0;  
+            especif.weighty = 0.2;
+            especif.insets = new Insets(20,10,0,0);
+            especif.fill = GridBagConstraints.BOTH;
+            especif.anchor = GridBagConstraints.CENTER;
+            
+            sepia_panel_izq.add(sepia_slider,especif);
+        
+            sepia_slider.setPaintLabels(true);
+            sepia_slider.setPaintTicks(true);
+            sepia_slider.setMajorTickSpacing(15);
+            
+            this.add(sepia_panel_izq);
+            this.add(sepia_panel_der);
+            this.revalidate();
+        
+        }
+        
+    }
+    
+    public void undo_sepia(){
+    
+             if(sepia_bool == true){
+        
+            this.remove(sepia_panel_izq);
+            this.remove(sepia_panel_der);
+            
+            this.setLayout(new GridLayout(1,2,5,10));
+
+            this.add(scroll_img_izq);
+            this.add(scroll_img_der);   
+            this.revalidate();
+            
+            sepia_bool = false;
+            
+        }
+        
+    }
     
     public void undo_all(){
         undo_warhol();
         undo_blending();
         undo_favicom();
+        undo_sepia();
+        
     }
+    
     
 }
 
