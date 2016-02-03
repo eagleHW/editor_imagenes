@@ -191,6 +191,74 @@ public class BibliotecaGrafica {
       
     }
     
+    public BufferedImage filtro_blending(BufferedImage img1, BufferedImage img2, int porcentaje){
+        
+        BufferedImage imagen_creada = new BufferedImage(Math.max(img1.getWidth(), img2.getWidth()),
+                Math.max(img1.getHeight(), img2.getHeight()),BufferedImage.TYPE_INT_RGB);
+        
+        BufferedImage minwidth = img1.getWidth() <= img2.getWidth() ? img1 : img2;
+        BufferedImage minheight = img1.getHeight()<= img2.getHeight() ? img1 : img2;
+        
+        BufferedImage maxwidth = img1 == minwidth ? img2 : img1;
+        BufferedImage maxheight = img1 == minheight ? img2 : img1;
+        
+        int red, green, blue;
+        int rgb1, rgb2;
+        
+        boolean bool_eq_height = ( img1.getHeight() == img2.getHeight() ); // i >= minheight.getHeight() en el for
+        boolean bool_eq_width = ( img1.getWidth() == img2.getWidth() ); // j >= minwidth.getWidth() en el for 
+        
+        double f_porcentaje = porcentaje / 100.0 ;
+        
+        for(int j = 0; j < imagen_creada.getWidth() ; j++){
+            for(int i = 0; i < imagen_creada.getHeight(); i++){
+                
+                if( j < minwidth.getWidth() && i < minheight.getHeight() ){
+            
+                    rgb1 = img1.getRGB(j, i);
+                    rgb2 = img2.getRGB(j, i);
+                          
+                    red =  (int) (getRedNum(rgb1) * f_porcentaje + getRedNum(rgb2) * (1- f_porcentaje));
+                    green = (int) (getGreenNum(rgb1) * f_porcentaje + getGreenNum(rgb2) * (1- f_porcentaje));
+                    blue = (int) (getBlueNum(rgb1) * f_porcentaje + getBlueNum(rgb2) * (1- f_porcentaje));
+                    
+                    imagen_creada.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+                }
+                
+                
+                if ( ( !bool_eq_height ) && j < maxheight.getWidth() && i >= minheight.getHeight() ){
+                    
+                    rgb1 = maxheight.getRGB(j, i);
+        
+                    red = (int)(getRedNum(rgb1) * (1- f_porcentaje));
+                    green = (int)(getGreenNum(rgb1) * (1- f_porcentaje));
+                    blue = (int)(getBlueNum(rgb1) * (1- f_porcentaje));
+                    
+                    imagen_creada.setRGB(j, i, getARGBNum(255,red,green,blue));
+                    
+                }
+                
+                if ( ( !bool_eq_width ) && j >= minwidth.getWidth() && i < maxwidth.getHeight() ){
+                
+                    rgb1 = maxwidth.getRGB(j, i);
+                    
+                     red = (int)(getRedNum(rgb1) * (1- f_porcentaje));
+                    green = (int)(getGreenNum(rgb1) * (1- f_porcentaje));
+                    blue = (int)(getBlueNum(rgb1) * (1- f_porcentaje));
+                    
+                    imagen_creada.setRGB(j, i, getARGBNum(255,red,green,blue));
+                    
+                    
+                }
+            }
+        
+            
+        }
+    
+        return imagen_creada;
+    
+    }
     
     // Sigue regresando -1
     public int getAlphaNum(int argb){

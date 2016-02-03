@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.ArchivoListener;
+import Controlador.BlendingMouseListener;
 import Controlador.ConvolucionListener;
 import Controlador.FiltrosListener;
 import Controlador.GrisesListener;
@@ -39,6 +40,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -48,6 +50,8 @@ public class Interfaz extends JFrame {
     
     File file_imagen = null;
     BufferedImage imagen = null;
+    
+    BibliotecaGrafica bg = new BibliotecaGrafica();
     
     // Formato Interfaz Normal
     
@@ -265,6 +269,7 @@ public class Interfaz extends JFrame {
             img = ImageIO.read(file);
             img_izq.setIcon(new ImageIcon(img));
             this.file_imagen = file;
+            this.imagen = img;
         } catch (IOException ex) {
             System.out.println("Error al cargar imagen de prueba");
         }
@@ -346,7 +351,7 @@ public class Interfaz extends JFrame {
     
     public void poner_imagen_izq(File file_imagen){
         try {
-            BufferedImage imagen = ImageIO.read(file_imagen);
+            imagen = ImageIO.read(file_imagen);
             img_izq.setIcon(new ImageIcon(imagen));
             img_der.setIcon(null);
             this.file_imagen = file_imagen;
@@ -386,13 +391,6 @@ public class Interfaz extends JFrame {
     
     public File getFile(){
         return file_imagen;
-    }
-    
-    public void poner_imagen_warhol(int i, BufferedImage imagen){
-        
-        JLabel[] imgs = {warhol_label_1,warhol_label_2,warhol_label_3,warhol_label_4};
-        imgs[i].setIcon(new ImageIcon(imagen));
-        
     }
     
     public void warholizate(){
@@ -479,6 +477,13 @@ public class Interfaz extends JFrame {
         
     }
     
+    public void poner_imagen_warhol(int i, BufferedImage imagen){
+        
+        JLabel[] imgs = {warhol_label_1,warhol_label_2,warhol_label_3,warhol_label_4};
+        imgs[i].setIcon(new ImageIcon(imagen));
+        
+    }
+    
     public void do_blending(){
         
         if(blending_bool != true){
@@ -498,7 +503,13 @@ public class Interfaz extends JFrame {
             blending_label_sup.setHorizontalAlignment(JLabel.CENTER);
             blending_label_inf.setHorizontalAlignment(JLabel.CENTER);
             
+            blending_label_inf.addMouseListener(new BlendingMouseListener(this));
+            
+            blending_label_inf.setIcon(null);
             blending_label_inf.setText("Click para agregar imagen");
+            
+            blending_img_inf = null; // Eliminar cualquier imagen anterior que halla qeudado 
+            blending_slider.setEnabled(false); // Desahbilitar el slider hasta que se carge una imagen
             
             try{
              
@@ -508,6 +519,10 @@ public class Interfaz extends JFrame {
                 blending_label_sup.setIcon(new ImageIcon(blending_img_sup));
                 //blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
              
+                blending_slider.addChangeListener((ChangeEvent e) -> {
+                this.poner_imagen_der(bg.filtro_blending(blending_img_sup, blending_img_inf, blending_slider.getValue()));  
+                });
+                
             }catch (IOException ex) {
                 System.out.println("Error al cargar imagen");
             }
@@ -544,7 +559,7 @@ public class Interfaz extends JFrame {
             especif.gridwidth = 3;
             especif.gridheight = 1;
             especif.weightx = 1.0;  
-            especif.weighty = 0.5;
+            especif.weighty = 0.1;
             especif.insets = new Insets(20,10,0,0);
             especif.fill = GridBagConstraints.HORIZONTAL;
             especif.anchor = GridBagConstraints.NORTH;
@@ -579,6 +594,25 @@ public class Interfaz extends JFrame {
             blending_bool = false;
             
         }
+        
+    }
+    
+    public void enable_blending_slider(){
+        blending_slider.setEnabled(true);
+    }
+    
+    public void poner_imagen_blending(File file_imagen){
+        
+        try{
+          blending_img_inf = ImageIO.read(file_imagen);
+          blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
+          blending_label_inf.setText("");
+        }catch(IOException ex) {
+            System.out.println("Problema al cargar la imagen");
+        }
+        
+        revalidate();
+        repaint();
         
     }
     
