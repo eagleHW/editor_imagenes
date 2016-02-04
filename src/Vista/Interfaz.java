@@ -51,6 +51,7 @@ public class Interfaz extends JFrame {
     
     File file_imagen = null;
     BufferedImage imagen = null;
+    BufferedImage imagen_guardar = null;
     
     BibliotecaGrafica bg = new BibliotecaGrafica();
     
@@ -380,13 +381,13 @@ public class Interfaz extends JFrame {
     }
     
     public void poner_imagen_der(BufferedImage imagen){
-        //this.imagen = imagen;  // Revisar ---------------------------------------------------------///////
+        this.imagen_guardar = imagen;  // Revisar ---------------------------------------------------------///////
         img_der.setIcon(new ImageIcon(imagen));
     }
     
     public void eliminar_imagen_der(){
         
-       // this.imagen = null; // Revisar ---------------------------------------------------------///////
+       this.imagen_guardar = null; // Revisar ---------------------------------------------------------///////
         img_der.setIcon(null);
         
     }
@@ -406,6 +407,11 @@ public class Interfaz extends JFrame {
     
     public BufferedImage getImage(){
         return imagen;
+    }
+    
+    public BufferedImage getImageGuardar(){
+        
+        return this.imagen_guardar;
     }
     
     public File getFile(){
@@ -811,14 +817,9 @@ public class Interfaz extends JFrame {
             
             
              sepia_slider.addChangeListener((ChangeEvent e) -> {
-                try {
                     
                     Interfaz.this.poner_imagen_der(bg.filtro_sepia(this.imagen,sepia_slider.getValue()));
-             
-                } catch (IOException ex) {
-                    System.out.println("Errro el cargar la imagen");
-                }
-                
+                  
              });
             
            

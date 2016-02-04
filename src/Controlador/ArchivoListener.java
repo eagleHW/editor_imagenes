@@ -66,7 +66,7 @@ public class ArchivoListener implements ActionListener{
                 File fileToSave = save_file.getSelectedFile();
                  
         try {
-                ImageIO.write(ventana_principal.getImage(),"jpg",fileToSave);
+                ImageIO.write(ventana_principal.getImageGuardar(),"jpg",fileToSave);
        
         } catch (IOException ex) {
           Logger.getLogger(ArchivoListener.class.getName()).log(Level.SEVERE, null, ex);
