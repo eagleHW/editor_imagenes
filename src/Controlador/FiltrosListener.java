@@ -108,7 +108,15 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.eliminar_imagen_der();
                 ventana_principal.do_sepia();
                 
+                break;
+            
+            case "Alto Contraste":
                 
+                ventana_principal.undo_all();
+                ventana_principal.eliminar_imagen_der();
+                ventana_principal.poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
+               
+                break;
             default:
                 System.out.println(e.getActionCommand());    
         

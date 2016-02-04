@@ -260,7 +260,7 @@ public class BibliotecaGrafica {
     
     }
     
-    public BufferedImage filtro_sepia(BufferedImage imagen, int constante) throws IOException{
+    public BufferedImage filtro_sepia(BufferedImage imagen, int constante){
        
         int height = imagen.getHeight();
         int width = imagen.getWidth();
@@ -277,6 +277,42 @@ public class BibliotecaGrafica {
                 blue = getBlueNum(imagen.getRGB(j, i));
                 
                 nueva_imagen.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+            
+            }
+         }
+          
+        return nueva_imagen;
+    }
+
+    public BufferedImage filtro_alto_contraste(BufferedImage imagen){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        int promedio;
+        
+        int LIMITE = 7750000;
+        
+        int pixel_negro = getARGBNum(255,0,0,0);
+        int pixel_blanco = getARGBNum(255,255,255,255);
+        int pixel;
+        
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int red, green, blue;
+        
+         for(int j = 0; j < imagen.getWidth() ; j++){
+            for(int i = 0; i < imagen.getHeight(); i++){
+            
+                red = getRedNum(imagen.getRGB(j,i));
+                green = getGreenNum(imagen.getRGB(j, i));
+                blue = getBlueNum(imagen.getRGB(j, i));
+                
+                promedio = (red + green + blue) / 3;
+                
+                pixel = (65536 * promedio) + (256 * promedio) + promedio <= LIMITE ? pixel_negro : pixel_blanco ;
+                nueva_imagen.setRGB(j, i, pixel);
                 
             
             }
@@ -355,6 +391,44 @@ public class BibliotecaGrafica {
         }
         
         return (int) ( average / (matrix.length * matrix[0].length ));
+        
+    }
+    
+    public int getMatrixMax(int [][] matrix){
+        
+        int width = matrix[0].length;
+        int height = matrix.length;
+    
+        int maximo = Integer.MIN_VALUE;
+    
+        for(int i = 0; i < height; i++ ){
+            for(int j = 0; j < width; j++){
+   
+                maximo = maximo < matrix[i][j] ? matrix[i][j] : maximo; 
+                             
+            }
+        }
+        
+        return maximo;
+        
+    }
+    
+    public int getMatrixMin(int [][] matrix){
+        
+        int width = matrix[0].length;
+        int height = matrix.length;
+    
+        int minimo = Integer.MAX_VALUE;
+    
+        for(int i = 0; i < height; i++ ){
+            for(int j = 0; j < width; j++){
+   
+                minimo = minimo > matrix[i][j] ? matrix[i][j] : minimo; 
+                             
+            }
+        }
+        
+        return minimo;
         
     }
     
