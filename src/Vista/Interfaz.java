@@ -6,6 +6,8 @@ import Controlador.BlendingMouseListener;
 import Controlador.ConvolucionListener;
 import Controlador.FiltrosListener;
 import Controlador.GrisesListener;
+import Controlador.MaximoListener;
+import Controlador.MinimoListener;
 import Controlador.RotacionListener;
 import Controlador.WarholMouseListener;
 import ManipulacionImagenes.BibliotecaGrafica;
@@ -243,6 +245,15 @@ public class Interfaz extends JFrame {
         JMenu menuRotacion = new JMenu("Rotacion");
         crear_submenu_rotacion(menuRotacion);
         
+        // Creamos el submenu Maximo
+        
+        JMenu menuMaximo = new JMenu("Maximo");
+        crear_submenu_maximo(menuMaximo);
+        
+        // Creamos el submenu Minimo
+        
+        JMenu menuMinimo = new JMenu("Minimo");
+        crear_submenu_minimo(menuMinimo);
         
         // Agrega los elementos del menu filtro
         // incluyendo los submenus
@@ -260,6 +271,8 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemFavicom);
         menuFiltros.add(itemSepia);
         menuFiltros.add(itemAltoContraste);
+        menuFiltros.add(menuMaximo);
+        menuFiltros.add(menuMinimo);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -275,7 +288,7 @@ public class Interfaz extends JFrame {
         itemFavicom.addActionListener(filtros_listener);
         itemSepia.addActionListener(filtros_listener);
         itemAltoContraste.addActionListener(filtros_listener);
-        
+             
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
         barra.add(menuFiltros);
@@ -367,6 +380,36 @@ public class Interfaz extends JFrame {
        itemRotacion180.addActionListener(rotacion_listener);
        itemRotacion270.addActionListener(rotacion_listener);
        
+    }
+    
+    public void crear_submenu_maximo(JMenu menuMaximo){
+        
+        MaximoListener maximo_listener = new MaximoListener(this);
+        
+        JMenuItem itemMaximo3x3 = new JMenuItem("3 x 3");
+        JMenuItem itemMaximo5x5 = new JMenuItem("5 x 5");
+        
+        menuMaximo.add(itemMaximo3x3);
+        menuMaximo.add(itemMaximo5x5);
+        
+        itemMaximo3x3.addActionListener(maximo_listener);
+        itemMaximo5x5.addActionListener(maximo_listener);
+        
+    }
+    
+    public void crear_submenu_minimo(JMenu menuMinimo){
+        
+        MinimoListener minimo_listener = new MinimoListener(this);
+        
+        JMenuItem itemMinimo3x3 = new JMenuItem("3 x 3");
+        JMenuItem itemMinimo5x5 = new JMenuItem("5 x 5");
+        
+        menuMinimo.add(itemMinimo3x3);
+        menuMinimo.add(itemMinimo5x5);
+        
+        itemMinimo3x3.addActionListener(minimo_listener);
+        itemMinimo5x5.addActionListener(minimo_listener);
+        
     }
     
     public void poner_imagen_izq(File file_imagen){
@@ -889,6 +932,6 @@ public class Interfaz extends JFrame {
         
     }
     
-    
+   
 }
 

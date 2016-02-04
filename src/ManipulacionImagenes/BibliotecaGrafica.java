@@ -320,6 +320,70 @@ public class BibliotecaGrafica {
           
         return nueva_imagen;
     }
+        
+    public BufferedImage filtro_maximo(BufferedImage imagen, int tam_matrix){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+          
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int red, green, blue;
+        int[][] new_array;
+        int[][][] rgb_arrays;
+        
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
+             
+              new_array = getCompMatrix(i,j,tam_matrix,tam_matrix,imagen);
+              rgb_arrays = getRGBMatrixs(new_array);
+               
+              red = getMatrixMax(rgb_arrays[0]);
+              green = getMatrixMax(rgb_arrays[1]);
+              blue = getMatrixMax(rgb_arrays[2]);       
+               
+              nueva_imagen.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+            }
+        } 
+           
+        return nueva_imagen;
+    }
+    
+    public BufferedImage filtro_minimo(BufferedImage imagen, int tam_matrix){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+          
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int red, green, blue;
+        int[][] new_array;
+        int[][][] rgb_arrays;
+        
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
+             
+              new_array = getCompMatrix(i,j,tam_matrix,tam_matrix,imagen);
+              rgb_arrays = getRGBMatrixs(new_array);
+               
+              red = getMatrixMin(rgb_arrays[0]);
+              green = getMatrixMin(rgb_arrays[1]);
+              blue = getMatrixMin(rgb_arrays[2]);       
+               
+              nueva_imagen.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+            }
+        } 
+           
+        return nueva_imagen;
+        
+        
+        
+        
+        
+        
+    }
     
     // Sigue regresando -1
     public int getAlphaNum(int argb){
