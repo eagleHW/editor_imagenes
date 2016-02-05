@@ -3,6 +3,7 @@ package Controlador;
 
 import ManipulacionImagenes.BibliotecaGrafica;
 import Vista.Interfaz;
+import Vista.PanelBlending;
 import Vista.VentanaBrillo;
 import Vista.VentanaConvolucion;
 import Vista.VentanaRGB;
@@ -89,9 +90,9 @@ public class FiltrosListener implements ActionListener{
             
             case "Blending":
               
-                ventana_principal.undo_all();
-                ventana_principal.eliminar_imagen_der();
-                ventana_principal.do_blending();
+                ventana_principal.setPanelPrincipal(new PanelBlending(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
                 
                 break;
             case "Favicom":

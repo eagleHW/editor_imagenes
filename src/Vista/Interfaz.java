@@ -63,7 +63,9 @@ public class Interfaz extends JFrame {
     JLabel img_der = new JLabel();
     JScrollPane scroll_img_izq = new JScrollPane(img_izq);
     JScrollPane scroll_img_der = new JScrollPane(img_der);
-       
+    
+    JPanel panel_principal;
+    
     // Formato Interfaz Warhol
     
     boolean warhol_bool = false;
@@ -153,7 +155,7 @@ public class Interfaz extends JFrame {
         
         // Metodo que se encarga de cargar el menu
         crear_menu();
-        this.setLayout(new GridLayout(1,2,5,10));
+        //this.setLayout(new GridLayout(1,2,5,10));
 
         img_izq.setHorizontalAlignment(JLabel.CENTER);
         img_der.setHorizontalAlignment(JLabel.CENTER);
@@ -163,8 +165,8 @@ public class Interfaz extends JFrame {
         warhol_label_3.setName("2");
         warhol_label_4.setName("3");
         
-        this.add(scroll_img_izq);
-        this.add(scroll_img_der);
+        //this.add(scroll_img_izq);
+        //this.add(scroll_img_der);
         
         // Aributos de la ventana principal
         this.setVisible(true);
@@ -448,6 +450,10 @@ public class Interfaz extends JFrame {
    
     }
     
+    public File getFile(){
+        return file_imagen;
+    }
+    
     public BufferedImage getImage(){
         return imagen;
     }
@@ -457,9 +463,23 @@ public class Interfaz extends JFrame {
         return this.imagen_guardar;
     }
     
-    public File getFile(){
-        return file_imagen;
+    public void setImageGuardar(BufferedImage imagen_guardar){
+        this.imagen_guardar = imagen_guardar;
     }
+    
+    public void setPanelPrincipal(JPanel panel_principal){
+        
+        this.panel_principal = panel_principal;
+        
+    }
+    
+    public JPanel getPanelPrincipal(){
+        
+        return this.panel_principal;
+        
+    }
+    
+
     
     // Warhol
     
@@ -575,7 +595,7 @@ public class Interfaz extends JFrame {
             blending_label_sup.setHorizontalAlignment(JLabel.CENTER);
             blending_label_inf.setHorizontalAlignment(JLabel.CENTER);
             
-            blending_label_inf.addMouseListener(new BlendingMouseListener(this));
+//            blending_label_inf.addMouseListener(new BlendingMouseListener(this));
             
             blending_label_inf.setIcon(null);
             blending_label_inf.setText("Click para agregar imagen");
@@ -648,6 +668,11 @@ public class Interfaz extends JFrame {
             
         }
         
+    }
+    
+    public void actualizar_interfaz(){
+        revalidate();
+        repaint();
     }
     
     public void undo_blending(){

@@ -1,7 +1,7 @@
 
 package Controlador;
 
-import Vista.Interfaz;
+import Vista.PanelBlending;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.imageio.ImageIO;
@@ -15,11 +15,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class BlendingMouseListener implements MouseListener{
 
-    Interfaz ventana_principal;
+    PanelBlending panel_blending;
     int user_selection; // Para verificar si el usuario escogio un archivo. 
     
-    public BlendingMouseListener(Interfaz ventana_principal){
-        this.ventana_principal = ventana_principal;     
+    public BlendingMouseListener(PanelBlending panel_blending){
+        this.panel_blending = panel_blending;     
     }
    
     @Override
@@ -35,8 +35,8 @@ public class BlendingMouseListener implements MouseListener{
             
          if(user_selection == JFileChooser.APPROVE_OPTION) {
             
-             ventana_principal.poner_imagen_blending(open_file.getSelectedFile());
-             ventana_principal.enable_blending_slider();
+             panel_blending.poner_imagen_izq_inf_blending(open_file.getSelectedFile());
+             panel_blending.enable_blending_slider();
              System.out.println(open_file.getSelectedFile());
             
          }
