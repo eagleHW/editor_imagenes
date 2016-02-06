@@ -6,8 +6,10 @@
 
 package Controlador;
 
+import ManipulacionImagenes.FiltrosGrises;
 import ManipulacionImagenes.FiltrosRotacion;
 import Vista.Interfaz;
+import Vista.PanelBasico;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -30,10 +32,15 @@ public class RotacionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        
-        FiltrosRotacion fr = new FiltrosRotacion();
-        
-        ventana_principal.eliminar_imagen_der();
-        ventana_principal.undo_all(); 
+        FiltrosRotacion fr = new FiltrosRotacion();        
+        PanelBasico panel_basico;
+       
+        ventana_principal.remove(ventana_principal.getPanelPrincipal());
+        ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+        ventana_principal.add(ventana_principal.getPanelPrincipal());
+        ventana_principal.actualizar_interfaz();
+                
+         panel_basico = (PanelBasico)ventana_principal.getPanelPrincipal();
         
         try{
         
@@ -41,18 +48,18 @@ public class RotacionListener implements ActionListener {
 
                  case "90":
 
-                     ventana_principal.poner_imagen_der(fr.filtro_rotacion90(ventana_principal.getFile()));
+                     panel_basico.poner_imagen_der(fr.filtro_rotacion90(ventana_principal.getFile()));
 
                     break;
                  case "180":
                      
-                     ventana_principal.poner_imagen_der(fr.filtro_rotacion180(ventana_principal.getFile()));
+                     panel_basico.poner_imagen_der(fr.filtro_rotacion180(ventana_principal.getFile()));
 
          
                     break;
                  case "270":
 
-                     ventana_principal.poner_imagen_der(fr.filtro_rotacion270(ventana_principal.getFile()));
+                     panel_basico.poner_imagen_der(fr.filtro_rotacion270(ventana_principal.getFile()));
 
                      break;
 

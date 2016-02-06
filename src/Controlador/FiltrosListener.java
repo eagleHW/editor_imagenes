@@ -57,10 +57,12 @@ public class FiltrosListener implements ActionListener{
                    
                 break;
             case "Brillo":
-                  
-                    ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_all();
-                    new VentanaBrillo(ventana_principal);
+                
+                    ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                    ventana_principal.add(ventana_principal.getPanelPrincipal());
+                    ventana_principal.actualizar_interfaz();
+                    new VentanaBrillo((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
                   
                 break;
             case "Grises":
@@ -70,18 +72,21 @@ public class FiltrosListener implements ActionListener{
                 break;
             case "Mosaico":
         
-                 //ventana_principal.poner_imagen_espera();
-                 ventana_principal.eliminar_imagen_der();
-                 ventana_principal.undo_all();
-                 ventana_principal.poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
-                
+                   ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                   ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                   ventana_principal.add(ventana_principal.getPanelPrincipal());
+                   ventana_principal.actualizar_interfaz();
+                   ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
+                    
                 break;
             case "Reduccion": 
                 
-                 ventana_principal.eliminar_imagen_der();
-                 ventana_principal.undo_all();
-                new VentanaReduccion(ventana_principal);
-                
+                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                 ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                 ventana_principal.actualizar_interfaz();
+                 new VentanaReduccion((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
+           
                 break;
             case "Warhol":
                 

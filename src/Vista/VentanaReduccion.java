@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ public class VentanaReduccion extends JFrame{
     private String[] proporciones = {"4:1", "8:1","16:1", "24:1", "32:1", "48:1", "64:1"};
     private int[] valores = {3,7,15,23,31,47,63};
     
-    public VentanaReduccion(Interfaz ventana_principal){
+    public VentanaReduccion(PanelBasico panel_basico, File file_image){
         super("Modificar tamaño");
         
         JPanel reduccion_panel = new JPanel(new GridBagLayout());
@@ -46,7 +47,7 @@ public class VentanaReduccion extends JFrame{
              int valor = valores[reduccion_combox.getSelectedIndex()];
              
             try {
-                ventana_principal.poner_imagen_der(bg.filtro_reduccion(ventana_principal.getFile(),valor));
+                panel_basico.poner_imagen_der(bg.filtro_reduccion(file_image,valor));
             } catch (IOException ex) {
                 Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }

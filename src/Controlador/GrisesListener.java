@@ -4,6 +4,8 @@ package Controlador;
 import ManipulacionImagenes.BibliotecaGrafica;
 import ManipulacionImagenes.FiltrosGrises;
 import Vista.Interfaz;
+import Vista.PanelBasico;
+import Vista.VentanaReduccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -28,48 +30,53 @@ public class GrisesListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
     
         FiltrosGrises fg = new FiltrosGrises();
+        PanelBasico panel_basico;
        
-        ventana_principal.eliminar_imagen_der();
-        ventana_principal.undo_all();
+         ventana_principal.remove(ventana_principal.getPanelPrincipal());
+         ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+         ventana_principal.add(ventana_principal.getPanelPrincipal());
+         ventana_principal.actualizar_interfaz();
+                
+         panel_basico = (PanelBasico)ventana_principal.getPanelPrincipal();
          
         try {
        
         
             switch(e.getActionCommand()){
                 case "Promedio":
+       
+                        panel_basico.poner_imagen_der(fg.filtro_promedio(ventana_principal.getFile()));
                     
-                        ventana_principal.poner_imagen_der(fg.filtro_promedio(ventana_principal.getFile()));                    
-                        
                         break;
                 case "Luminicensia":
                     
-                        ventana_principal.poner_imagen_der(fg.filtro_luminicensia(ventana_principal.getFile()));                    
-                        
+                        panel_basico.poner_imagen_der(fg.filtro_luminicensia(ventana_principal.getFile()));
+                                        
                     
                     break;
                 case "Desaturación":
                         
-                        ventana_principal.poner_imagen_der(fg.filtro_desaturacion(ventana_principal.getFile()));                   
+                        panel_basico.poner_imagen_der(fg.filtro_desaturacion(ventana_principal.getFile()));                  
                         
                     
                     break;
                 case "Máximo":
                     
-                        ventana_principal.poner_imagen_der(fg.filtro_maximo(ventana_principal.getFile()));                    
+                        panel_basico.poner_imagen_der(fg.filtro_maximo(ventana_principal.getFile()));                   
                         
                     
                     break;
                 case "Mínimo":
                     
-                        ventana_principal.poner_imagen_der(fg.filtro_minimo(ventana_principal.getFile()));                    
+                        panel_basico.poner_imagen_der(fg.filtro_minimo(ventana_principal.getFile()));                    
                         
    
                     break;
                 case "Verde":
                     
-                        ventana_principal.poner_imagen_der(fg.filtro_verde(ventana_principal.getFile()));                    
+                        panel_basico.poner_imagen_der(fg.filtro_verde(ventana_principal.getFile()));                    
                         
-                    
+                   
                     break;
                 default:
                     System.out.println(e.getActionCommand());

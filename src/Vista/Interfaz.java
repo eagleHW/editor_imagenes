@@ -369,7 +369,7 @@ public class Interfaz extends JFrame {
             this.imagen = ImageIO.read(file_imagen);
             img_izq.setIcon(new ImageIcon(imagen));
             img_der.setIcon(null);
-            this.file_imagen = file_imagen;  
+            this.file_imagen = file_imagen;              
         } catch (IOException ex) {
             System.out.println("Problema al cargar la imagen");
         }

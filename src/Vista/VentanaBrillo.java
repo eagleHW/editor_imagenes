@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import javax.swing.event.ChangeEvent;
  */
 public class VentanaBrillo extends JFrame{
     
-    public VentanaBrillo(Interfaz ventana_principal){
+    public VentanaBrillo(PanelBasico panel_basico, File file_image){
         
         super("Modificar brillo");
         
@@ -55,7 +56,7 @@ public class VentanaBrillo extends JFrame{
              int brillo = brillo_slider.getValue();
                 
             try {
-                ventana_principal.poner_imagen_der(bg.filtro_brillo(ventana_principal.getFile(),brillo));
+                panel_basico.poner_imagen_der(bg.filtro_brillo(file_image,brillo));
             } catch (IOException ex) {
                 Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }
