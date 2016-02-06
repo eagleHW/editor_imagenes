@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/GrisesListener.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/MinimoListener.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/MaximoListener.java</file>
             <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/FiltrosListener.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Vista/Interfaz.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/RotacionListener.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/ArchivoListener.java</file>
         </group>
     </open-files>
 </project-private>

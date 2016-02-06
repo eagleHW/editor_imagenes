@@ -2,14 +2,12 @@
 package Vista;
 
 import Controlador.ArchivoListener;
-import Controlador.BlendingMouseListener;
 import Controlador.ConvolucionListener;
 import Controlador.FiltrosListener;
 import Controlador.GrisesListener;
 import Controlador.MaximoListener;
 import Controlador.MinimoListener;
 import Controlador.RotacionListener;
-import Controlador.WarholMouseListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -43,7 +41,6 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -96,19 +93,6 @@ public class Interfaz extends JFrame {
     //Imagenes Favicom
     BufferedImage favicom_img_sup, favicom_img_inf;
     
-    // Formato Interfaz Sepia 
-    
-    boolean sepia_bool = false;
-    
-    JPanel sepia_panel_izq = new JPanel();
-    JPanel sepia_panel_der = new JPanel();
-    
-    JLabel sepia_label = new JLabel();
-    
-    JScrollPane sepia_scroll_label = new JScrollPane(sepia_label);
-    
-    JSlider sepia_slider = new JSlider(SwingConstants.HORIZONTAL,0,255,1);
-        
     public Interfaz(){
     
         super("Editor gráfico");
@@ -585,95 +569,9 @@ public class Interfaz extends JFrame {
         
     }
         
-    // Sepia
-    
-    public void do_sepia(){
-        
-        if(sepia_bool != true){
-         
-            this.remove(scroll_img_izq);
-            this.remove(scroll_img_der);
-            
-            this.setLayout(new GridLayout(1,2,5,10));
-            
-            sepia_bool = true;
-            
-            sepia_panel_izq = new JPanel(new GridBagLayout()); 
-            sepia_panel_der = new JPanel(new BorderLayout());
-            
-            sepia_panel_der.add(scroll_img_der,BorderLayout.CENTER);
-            
-            
-            
-             sepia_slider.addChangeListener((ChangeEvent e) -> {
-                    
-                    Interfaz.this.poner_imagen_der(bg.filtro_sepia(this.imagen,sepia_slider.getValue()));
-                  
-             });
-            
-           
-             
-            GridBagConstraints especif = new GridBagConstraints();
-         
-            especif.gridx = 0;
-            especif.gridy = 0;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 1.0;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-        
-            sepia_panel_izq.add(scroll_img_izq,especif);
-            
-            especif.gridx = 0;
-            especif.gridy = 1;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 0.2;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-            
-            sepia_panel_izq.add(sepia_slider,especif);
-        
-            sepia_slider.setPaintLabels(true);
-            sepia_slider.setPaintTicks(true);
-            sepia_slider.setMajorTickSpacing(15);
-            
-            this.add(sepia_panel_izq);
-            this.add(sepia_panel_der);
-            this.revalidate();
-        
-        }
-        
-    }
-    
-    public void undo_sepia(){
-    
-             if(sepia_bool == true){
-        
-            this.remove(sepia_panel_izq);
-            this.remove(sepia_panel_der);
-            
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            this.add(scroll_img_izq);
-            this.add(scroll_img_der);   
-            this.revalidate();
-            
-            sepia_bool = false;
-            
-        }
-        
-    }
-    
     public void undo_all(){
     
         undo_favicom();
-        undo_sepia();
         
     }
     

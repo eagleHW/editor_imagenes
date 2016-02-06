@@ -5,15 +5,15 @@ import ManipulacionImagenes.BibliotecaGrafica;
 import Vista.Interfaz;
 import Vista.PanelBasico;
 import Vista.PanelBlending;
+import Vista.PanelFavicom;
+import Vista.PanelSepia;
 import Vista.PanelWarhol;
 import Vista.VentanaBrillo;
-import Vista.VentanaConvolucion;
 import Vista.VentanaRGB;
 import Vista.VentanaReduccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -112,26 +112,30 @@ public class FiltrosListener implements ActionListener{
                 break;
             case "Favicom":
                 
-                ventana_principal.undo_all();
-                ventana_principal.eliminar_imagen_der();
-                ventana_principal.do_favicom();
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelFavicom(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
                 
                 break;
             
             case "Sepia":
                 
-                ventana_principal.undo_all();
-                ventana_principal.eliminar_imagen_der();
-                ventana_principal.do_sepia();
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelSepia(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
                 
                 break;
             
             case "Alto Contraste":
                 
-                ventana_principal.undo_all();
-                ventana_principal.eliminar_imagen_der();
-                ventana_principal.poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
-               
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
+                   
                 break;
             default:
                 System.out.println(e.getActionCommand());    
