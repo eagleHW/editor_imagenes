@@ -7,6 +7,7 @@
 package Controlador;
 
 import Vista.Interfaz;
+import Vista.PanelWarhol;
 import Vista.VentanaRGB;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,9 +21,11 @@ import javax.swing.JLabel;
  */
 public class WarholMouseListener implements MouseListener {
 
+    PanelWarhol panel_warhol;
     Interfaz ventana_principal;
     
-    public WarholMouseListener(Interfaz ventana_principal){
+    public WarholMouseListener(PanelWarhol panel_warhol,Interfaz ventana_principal){
+        this.panel_warhol = panel_warhol;
         this.ventana_principal = ventana_principal;
     }
     
@@ -33,7 +36,7 @@ public class WarholMouseListener implements MouseListener {
         int num_ventana = Integer.parseInt(((JLabel)e.getSource()).getName()); 
         BufferedImage imagen = (BufferedImage)((ImageIcon)(((JLabel)e.getSource()).getIcon())).getImage(); 
  
-        new VentanaRGB(ventana_principal,num_ventana,imagen);
+        new VentanaRGB(panel_warhol,imagen,num_ventana);
        
     }
 

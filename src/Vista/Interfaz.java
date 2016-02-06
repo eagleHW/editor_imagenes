@@ -64,48 +64,8 @@ public class Interfaz extends JFrame {
     JScrollPane scroll_img_izq = new JScrollPane(img_izq);
     JScrollPane scroll_img_der = new JScrollPane(img_der);
     
-    JPanel panel_principal;
-    
-    // Formato Interfaz Warhol
-    
-    boolean warhol_bool = false;
-   
-    JPanel warhol_panel_izq; 
-    JPanel warhol_panel_der; 
-    
-    JLabel warhol_label_1 = new JLabel();
-    JLabel warhol_label_2 = new JLabel();
-    JLabel warhol_label_3 = new JLabel();
-    JLabel warhol_label_4 = new JLabel();
-    
-    JScrollPane scroll_label_1 = new JScrollPane(warhol_label_1);
-    JScrollPane scroll_label_2 = new JScrollPane(warhol_label_2);
-    JScrollPane scroll_label_3 = new JScrollPane(warhol_label_3);
-    JScrollPane scroll_label_4 = new JScrollPane(warhol_label_4);
-
-    JButton button_generar = new JButton("Generar");
-    
-    // Imagenes Warhol
-    BufferedImage img0,img1,img2,img3;
-    
-    // Formato Interfaz blending
-
-    boolean blending_bool = false;
-    
-    JPanel blending_panel_izq;
-    JPanel blending_panel_der;
-   
-    JLabel blending_label_sup = new JLabel();
-    JLabel blending_label_inf = new JLabel();
-    
-    JScrollPane blending_scroll_label_sup = new JScrollPane(blending_label_sup);
-    JScrollPane blending_scroll_label_inf = new JScrollPane(blending_label_inf);
-            
-    JSlider blending_slider = new JSlider(SwingConstants.HORIZONTAL,0,100,1);
-    
-    // Imagenes Blending
-    BufferedImage blending_img_sup, blending_img_inf;
-    
+    JPanel panel_principal = new JPanel();
+        
     // Formato Interfaz Favicom 
     
     boolean favicom_bool = false;
@@ -155,18 +115,8 @@ public class Interfaz extends JFrame {
         
         // Metodo que se encarga de cargar el menu
         crear_menu();
-        //this.setLayout(new GridLayout(1,2,5,10));
-
-        img_izq.setHorizontalAlignment(JLabel.CENTER);
-        img_der.setHorizontalAlignment(JLabel.CENTER);
         
-        warhol_label_1.setName("0");
-        warhol_label_2.setName("1");
-        warhol_label_3.setName("2");
-        warhol_label_4.setName("3");
-        
-        //this.add(scroll_img_izq);
-        //this.add(scroll_img_der);
+        this.add(panel_principal);
         
         // Aributos de la ventana principal
         this.setVisible(true);
@@ -472,201 +422,10 @@ public class Interfaz extends JFrame {
         this.panel_principal = panel_principal;
         
     }
-    
+        
     public JPanel getPanelPrincipal(){
         
         return this.panel_principal;
-        
-    }
-    
-
-    
-    // Warhol
-    
-    public void warholizate(){
-          
-        if(warhol_bool != true){
-
-            WarholMouseListener warhol_listener = new WarholMouseListener(this);
-            BibliotecaGrafica bg = new BibliotecaGrafica();
-            
-            warhol_bool = true;
-
-            this.remove(scroll_img_izq);
-            this.remove(scroll_img_der);
-
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            warhol_panel_izq = new JPanel(new GridLayout(2,2,5,10));
-            warhol_panel_der = new JPanel(new BorderLayout());
-
-            warhol_panel_der.add(scroll_img_der, BorderLayout.CENTER);
-            warhol_panel_der.add(button_generar, BorderLayout.PAGE_START);
-            
-            warhol_label_1.setHorizontalAlignment(JLabel.CENTER);
-            warhol_label_2.setHorizontalAlignment(JLabel.CENTER);
-            warhol_label_3.setHorizontalAlignment(JLabel.CENTER);
-            warhol_label_4.setHorizontalAlignment(JLabel.CENTER);
-
-            try {
-
-              img0 = ImageIO.read(file_imagen);
-              img1 = ImageIO.read(file_imagen);
-              img2 = ImageIO.read(file_imagen);
-              img3 = ImageIO.read(file_imagen);
-
-              warhol_label_1.setIcon(new ImageIcon(img0));
-              warhol_label_2.setIcon(new ImageIcon(img1));
-              warhol_label_3.setIcon(new ImageIcon(img2));
-              warhol_label_4.setIcon(new ImageIcon(img3));
-      
-              warhol_label_1.addMouseListener(warhol_listener);
-              warhol_label_2.addMouseListener(warhol_listener);
-              warhol_label_3.addMouseListener(warhol_listener);
-              warhol_label_4.addMouseListener(warhol_listener);
-              
-              
-            } catch (IOException ex) {
-                System.out.println("Error al cargar imagen");
-            }
-
-            warhol_panel_izq.add(scroll_label_1);
-            warhol_panel_izq.add(scroll_label_2);
-            warhol_panel_izq.add(scroll_label_3);
-            warhol_panel_izq.add(scroll_label_4);
-            
-            button_generar.addActionListener((ActionEvent e) -> {
-                
-                poner_imagen_der(bg.pegar_imagenes(img0, img1, img2, img3));
-                
-            });
-            
-            this.add(warhol_panel_izq);
-            this.add(warhol_panel_der);
-            this.revalidate();
-
-        }
-    }
-
-    public void undo_warhol(){
-         
-        if(warhol_bool == true){
-            
-         this.remove(warhol_panel_izq);
-         this.remove(warhol_panel_der);
-            
-         this.setLayout(new GridLayout(1,2,5,10));
-
-         this.add(scroll_img_izq);
-         this.add(scroll_img_der);   
-         this.revalidate();
-         
-         warhol_bool = false;
-        
-        }
-        
-    }
-    
-    public void poner_imagen_warhol(int i, BufferedImage imagen){
-        
-        JLabel[] imgs = {warhol_label_1,warhol_label_2,warhol_label_3,warhol_label_4};
-        imgs[i].setIcon(new ImageIcon(imagen));
-        
-    }
-    
-    // Blending
-    
-    public void do_blending(){
-        
-        if(blending_bool != true){
-         
-            blending_bool = true;
-            
-            this.remove(scroll_img_izq);
-            this.remove(scroll_img_der);
-            
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            blending_panel_izq = new JPanel(new GridBagLayout()); 
-            blending_panel_der = new JPanel(new BorderLayout());
-            
-            blending_panel_der.add(scroll_img_der,BorderLayout.CENTER);
-            
-            blending_label_sup.setHorizontalAlignment(JLabel.CENTER);
-            blending_label_inf.setHorizontalAlignment(JLabel.CENTER);
-            
-//            blending_label_inf.addMouseListener(new BlendingMouseListener(this));
-            
-            blending_label_inf.setIcon(null);
-            blending_label_inf.setText("Click para agregar imagen");
-            
-            blending_img_inf = null; // Eliminar cualquier imagen anterior que halla qeudado 
-            blending_slider.setEnabled(false); // Desahbilitar el slider hasta que se carge una imagen
-            
-            try{
-             
-                blending_img_sup = ImageIO.read(file_imagen);
-                //blending_img_inf = ImageIO.read(file_imagen);
-                
-                blending_label_sup.setIcon(new ImageIcon(blending_img_sup));
-                //blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
-             
-                blending_slider.addChangeListener((ChangeEvent e) -> {
-                this.poner_imagen_der(bg.filtro_blending(blending_img_sup, blending_img_inf, blending_slider.getValue()));  
-                });
-                
-            }catch (IOException ex) {
-                System.out.println("Error al cargar imagen");
-            }
-        
-            GridBagConstraints especif = new GridBagConstraints(); 
-
-            especif.gridx = 1;
-            especif.gridy = 1;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 1.0;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-        
-            blending_panel_izq.add(blending_scroll_label_sup,especif);
-           
-            especif.gridx = 1;
-            especif.gridy = 2;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 1.0;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-        
-            
-            blending_panel_izq.add(blending_scroll_label_inf,especif);
-        
-            especif.gridx = 0;
-            especif.gridy = 3;
-            especif.gridwidth = 3;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 0.1;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.HORIZONTAL;
-            especif.anchor = GridBagConstraints.NORTH;
-            
-            blending_panel_izq.add(blending_slider,especif);
-        
-            blending_slider.setPaintLabels(true);
-            blending_slider.setPaintTicks(true);
-            blending_slider.setMajorTickSpacing(10);
-            
-            this.add(blending_panel_izq);
-            this.add(blending_panel_der);
-            this.revalidate();
-            
-        }
         
     }
     
@@ -674,45 +433,7 @@ public class Interfaz extends JFrame {
         revalidate();
         repaint();
     }
-    
-    public void undo_blending(){
         
-        if(blending_bool == true){
-            
-            this.remove(blending_panel_izq);
-            this.remove(blending_panel_der);
- 
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            this.add(scroll_img_izq);
-            this.add(scroll_img_der);   
-            this.revalidate();
-            
-            blending_bool = false;
-            
-        }
-        
-    }
-    
-    public void enable_blending_slider(){
-        blending_slider.setEnabled(true);
-    }
-    
-    public void poner_imagen_blending(File file_imagen){
-        
-        try{
-          blending_img_inf = ImageIO.read(file_imagen);
-          blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
-          blending_label_inf.setText("");
-        }catch(IOException ex) {
-            System.out.println("Problema al cargar la imagen");
-        }
-        
-        revalidate();
-        repaint();
-        
-    }
-    
     // Favicom
     
     public void do_favicom(){
@@ -950,8 +671,7 @@ public class Interfaz extends JFrame {
     }
     
     public void undo_all(){
-        undo_warhol();
-        undo_blending();
+    
         undo_favicom();
         undo_sepia();
         

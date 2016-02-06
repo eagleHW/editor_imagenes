@@ -13,6 +13,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,25 +32,30 @@ import javax.swing.event.ChangeListener;
  */
 public class VentanaRGB extends JFrame {
    
-    Interfaz ventana_principal;
+    PanelBasico panel_basico;
+    File file_image;
+    
+    BufferedImage imagen_warhol;
+    PanelWarhol panel_warhol;
     boolean warhol = false;
     int num;
-    BufferedImage imagen_warhol;
     
-    public VentanaRGB(Interfaz ventana_principal){
+    
+    public VentanaRGB(PanelBasico panel_basico, File file_image){
         
         super("Modificar RGB");
-        this.ventana_principal = ventana_principal;
+        this.panel_basico = panel_basico;
+        this.file_image = file_image;
         cargar_elementos();
         
     }
     
-    public VentanaRGB(Interfaz ventana_principal, int num, BufferedImage imagen_warhol){
+    public VentanaRGB(PanelWarhol panel_warhol, BufferedImage imagen_warhol , int num){
         
         super("Modificar RGB");
-        this.ventana_principal = ventana_principal;
-        this.num = num;
+        this.panel_warhol = panel_warhol;
         this.imagen_warhol = imagen_warhol;
+        this.num = num;
         warhol = true;
         
         cargar_elementos();
@@ -58,6 +64,9 @@ public class VentanaRGB extends JFrame {
     
     private void cargar_elementos(){
 
+        System.out.println(this.getContentPane());
+        
+        
         // Red Slider
         
         JPanel red_panel = new JPanel(new GridBagLayout()); 
@@ -120,9 +129,9 @@ public class VentanaRGB extends JFrame {
                 
             try {
                 if(!warhol){
-                    ventana_principal.poner_imagen_der(bg.filtro_rgb(ventana_principal.getFile(),red,green,blue));
+                    panel_basico.poner_imagen_der(bg.filtro_rgb(file_image,red,green,blue));
                 }else{
-                    ventana_principal.poner_imagen_warhol(num,bg.filtro_rgb(imagen_warhol,red,green,blue) );
+                   panel_warhol.poner_imagen_warhol(num,bg.filtro_rgb(imagen_warhol,red,green,blue) );
                 }
                           
             } catch (IOException ex) {

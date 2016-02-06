@@ -3,7 +3,9 @@ package Controlador;
 
 import ManipulacionImagenes.BibliotecaGrafica;
 import Vista.Interfaz;
+import Vista.PanelBasico;
 import Vista.PanelBlending;
+import Vista.PanelWarhol;
 import Vista.VentanaBrillo;
 import Vista.VentanaConvolucion;
 import Vista.VentanaRGB;
@@ -38,16 +40,20 @@ public class FiltrosListener implements ActionListener{
             switch(e.getActionCommand()){
             case "Azar":
    
-                    ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_all();
-                    ventana_principal.poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
+                    ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                    ventana_principal.add(ventana_principal.getPanelPrincipal());
+                    ventana_principal.actualizar_interfaz();
+                    ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
                 
                 break;
             case "RGB":
                 
-                    ventana_principal.eliminar_imagen_der();
-                    ventana_principal.undo_all();
-                    new VentanaRGB(ventana_principal);
+                    ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                    ventana_principal.add(ventana_principal.getPanelPrincipal());
+                    ventana_principal.actualizar_interfaz();
+                    new VentanaRGB((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
                    
                 break;
             case "Brillo":
@@ -78,11 +84,14 @@ public class FiltrosListener implements ActionListener{
                 
                 break;
             case "Warhol":
-                  
-                 ventana_principal.eliminar_imagen_der();
-                 ventana_principal.undo_all();
-                 ventana_principal.warholizate();
                 
+                //System.out.println(ventana_principal.getPanelPrincipal().getClass().getName());
+
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelWarhol(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                                  
                 break;
             case "Rotacion": 
                  // Para ver las acciones del subMenu Rotacion ir a RotacionListener.java
@@ -90,6 +99,7 @@ public class FiltrosListener implements ActionListener{
             
             case "Blending":
               
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelBlending(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
