@@ -1,11 +1,9 @@
 
 package Controlador;
 
-import ManipulacionImagenes.BibliotecaGrafica;
 import ManipulacionImagenes.FiltrosGrises;
 import Vista.Interfaz;
 import Vista.PanelBasico;
-import Vista.VentanaReduccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class GrisesListener implements ActionListener{
 
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
     
     public GrisesListener(Interfaz ventana_principal){
         

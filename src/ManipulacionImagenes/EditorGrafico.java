@@ -6,9 +6,7 @@ package ManipulacionImagenes;
  * and open the template in the editor.
  */
 
-import Controlador.Matriz;
 import Vista.Interfaz;
-import java.util.Arrays;
 
 /**
  *

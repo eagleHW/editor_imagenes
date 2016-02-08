@@ -21,8 +21,8 @@ import javax.swing.JLabel;
  */
 public class WarholMouseListener implements MouseListener {
 
-    PanelWarhol panel_warhol;
-    Interfaz ventana_principal;
+    private PanelWarhol panel_warhol;
+    private Interfaz ventana_principal;
     
     public WarholMouseListener(PanelWarhol panel_warhol,Interfaz ventana_principal){
         this.panel_warhol = panel_warhol;

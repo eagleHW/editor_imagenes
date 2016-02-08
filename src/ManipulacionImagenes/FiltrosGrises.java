@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  */
 public class FiltrosGrises {
     
-    BibliotecaGrafica bg = new BibliotecaGrafica();
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
     
     public FiltrosGrises(){}
     

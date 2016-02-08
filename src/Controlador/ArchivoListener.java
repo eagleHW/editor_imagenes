@@ -45,9 +45,10 @@ public class ArchivoListener implements ActionListener{
             user_selection = open_file.showOpenDialog(null);
             
              if(user_selection == JFileChooser.APPROVE_OPTION) {
-                
-                 ventana_principal.poner_imagen_izq(open_file.getSelectedFile());
-                 System.out.println(open_file.getSelectedFile());
+                 
+                 ventana_principal.setFile(open_file.getSelectedFile());
+                 ventana_principal.getPanelPrincipal().poner_imagen_izq(ventana_principal.getImage());
+                 
              
              }
             break;

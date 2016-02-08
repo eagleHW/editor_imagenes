@@ -1,6 +1,8 @@
 package Controlador;
 
+import ManipulacionImagenes.FiltrosRotacion;
 import Vista.Interfaz;
+import Vista.PanelBasico;
 import Vista.VentanaConvolucion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ import java.awt.event.ActionListener;
  */
 public class ConvolucionListener implements ActionListener {
     
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
     
     public ConvolucionListener(Interfaz ventana_principal){
         
@@ -28,29 +30,36 @@ public class ConvolucionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        ventana_principal.eliminar_imagen_der();
-        ventana_principal.undo_all();
+        FiltrosRotacion fr = new FiltrosRotacion();        
+        PanelBasico panel_basico;
+       
+        ventana_principal.remove(ventana_principal.getPanelPrincipal());
+        ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+        ventana_principal.add(ventana_principal.getPanelPrincipal());
+        ventana_principal.actualizar_interfaz();
+                
+         panel_basico = (PanelBasico)ventana_principal.getPanelPrincipal();
         
         switch(e.getActionCommand()){
             
             case "3 x 3":
                 
-                    new VentanaConvolucion(ventana_principal,3);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),3);
                 
                 break;
             case "5 x 5":
                 
-                    new VentanaConvolucion(ventana_principal,5);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),5);
                 
                 break;
             case "7 x 7":
                 
-                    new VentanaConvolucion(ventana_principal,7);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),7);
                 
                 break;
             case "9 x 9":
                 
-                    new VentanaConvolucion(ventana_principal,9);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),9);
                 
                 break;
         }

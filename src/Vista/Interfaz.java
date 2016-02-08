@@ -9,38 +9,18 @@ import Controlador.MaximoListener;
 import Controlador.MinimoListener;
 import Controlador.RotacionListener;
 import ManipulacionImagenes.BibliotecaGrafica;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -48,58 +28,23 @@ import javax.swing.event.ChangeEvent;
  */
 public class Interfaz extends JFrame {
     
-    File file_imagen = null;
-    BufferedImage imagen = null;
-    BufferedImage imagen_guardar = null;
+    private File file_imagen = null;
+    private BufferedImage imagen = null;
+    private BufferedImage imagen_guardar = null;
     
-    BibliotecaGrafica bg = new BibliotecaGrafica();
-    
-    // Formato Interfaz Normal
-    
-    JLabel img_izq = new JLabel();
-    JLabel img_der = new JLabel();
-    JScrollPane scroll_img_izq = new JScrollPane(img_izq);
-    JScrollPane scroll_img_der = new JScrollPane(img_der);
-    
-    JPanel panel_principal = new JPanel();
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
         
-    // Formato Interfaz Favicom 
-    
-    boolean favicom_bool = false;
-    
-    JPanel favicom_panel_izq_inf_radio = new JPanel();
-    JPanel favicom_panel_izq_inf = new JPanel();
-    JPanel favicom_panel_der = new JPanel();
-    JPanel favicom_panel_izq = new JPanel(); 
-    
-    JLabel favicom_label_sup = new JLabel();
-    JLabel favicom_label_inf = new JLabel();
-    
-    JScrollPane favicom_scroll_label_sup = new JScrollPane(favicom_label_sup);
-    JScrollPane favicom_scroll_label_inf = new JScrollPane(favicom_label_inf);
-    
-    JRadioButton izq_sup = new JRadioButton("Esquina superior izquierda",true);
-    JRadioButton der_sup = new JRadioButton("Esquina superior derecha",false);
-    JRadioButton izq_inf = new JRadioButton("Esquina inferior izquierda",false);
-    JRadioButton der_inf = new JRadioButton("Esquina inferior derecha",false);
-    ButtonGroup opciones = new ButtonGroup();
-    
-    JButton favicom_boton = new JButton("Aceptar");
-    
-    JLabel favicom_spinner_label = new JLabel("Nivel de transparencia (%)");
-    SpinnerModel favicom_spinner_model = new SpinnerNumberModel(0,0,100,1);
-    JSpinner favicom_spinner = new JSpinner(favicom_spinner_model);
-    
-    //Imagenes Favicom
-    BufferedImage favicom_img_sup, favicom_img_inf;
-    
+    private PanelEditorImagen panel_principal;
+            
     public Interfaz(){
     
         super("Editor gráfico");
-        
+
         // Metodo que se encarga de cargar el menu
         crear_menu();
-        
+                     
+        panel_principal = new PanelBasico(this);
+        panel_principal.poner_imagen_izq(imagen);
         this.add(panel_principal);
         
         // Aributos de la ventana principal
@@ -110,7 +55,7 @@ public class Interfaz extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     
     }
-    
+        
     private void crear_menu(){
         
         // Crea barra de menu
@@ -234,9 +179,8 @@ public class Interfaz extends JFrame {
         // Para evitar estar cargando imagen cada vez que pruebo
         try {
             BufferedImage img;
-            File file = new File("/home/rae/prueba.jpg");
+            File file = new File("/home/rae/little_face_puppy.jpg");
             img = ImageIO.read(file);
-            img_izq.setIcon(new ImageIcon(img));
             this.file_imagen = file;
             this.imagen = img;
         } catch (IOException ex) {
@@ -348,45 +292,20 @@ public class Interfaz extends JFrame {
         
     }
     
-    public void poner_imagen_izq(File file_imagen){
-        try {
-            this.imagen = ImageIO.read(file_imagen);
-            img_izq.setIcon(new ImageIcon(imagen));
-            img_der.setIcon(null);
-            this.file_imagen = file_imagen;              
-        } catch (IOException ex) {
-            System.out.println("Problema al cargar la imagen");
-        }
-    }
-    
-    public void poner_imagen_der(BufferedImage imagen){
-        this.imagen_guardar = imagen;  // Revisar ---------------------------------------------------------///////
-        img_der.setIcon(new ImageIcon(imagen));
-    }
-    
-    public void eliminar_imagen_der(){
-        
-       this.imagen_guardar = null; // Revisar ---------------------------------------------------------///////
-        img_der.setIcon(null);
-        
-    }
-    
-    public void poner_imagen_espera(){
-        BufferedImage imagen;
-        try {
-            imagen = ImageIO.read(new File("wait_whale.jpg"));
-            img_der.setIcon(new ImageIcon(imagen));
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-    
-   
-    }
-    
     public File getFile(){
         return file_imagen;
     }
+    
+    public void setFile(File file_imagen){
+        
+          try {
+            this.file_imagen = file_imagen;   
+            this.imagen = ImageIO.read(file_imagen);    
+        } catch (IOException ex) {
+            System.out.println("Problema al cargar la imagen");
+        }
+        
+    } 
     
     public BufferedImage getImage(){
         return imagen;
@@ -401,180 +320,22 @@ public class Interfaz extends JFrame {
         this.imagen_guardar = imagen_guardar;
     }
     
-    public void setPanelPrincipal(JPanel panel_principal){
-        
-        this.panel_principal = panel_principal;
-        
-    }
-        
-    public JPanel getPanelPrincipal(){
+     public PanelEditorImagen getPanelPrincipal(){
         
         return this.panel_principal;
         
     }
     
+    public void setPanelPrincipal(PanelEditorImagen panel_principal){
+        
+        this.panel_principal = panel_principal;
+        
+    }
+         
     public void actualizar_interfaz(){
         revalidate();
         repaint();
     }
-        
-    // Favicom
-    
-    public void do_favicom(){
-        
-        if(favicom_bool != true){
-            
-            this.remove(scroll_img_izq);
-            this.remove(scroll_img_der);
-            
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            favicom_bool = true;
-            
-            favicom_spinner_label.setHorizontalAlignment(JLabel.CENTER);
-            
-            favicom_panel_izq = new JPanel(new GridBagLayout()); 
-            favicom_panel_der = new JPanel(new BorderLayout());
-            
-            favicom_panel_der.add(scroll_img_der,BorderLayout.CENTER);
-            
-            opciones.add(izq_sup);
-            opciones.add(der_sup);
-            opciones.add(izq_inf);
-            opciones.add(der_inf);
-            
-            favicom_label_sup.setHorizontalAlignment(JLabel.CENTER);
-            favicom_label_inf.setHorizontalAlignment(JLabel.CENTER);
-            
-            try{
-                
-                favicom_img_sup = ImageIO.read(file_imagen);
-                favicom_img_inf = ImageIO.read(file_imagen);
-                        
-                favicom_label_sup.setIcon(new ImageIcon(favicom_img_sup));
-                favicom_label_inf.setIcon(new ImageIcon(favicom_img_inf));
-                
-            }catch(IOException ex) {
-                System.out.println("Error al cargar imagen"); 
-            }
-            
-            GridBagConstraints especif = new GridBagConstraints();
-            
-            especif.gridx = 0;
-            especif.gridy = 0;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 1.0;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-            
-            
-            favicom_panel_izq.add(favicom_scroll_label_sup,especif);
-            
-            especif.gridx = 0;
-            especif.gridy = 1;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 0.5;
-            especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-            especif.ipadx = 0;
-            
-            favicom_panel_izq.add(favicom_panel_izq_inf,especif);
-        
-            especif.gridx = 0;
-            especif.gridy = 2;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 0.10;
-            especif.insets = new Insets(20,10,20,0);
-            especif.fill = GridBagConstraints.NONE;
-            especif.anchor = GridBagConstraints.CENTER;
-            
-            
-            favicom_panel_izq.add(favicom_boton,especif);
-            
-            // Aqui empieza la comfiguracion del subpanel inferior del lado izquierdo
-            
-            favicom_panel_izq_inf.setLayout(new GridBagLayout());
-            
-            
-            favicom_panel_izq_inf_radio.setLayout(new GridLayout(6,1));
-            favicom_panel_izq_inf_radio.add(favicom_spinner_label);
-            favicom_panel_izq_inf_radio.add(favicom_spinner);
-            favicom_panel_izq_inf_radio.add(izq_sup);
-            favicom_panel_izq_inf_radio.add(der_sup);
-            favicom_panel_izq_inf_radio.add(izq_inf);
-            favicom_panel_izq_inf_radio.add(der_inf);
-            
-            
            
-            especif.gridx = 0;
-            especif.gridy = 0;
-            especif.gridwidth = 2;
-            especif.gridheight = 1;
-            especif.weightx = 1.0;  
-            especif.weighty = 1.0;
-            //especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
-            
-             
-            favicom_panel_izq_inf.add(favicom_scroll_label_inf,especif);
-            
-            especif.gridx = 2;
-            especif.gridy = 0;
-            especif.gridwidth = 1;
-            especif.gridheight = 1;
-            especif.weightx = 0.1;  
-            especif.weighty = 1.0;
-            //especif.insets = new Insets(20,10,0,0);
-            especif.fill = GridBagConstraints.VERTICAL;
-            especif.anchor = GridBagConstraints.CENTER;
-            
-            
-            favicom_panel_izq_inf.add(favicom_panel_izq_inf_radio,especif);
-            
-            
-            this.add(favicom_panel_izq);
-            this.add(favicom_panel_der);
-            this.revalidate();
-        
-        }
-        
-    }
-    
-    public void undo_favicom(){
-        
-        
-        if(favicom_bool == true){
-        
-            this.remove(favicom_panel_izq);
-            this.remove(favicom_panel_der);
-            
-            this.setLayout(new GridLayout(1,2,5,10));
-
-            this.add(scroll_img_izq);
-            this.add(scroll_img_der);   
-            this.revalidate();
-            
-            favicom_bool = false;
-            
-        }
-        
-    }
-        
-    public void undo_all(){
-    
-        undo_favicom();
-        
-    }
-    
-   
 }
 

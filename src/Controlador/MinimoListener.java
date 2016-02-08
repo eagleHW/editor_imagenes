@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class MinimoListener implements ActionListener {
 
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
     
      public MinimoListener(Interfaz ventana_principal){
         this.ventana_principal = ventana_principal;

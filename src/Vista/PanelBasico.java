@@ -5,29 +5,26 @@ import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
  *
  * @author rae
  */
-public class PanelBasico extends JPanel {
+public class PanelBasico extends PanelEditorImagen{
     
-    Interfaz ventana_principal;
-    BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Interfaz ventana_principal;
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
     
-    JLabel img_izq = new JLabel();
-    JLabel img_der = new JLabel();
-    JScrollPane scroll_img_izq = new JScrollPane(img_izq);
-    JScrollPane scroll_img_der = new JScrollPane(img_der);
+    private JLabel img_izq = new JLabel();
+    private JLabel img_der = new JLabel();
+    private JScrollPane scroll_img_izq = new JScrollPane(img_izq);
+    private JScrollPane scroll_img_der = new JScrollPane(img_der);
     
-    BufferedImage basico_img_izq;
+    private BufferedImage basico_img_izq;
     
     public PanelBasico(Interfaz ventana_principal){
                 
@@ -53,11 +50,20 @@ public class PanelBasico extends JPanel {
         
     }
     
+    @Override
     public void poner_imagen_der(BufferedImage imagen){
-    
+        
         ventana_principal.setImageGuardar(imagen);  
         img_der.setIcon(new ImageIcon(imagen));
     
+    }
+
+    @Override
+    public void poner_imagen_izq(BufferedImage imagen) {
+    
+        img_izq.setIcon(new ImageIcon(imagen));
+        img_der.setIcon(null);
+        
     }
     
 }

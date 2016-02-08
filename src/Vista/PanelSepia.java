@@ -9,8 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -24,36 +22,30 @@ import javax.swing.event.ChangeEvent;
  *
  * @author rae
  */
-public class PanelSepia extends JPanel{
+public class PanelSepia extends PanelEditorImagen{
     
-    Interfaz ventana_principal;
-    BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Interfaz ventana_principal;
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
     
-    boolean sepia_bool = false;
+    private JPanel sepia_panel_izq = new JPanel();
+    private JPanel sepia_panel_der = new JPanel();
     
-    JPanel sepia_panel_izq = new JPanel();
-    JPanel sepia_panel_der = new JPanel();
+    private JLabel sepia_label_izq = new JLabel();
+    private JLabel sepia_label_der = new JLabel();
     
-    JLabel sepia_label_izq = new JLabel();
-    JLabel sepia_label_der = new JLabel();
+    private JScrollPane sepia_scroll_label_izq = new JScrollPane(sepia_label_izq);
+    private JScrollPane sepia_scroll_label_der = new JScrollPane(sepia_label_der);
     
-    JScrollPane sepia_scroll_label_izq = new JScrollPane(sepia_label_izq);
-    JScrollPane sepia_scroll_label_der = new JScrollPane(sepia_label_der);
+    private JSlider sepia_slider = new JSlider(SwingConstants.HORIZONTAL,0,255,1);
     
-    JSlider sepia_slider = new JSlider(SwingConstants.HORIZONTAL,0,255,1);
-    
-    BufferedImage sepia_img_izq;
+    private BufferedImage sepia_img_izq;
     
     public PanelSepia(Interfaz ventana_principal){
    
         this.ventana_principal = ventana_principal;
         
-        if(sepia_bool != true){
-
             this.setLayout(new GridLayout(1,2,5,10));
-            
-            sepia_bool = true;
-            
+                        
             sepia_panel_izq = new JPanel(new GridBagLayout()); 
             sepia_panel_der = new JPanel(new BorderLayout());
             
@@ -109,17 +101,25 @@ public class PanelSepia extends JPanel{
             this.add(sepia_panel_izq);
             this.add(sepia_panel_der);
             this.revalidate();
-        
-        }
+
         
     }
     
-    
+    @Override
     public void poner_imagen_der(BufferedImage imagen){
     
         ventana_principal.setImageGuardar(imagen);  
         sepia_label_der.setIcon(new ImageIcon(imagen));
+        ventana_principal.actualizar_interfaz();
     
+    }
+
+    @Override
+    public void poner_imagen_izq(BufferedImage imagen) {
+       
+       sepia_label_izq.setIcon(new ImageIcon(imagen));
+       sepia_label_der.setIcon(null);
+        
     }
    
     

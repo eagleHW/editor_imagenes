@@ -6,7 +6,6 @@
 
 package Controlador;
 
-import ManipulacionImagenes.FiltrosGrises;
 import ManipulacionImagenes.FiltrosRotacion;
 import Vista.Interfaz;
 import Vista.PanelBasico;
@@ -22,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class RotacionListener implements ActionListener {
 
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
     
     public RotacionListener(Interfaz ventana_principal){
         this.ventana_principal = ventana_principal;

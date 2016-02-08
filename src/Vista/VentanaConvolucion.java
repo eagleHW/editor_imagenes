@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ import javax.swing.SwingConstants;
  */
 public class VentanaConvolucion extends JFrame {
 
-    public VentanaConvolucion(Interfaz ventana_principal, int tam){
+    public VentanaConvolucion(PanelBasico panel_basico, File file_image  ,int tam){
         
         super("Valores convolución");
         
@@ -57,8 +58,8 @@ public class VentanaConvolucion extends JFrame {
                     }
                 }
 
-                ventana_principal.poner_imagen_der(bg.filtro_convolucion(ventana_principal.getFile(),
-                                               matriz_convolucion,factor));   
+                panel_basico.poner_imagen_der(bg.filtro_convolucion(file_image,matriz_convolucion,factor)); 
+                
                 dispose();
              
              }else{

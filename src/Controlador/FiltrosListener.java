@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class FiltrosListener implements ActionListener{
     
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
     
     public FiltrosListener(Interfaz ventana_principal){
      
@@ -44,7 +44,7 @@ public class FiltrosListener implements ActionListener{
                     ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
                     ventana_principal.actualizar_interfaz();
-                    ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
+                    ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
                 
                 break;
             case "RGB":
@@ -76,7 +76,7 @@ public class FiltrosListener implements ActionListener{
                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                    ventana_principal.add(ventana_principal.getPanelPrincipal());
                    ventana_principal.actualizar_interfaz();
-                   ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
+                   ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
                     
                 break;
             case "Reduccion": 
@@ -134,7 +134,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
-                ((PanelBasico)ventana_principal.getPanelPrincipal()).poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
+                ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
                    
                 break;
             default:

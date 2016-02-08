@@ -11,12 +11,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -32,13 +28,13 @@ import javax.swing.event.ChangeListener;
  */
 public class VentanaRGB extends JFrame {
    
-    PanelBasico panel_basico;
-    File file_image;
+    private PanelBasico panel_basico;
+    private File file_image;
     
-    BufferedImage imagen_warhol;
-    PanelWarhol panel_warhol;
-    boolean warhol = false;
-    int num;
+    private BufferedImage imagen_warhol;
+    private PanelWarhol panel_warhol;
+    private boolean warhol = false;
+    private int num;
     
     
     public VentanaRGB(PanelBasico panel_basico, File file_image){

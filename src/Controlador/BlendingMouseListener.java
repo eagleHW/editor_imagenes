@@ -15,8 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class BlendingMouseListener implements MouseListener{
 
-    PanelBlending panel_blending;
-    int user_selection; // Para verificar si el usuario escogio un archivo. 
+    private PanelBlending panel_blending;
+    private int user_selection; // Para verificar si el usuario escogio un archivo. 
     
     public BlendingMouseListener(PanelBlending panel_blending){
         this.panel_blending = panel_blending;     

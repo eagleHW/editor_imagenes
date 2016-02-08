@@ -25,50 +25,44 @@ import javax.swing.SpinnerNumberModel;
  *
  * @author rae
  */
-public class PanelFavicom extends JPanel{
+public class PanelFavicom extends PanelEditorImagen{
     
-    Interfaz ventana_principal;
-    BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Interfaz ventana_principal;
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
+        
+    private JPanel favicom_panel_izq_inf_radio = new JPanel();
+    private JPanel favicom_panel_izq_inf = new JPanel();
+    private JPanel favicom_panel_der = new JPanel();
+    private JPanel favicom_panel_izq = new JPanel(); 
     
-    boolean favicom_bool = false;
+    private JLabel favicom_label_izq_sup = new JLabel();
+    private JLabel favicom_label_izq_inf = new JLabel();
+    private JLabel favicom_label_der = new JLabel();
     
-    JPanel favicom_panel_izq_inf_radio = new JPanel();
-    JPanel favicom_panel_izq_inf = new JPanel();
-    JPanel favicom_panel_der = new JPanel();
-    JPanel favicom_panel_izq = new JPanel(); 
+    private JScrollPane favicom_scroll_label_izq_sup = new JScrollPane(favicom_label_izq_sup);
+    private JScrollPane favicom_scroll_label_izq_inf = new JScrollPane(favicom_label_izq_inf);
+    private JScrollPane favicom_scroll_label_der = new JScrollPane(favicom_label_der);
     
-    JLabel favicom_label_izq_sup = new JLabel();
-    JLabel favicom_label_izq_inf = new JLabel();
-    JLabel favicom_label_der = new JLabel();
+    private JRadioButton izq_sup = new JRadioButton("Esquina superior izquierda",true);
+    private JRadioButton der_sup = new JRadioButton("Esquina superior derecha",false);
+    private JRadioButton izq_inf = new JRadioButton("Esquina inferior izquierda",false);
+    private  JRadioButton der_inf = new JRadioButton("Esquina inferior derecha",false);
+    private  ButtonGroup opciones = new ButtonGroup();
     
-    JScrollPane favicom_scroll_label_izq_sup = new JScrollPane(favicom_label_izq_sup);
-    JScrollPane favicom_scroll_label_izq_inf = new JScrollPane(favicom_label_izq_inf);
-    JScrollPane favicom_scroll_label_der = new JScrollPane(favicom_label_der);
+    private JButton favicom_boton = new JButton("Aceptar");
     
-    JRadioButton izq_sup = new JRadioButton("Esquina superior izquierda",true);
-    JRadioButton der_sup = new JRadioButton("Esquina superior derecha",false);
-    JRadioButton izq_inf = new JRadioButton("Esquina inferior izquierda",false);
-    JRadioButton der_inf = new JRadioButton("Esquina inferior derecha",false);
-    ButtonGroup opciones = new ButtonGroup();
-    
-    JButton favicom_boton = new JButton("Aceptar");
-    
-    JLabel favicom_spinner_label = new JLabel("Nivel de transparencia (%)");
-    SpinnerModel favicom_spinner_model = new SpinnerNumberModel(0,0,100,1);
-    JSpinner favicom_spinner = new JSpinner(favicom_spinner_model);
+    private JLabel favicom_spinner_label = new JLabel("Nivel de transparencia (%)");
+    private SpinnerModel favicom_spinner_model = new SpinnerNumberModel(0,0,100,1);
+    private JSpinner favicom_spinner = new JSpinner(favicom_spinner_model);
     
     //Imagenes Favicom
-    BufferedImage favicom_img_izq_sup, favicom_img_izq_inf;
+    private BufferedImage favicom_img_izq_sup, favicom_img_izq_inf;
     
     public PanelFavicom(Interfaz ventana_principal){
         
-    if(favicom_bool != true){
-
             this.ventana_principal = ventana_principal;
         
             this.setLayout(new GridLayout(1,2,5,10));
-
-            favicom_bool = true;
             
             favicom_spinner_label.setHorizontalAlignment(JLabel.CENTER);
             
@@ -185,10 +179,17 @@ public class PanelFavicom extends JPanel{
             this.add(favicom_panel_der);
             this.revalidate();
         
-        }
         
+    }
 
-        
+    @Override
+    public void poner_imagen_izq(BufferedImage imagen) {
+        System.out.println("Aun no implementado");
+    }
+
+    @Override
+    public void poner_imagen_der(BufferedImage imagen) {
+         System.out.println("Aun no implementado");
     }
     
 }

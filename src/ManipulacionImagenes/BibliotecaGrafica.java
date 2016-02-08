@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  */
 public class BibliotecaGrafica {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     public BibliotecaGrafica(){
 
@@ -767,6 +767,24 @@ public class BibliotecaGrafica {
         
         return imagen_creada;
         
+    }
+    
+    public BufferedImage copiar_imagen(BufferedImage imagen){
+        
+        int width = imagen.getWidth();
+        int heigth = imagen.getHeight();
+        
+        BufferedImage nueva_imagen = new BufferedImage(width, heigth, BufferedImage.TYPE_INT_RGB);
+        
+        for(int j = 0 ; j < width ; j++){
+            for(int i = 0; i < heigth ; i++){
+             
+                nueva_imagen.setRGB(j, i, imagen.getRGB(j, i));
+                
+            }
+        }
+        
+        return nueva_imagen;
     }
     
 }

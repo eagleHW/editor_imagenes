@@ -4,7 +4,6 @@ package Vista;
 import Controlador.BlendingMouseListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -25,23 +24,21 @@ import javax.swing.event.ChangeEvent;
  *
  * @author rae
  */
-public class PanelBlending extends JPanel {
+public class PanelBlending extends PanelEditorImagen {
     
-    Interfaz ventana_principal;
-    BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Interfaz ventana_principal;
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
     
-    boolean blending_bool = false;
-    
-    JPanel blending_panel_izq;
-    JPanel blending_panel_der;
+    private JPanel blending_panel_izq;
+    private JPanel blending_panel_der;
    
-    JLabel blending_label_izq_sup = new JLabel();
-    JLabel blending_label_izq_inf = new JLabel();
-    JLabel blending_label_der = new JLabel();
+    private JLabel blending_label_izq_sup = new JLabel();
+    private JLabel blending_label_izq_inf = new JLabel();
+    private JLabel blending_label_der = new JLabel();
    
-    JScrollPane blending_scroll_label_izq_sup = new JScrollPane(blending_label_izq_sup);
-    JScrollPane blending_scroll_label_izq_inf = new JScrollPane(blending_label_izq_inf);
-    JScrollPane blending_scroll_label_der = new JScrollPane(blending_label_der);
+    private JScrollPane blending_scroll_label_izq_sup = new JScrollPane(blending_label_izq_sup);
+    private JScrollPane blending_scroll_label_izq_inf = new JScrollPane(blending_label_izq_inf);
+    private JScrollPane blending_scroll_label_der = new JScrollPane(blending_label_der);
     
     JSlider blending_slider = new JSlider(SwingConstants.HORIZONTAL,0,100,1);
     
@@ -50,11 +47,7 @@ public class PanelBlending extends JPanel {
         
     
     public PanelBlending(Interfaz ventana_principal){
-    
-            if(blending_bool != true){
-         
-            blending_bool = true;    
-                
+                   
             this.ventana_principal = ventana_principal;    
                         
             this.setLayout(new GridLayout(1,2,5,10));
@@ -138,12 +131,6 @@ public class PanelBlending extends JPanel {
             this.add(blending_panel_izq);
             this.add(blending_panel_der);
             this.revalidate();
-            
-        }
-        
-        
-        
-        
         
     }
     
@@ -170,6 +157,13 @@ public class PanelBlending extends JPanel {
         ventana_principal.setImageGuardar(imagen);  
         blending_label_der.setIcon(new ImageIcon(imagen));
     }
-    
-}
 
+    public void poner_imagen_izq(BufferedImage imagen) {    
+        
+      blending_label_izq_sup.setIcon(new ImageIcon(imagen));
+      blending_label_der.setIcon(null);
+      
+    }
+        
+        
+}
