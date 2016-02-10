@@ -123,7 +123,7 @@ public class BibliotecaGrafica {
         int new_heigth = (int) Math.ceil(heigth);
         
         imagen_creada = new BufferedImage(new_width,new_heigth,BufferedImage.TYPE_INT_RGB);
-                                    //Dividir
+                                    
         int alpha,red,green,blue;
         int [][] matrix;
         int [][][] argbs_matrix;
@@ -416,6 +416,31 @@ public class BibliotecaGrafica {
         
     }
     
+    // Falta pasar a grises --------------------------------------------------------------
+    
+    public BufferedImage filtro_oleo_bn(BufferedImage imagen){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+          
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int[][] ventana;
+        int pixel;
+        
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width ; j++) {
+                
+                ventana = getCompMatrix(i,j,5,5,imagen);
+                pixel = getMaxFrecuencia(getRGBMatrixs(ventana)[0]);        
+                nueva_imagen.setRGB(j, i, getARGBNum(255,pixel,pixel,pixel));
+                
+            }
+        }
+        
+        return nueva_imagen;
+    }
+    
     // Sigue regresando -1
     public int getAlphaNum(int argb){
 
@@ -524,6 +549,49 @@ public class BibliotecaGrafica {
         }
         
         return minimo;
+        
+    }
+    
+    public int getMaxFrecuencia(int [][] matrix){
+        
+        int[] temporal_array = new int[matrix.length * matrix[0].length];
+        int contador = 0;
+        int moda = 0; 
+        int frecuencia_maxima;
+        int frecuencia_actual;
+        
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length ; j++) {
+                temporal_array[contador] = matrix[i][j];
+                contador++;
+            }
+        }
+        
+        Arrays.sort(temporal_array);
+        
+        moda = temporal_array[0];
+        frecuencia_actual = 1;
+        frecuencia_maxima = 1;
+        
+        for (int i = 1; i < temporal_array.length ; i++) {
+         
+            if (temporal_array[i-1] == temporal_array[i]) {
+              
+                frecuencia_actual++;
+                
+            }else{
+                
+                if(frecuencia_actual > frecuencia_maxima){
+                    moda = temporal_array[i-1];
+                    frecuencia_maxima = frecuencia_actual;                    
+                }   
+                    
+                frecuencia_actual = 1;
+            }
+            
+        }
+        
+        return moda;
         
     }
     
@@ -673,7 +741,7 @@ public class BibliotecaGrafica {
         return matrix;
         
     }
- 
+   
     public int[][] getEdgeCompMatrix(int y, int x, int heigth_mat, int width_mat, BufferedImage imagen){
     
         int heigth_img = imagen.getHeight();
@@ -721,7 +789,7 @@ public class BibliotecaGrafica {
         return matrix;
         
     }
-    
+      
     public int convolucion(int[][] pixel, double[][] values, int factor){
        
         int width;

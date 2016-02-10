@@ -7,6 +7,7 @@ import Controlador.FiltrosListener;
 import Controlador.GrisesListener;
 import Controlador.MaximoListener;
 import Controlador.MinimoListener;
+import Controlador.OleoListener;
 import Controlador.RotacionListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.Dimension;
@@ -137,6 +138,11 @@ public class Interfaz extends JFrame {
         JMenu menuMinimo = new JMenu("Minimo");
         crear_submenu_minimo(menuMinimo);
         
+        // Creamos el submenu Oleo
+        
+        JMenu menuOleo = new JMenu("Oleo");
+        crear_submenu_oleo(menuOleo);
+        
         // Agrega los elementos del menu filtro
         // incluyendo los submenus
         
@@ -156,6 +162,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuMaximo);
         menuFiltros.add(menuMinimo);
         menuFiltros.add(itemBlackLight);
+        menuFiltros.add(menuOleo);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -221,7 +228,7 @@ public class Interfaz extends JFrame {
         
     }
     
-    public void crear_submenu_convolucion(JMenu menuConvolucion){
+    private void crear_submenu_convolucion(JMenu menuConvolucion){
         
         ConvolucionListener convolucion_listener = new ConvolucionListener(this);
         
@@ -246,7 +253,7 @@ public class Interfaz extends JFrame {
         
     }
     
-    public void crear_submenu_rotacion(JMenu menuRotacion){
+    private void crear_submenu_rotacion(JMenu menuRotacion){
         
        RotacionListener rotacion_listener = new RotacionListener(this); 
         
@@ -264,7 +271,7 @@ public class Interfaz extends JFrame {
        
     }
     
-    public void crear_submenu_maximo(JMenu menuMaximo){
+    private void crear_submenu_maximo(JMenu menuMaximo){
         
         MaximoListener maximo_listener = new MaximoListener(this);
         
@@ -279,7 +286,7 @@ public class Interfaz extends JFrame {
         
     }
     
-    public void crear_submenu_minimo(JMenu menuMinimo){
+    private void crear_submenu_minimo(JMenu menuMinimo){
         
         MinimoListener minimo_listener = new MinimoListener(this);
         
@@ -291,6 +298,21 @@ public class Interfaz extends JFrame {
         
         itemMinimo3x3.addActionListener(minimo_listener);
         itemMinimo5x5.addActionListener(minimo_listener);
+        
+    }
+    
+    private void crear_submenu_oleo(JMenu menuOleo){
+        
+        OleoListener oleo_listener = new OleoListener(this);
+        
+        JMenuItem itemOleoGris = new JMenuItem("Gris");
+        JMenuItem itemOleoColor = new JMenuItem("Color");
+        
+        menuOleo.add(itemOleoGris);
+        menuOleo.add(itemOleoColor);
+        
+        itemOleoGris.addActionListener(oleo_listener);
+        itemOleoColor.addActionListener(oleo_listener);
         
     }
     
