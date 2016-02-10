@@ -148,6 +148,8 @@ public class PanelBlending extends PanelEditorImagen {
             System.out.println("Problema al cargar la imagen");
         }
         
+        blending_slider.setValue(0);
+        
         revalidate();
         repaint();
         
@@ -159,7 +161,8 @@ public class PanelBlending extends PanelEditorImagen {
     }
 
     public void poner_imagen_izq(BufferedImage imagen) {    
-        
+      
+      blending_slider.setValue(0);
       blending_label_izq_sup.setIcon(new ImageIcon(imagen));
       blending_label_der.setIcon(null);
       

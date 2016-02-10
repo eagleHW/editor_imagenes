@@ -116,7 +116,8 @@ public class PanelSepia extends PanelEditorImagen{
 
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
-       
+
+       sepia_slider.setValue(0);
        sepia_label_izq.setIcon(new ImageIcon(imagen));
        sepia_label_der.setIcon(null);
         
