@@ -110,6 +110,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemFavicom = new JMenuItem("Favicom");
         JMenuItem itemSepia = new JMenuItem("Sepia");
         JMenuItem itemAltoContraste = new JMenuItem("Alto Contraste");
+        JMenuItem itemBlackLight = new JMenuItem("BlackLight");
                 
         // Creamos el submenu Grises
     
@@ -154,6 +155,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemAltoContraste);
         menuFiltros.add(menuMaximo);
         menuFiltros.add(menuMinimo);
+        menuFiltros.add(itemBlackLight);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -169,11 +171,11 @@ public class Interfaz extends JFrame {
         itemFavicom.addActionListener(filtros_listener);
         itemSepia.addActionListener(filtros_listener);
         itemAltoContraste.addActionListener(filtros_listener);
+        itemBlackLight.addActionListener(filtros_listener);
              
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
         barra.add(menuFiltros);
-        
         
         
         // Para evitar estar cargando imagen cada vez que pruebo

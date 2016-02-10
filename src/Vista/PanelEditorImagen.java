@@ -15,8 +15,9 @@ import javax.swing.JPanel;
  */
 public abstract class PanelEditorImagen extends JPanel{
     
-    public abstract void poner_imagen_izq(BufferedImage imagen);
     public abstract void poner_imagen_der(BufferedImage imagen);
+    public abstract void poner_imagen_izq(BufferedImage imagen);
+  
     
     
 }

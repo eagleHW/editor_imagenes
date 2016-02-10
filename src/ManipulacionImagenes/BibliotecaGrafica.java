@@ -378,10 +378,41 @@ public class BibliotecaGrafica {
            
         return nueva_imagen;
         
+    }
+   
+    public BufferedImage filtro_blacklight(BufferedImage imagen, int constante){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+          
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int red, green, blue;
+        int rgb;
+        int ponderacion;
+        
+        for(int i = 0; i < height ; i++){
+            for (int j = 0; j < width; j++) {
+             
+                rgb = imagen.getRGB(j, i);
+               
+                red = getRedNum(rgb); 
+                green = getGreenNum(rgb);
+                blue = getBlueNum(rgb);
+                
+                ponderacion = (int) ((red*0.3) + (green*0.59) + (blue*0.11));
+                
+                red = Math.abs(red - ponderacion) * constante ;
+                green = Math.abs(green - ponderacion) * constante;
+                blue = Math.abs(blue - ponderacion) * constante ;
+               
+                nueva_imagen.setRGB(j, i, getARGBNum(255,red,green,blue));
+                
+            }
+        }
         
         
-        
-        
+        return nueva_imagen;
         
     }
     

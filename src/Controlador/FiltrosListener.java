@@ -4,6 +4,7 @@ package Controlador;
 import ManipulacionImagenes.BibliotecaGrafica;
 import Vista.Interfaz;
 import Vista.PanelBasico;
+import Vista.PanelBlackLight;
 import Vista.PanelBlending;
 import Vista.PanelFavicom;
 import Vista.PanelSepia;
@@ -136,6 +137,15 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.actualizar_interfaz();
                 ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
                    
+                break;
+                
+            case "BlackLight":
+                
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelBlackLight(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                
                 break;
             default:
                 System.out.println(e.getActionCommand());    
