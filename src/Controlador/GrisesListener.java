@@ -43,7 +43,7 @@ public class GrisesListener implements ActionListener{
             switch(e.getActionCommand()){
                 case "Promedio":
        
-                        panel_basico.poner_imagen_der(fg.filtro_promedio(ventana_principal.getFile()));
+                        panel_basico.poner_imagen_der(fg.filtro_promedio(ventana_principal.getImage()));
                     
                         break;
                 case "Luminicensia":

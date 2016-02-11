@@ -21,12 +21,12 @@ public class FiltrosGrises {
     
     public FiltrosGrises(){}
     
-    public BufferedImage filtro_promedio(File file_imagen) throws IOException{
+    public BufferedImage filtro_promedio(BufferedImage imagen){
       
-        BufferedImage imagen = ImageIO.read(file_imagen);
-        
-        int heigth = imagen.getHeight();
+        int height = imagen.getHeight();
         int width = imagen.getWidth();
+        
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
         
         int argb;
         int alpha;
@@ -37,7 +37,7 @@ public class FiltrosGrises {
         int promedio;
         
         for( int x = 0; x < width; x ++){     
-            for(int y = 0; y < heigth; y++){
+            for(int y = 0; y < height; y++){
     
                 argb = imagen.getRGB(x, y);
                 
@@ -48,12 +48,12 @@ public class FiltrosGrises {
                 
                 promedio = (red + green + blue) / 3;
                 
-                imagen.setRGB(x, y, bg.getARGBNum(alpha,promedio,promedio,promedio));
+                nueva_imagen.setRGB(x, y, bg.getARGBNum(alpha,promedio,promedio,promedio));
                 
             }
         }
         
-        return imagen;
+        return nueva_imagen;
     }
     
     public BufferedImage filtro_luminicensia(File file_imagen) throws IOException{
