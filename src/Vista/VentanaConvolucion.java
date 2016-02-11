@@ -11,7 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.io.File;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +29,7 @@ import javax.swing.SwingConstants;
  */
 public class VentanaConvolucion extends JFrame {
 
-    public VentanaConvolucion(PanelBasico panel_basico, File file_image  ,int tam){
+    public VentanaConvolucion(PanelBasico panel_basico, BufferedImage imagen  ,int tam){
         
         super("Valores convolución");
         
@@ -58,7 +58,7 @@ public class VentanaConvolucion extends JFrame {
                     }
                 }
 
-                panel_basico.poner_imagen_der(filter.filtro_convolucion(file_image,matriz_convolucion,factor)); 
+                panel_basico.poner_imagen_der(filter.filtro_convolucion(imagen,matriz_convolucion,factor)); 
                 
                 dispose();
              
@@ -70,9 +70,6 @@ public class VentanaConvolucion extends JFrame {
             } catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(null,"Algún campo contiene una entrada no valida",
                                 "Error en entrada",JOptionPane.ERROR_MESSAGE);
-            }
-             catch (IOException ex) {
-                Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }
             
            

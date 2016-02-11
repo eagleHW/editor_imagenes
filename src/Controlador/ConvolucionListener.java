@@ -44,22 +44,22 @@ public class ConvolucionListener implements ActionListener {
             
             case "3 x 3":
                 
-                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),3);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getImage(),3);
                 
                 break;
             case "5 x 5":
                 
-                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),5);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getImage(),5);
                 
                 break;
             case "7 x 7":
                 
-                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),7);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getImage(),7);
                 
                 break;
             case "9 x 9":
                 
-                    new VentanaConvolucion(panel_basico,ventana_principal.getFile(),9);
+                    new VentanaConvolucion(panel_basico,ventana_principal.getImage(),9);
                 
                 break;
         }

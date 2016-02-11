@@ -110,10 +110,10 @@ public class Filtros {
 
     }
  
-    public BufferedImage filtro_mosaico(File file_image, int tam_matrix) throws IOException{
+    public BufferedImage filtro_mosaico(BufferedImage imagen){
 
         double[][] blur_matrix = {{1,1,1},{1,1,1},{1,1,1}};
-        return filtro_convolucion(file_image,blur_matrix,9);
+        return filtro_convolucion(imagen,blur_matrix,9);
 
     }
     
@@ -157,14 +157,13 @@ public class Filtros {
         
     }
    
-    public BufferedImage filtro_convolucion(File file_image, double[][] valores, int factor) throws IOException{
+    public BufferedImage filtro_convolucion(BufferedImage imagen, double[][] valores, int factor){
         
-      BufferedImage imagen_original = ImageIO.read(file_image);
-      BufferedImage imagen_modificada = ImageIO.read(file_image);
+      int heigth = imagen.getHeight();
+      int width = imagen.getWidth();  
         
-      int heigth = imagen_original.getHeight();
-      int width = imagen_original.getWidth();
-      
+      BufferedImage imagen_nueva = new BufferedImage(width,heigth,BufferedImage.TYPE_INT_RGB);
+        
       int tam_matrix = valores.length;
       
       int red,green,blue;
@@ -175,7 +174,7 @@ public class Filtros {
       for(int i = 0 ; i < heigth; i++){
           for(int j = 0; j < width; j++){
               
-              new_array = bg.getCompMatrix(i,j,tam_matrix,tam_matrix,imagen_original);
+              new_array = bg.getCompMatrix(i,j,tam_matrix,tam_matrix,imagen);
               rgb_arrays = bg.getRGBMatrixs(new_array);
                             
               red = bg.convolucion(rgb_arrays[0], valores,factor);
@@ -185,7 +184,7 @@ public class Filtros {
               rgb = bg.getARGBNum(255,red,green,blue);
   
               try{
-                   imagen_modificada.setRGB(j, i, rgb);     
+                   imagen_nueva.setRGB(j, i, rgb);     
               }catch(ArrayIndexOutOfBoundsException e){
                   System.out.println(j + "   " + i);
               }
@@ -193,7 +192,7 @@ public class Filtros {
           }
       }
         
-      return imagen_modificada;
+      return imagen_nueva;
       
     }
     
@@ -422,14 +421,14 @@ public class Filtros {
         
     }
     
-    // Falta pasar a grises --------------------------------------------------------------
-    
     public BufferedImage filtro_oleo_bn(BufferedImage imagen){
         
         int height = imagen.getHeight();
         int width = imagen.getWidth();
+        FiltrosGrises fg = new FiltrosGrises();
           
         BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        BufferedImage gris_imagen = fg.filtro_promedio(imagen);
         
         int[][] ventana;
         int pixel;
@@ -437,7 +436,7 @@ public class Filtros {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width ; j++) {
                 
-                ventana = bg.getCompMatrix(i,j,5,5,imagen);
+                ventana = bg.getCompMatrix(i,j,5,5,gris_imagen);
                 pixel = bg.getMaxFrecuencia(bg.getRGBMatrixs(ventana)[0]);        
                 nueva_imagen.setRGB(j, i, bg.getARGBNum(255,pixel,pixel,pixel));
                 
@@ -446,6 +445,37 @@ public class Filtros {
         
         return nueva_imagen;
     }
+
+    public BufferedImage filtro_oleo_color(BufferedImage imagen){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        double[][] blur_matrix = {{1,1},{1,1}};
+        
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
+        int[][] ventana;
+        int[][][] rgb_matrixs;
+        int red, green, blue;
+        
+         for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width ; j++) {
+          
+                ventana = bg.getCompMatrix(i, j, random.nextInt(4) + 2, random.nextInt(4) + 2 , imagen);
+                rgb_matrixs = bg.getRGBMatrixs(ventana);
+                
+                red = bg.getMatrixMin(rgb_matrixs[0]);
+                green = bg.getMatrixMin(rgb_matrixs[1]);
+                blue = bg.getMatrixMin(rgb_matrixs[2]);
+                
+                nueva_imagen.setRGB(j, i, bg.getARGBNum(255, red, green, blue));
+            }
+         }
+           
+        return filtro_convolucion(nueva_imagen,blur_matrix,4);
+         
+    } 
     
     
 }

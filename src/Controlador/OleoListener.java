@@ -47,7 +47,7 @@ public class OleoListener implements ActionListener{
         
             case "Color":
            
-                panel_basico.poner_imagen_der(ventana_principal.getImage());
+                panel_basico.poner_imagen_der(filter.filtro_oleo_color(ventana_principal.getImage()));
                 
                 break;
       

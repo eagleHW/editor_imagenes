@@ -77,7 +77,7 @@ public class FiltrosListener implements ActionListener{
                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                    ventana_principal.add(ventana_principal.getPanelPrincipal());
                    ventana_principal.actualizar_interfaz();
-                   ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_mosaico(ventana_principal.getFile(),5));
+                   ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_mosaico(ventana_principal.getImage()));
                     
                 break;
             case "Reduccion": 

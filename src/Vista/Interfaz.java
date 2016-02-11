@@ -188,7 +188,7 @@ public class Interfaz extends JFrame {
         // Para evitar estar cargando imagen cada vez que pruebo
         try {
             BufferedImage img;
-            File file = new File("/home/rae/little_face_puppy.jpg");
+            File file = new File("/home/rae/little_san_francisco.jpg");
             img = ImageIO.read(file);
             this.file_imagen = file;
             this.imagen = img;
