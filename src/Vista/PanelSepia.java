@@ -1,7 +1,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,7 +25,7 @@ import javax.swing.event.ChangeEvent;
 public class PanelSepia extends PanelEditorImagen{
     
     private Interfaz ventana_principal;
-    private BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Filtros filter = new Filtros();
     
     private JPanel sepia_panel_izq = new JPanel();
     private JPanel sepia_panel_der = new JPanel();
@@ -65,7 +65,7 @@ public class PanelSepia extends PanelEditorImagen{
             }
             
              sepia_slider.addChangeListener((ChangeEvent e) -> {       
-                    poner_imagen_der(bg.filtro_sepia(ventana_principal.getImage(),sepia_slider.getValue()));   
+                    poner_imagen_der(filter.filtro_sepia(ventana_principal.getImage(),sepia_slider.getValue()));   
              });
              
             GridBagConstraints especif = new GridBagConstraints();

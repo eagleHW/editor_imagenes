@@ -1,7 +1,7 @@
 
 package Controlador;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelBasico;
 import Vista.PanelBlackLight;
@@ -35,7 +35,7 @@ public class FiltrosListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        
-        BibliotecaGrafica bg = new BibliotecaGrafica();
+        Filtros filter = new Filtros();
         
         try{
             switch(e.getActionCommand()){
@@ -45,7 +45,7 @@ public class FiltrosListener implements ActionListener{
                     ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
                     ventana_principal.actualizar_interfaz();
-                    ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_azar(ventana_principal.getFile()));
+                    ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_azar(ventana_principal.getFile()));
                 
                 break;
             case "RGB":
@@ -77,7 +77,7 @@ public class FiltrosListener implements ActionListener{
                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                    ventana_principal.add(ventana_principal.getPanelPrincipal());
                    ventana_principal.actualizar_interfaz();
-                   ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_mosaico(ventana_principal.getFile(),5));
+                   ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_mosaico(ventana_principal.getFile(),5));
                     
                 break;
             case "Reduccion": 
@@ -135,7 +135,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
-                ventana_principal.getPanelPrincipal().poner_imagen_der(bg.filtro_alto_contraste(ventana_principal.getImage()));
+                ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_alto_contraste(ventana_principal.getImage()));
                    
                 break;
                 

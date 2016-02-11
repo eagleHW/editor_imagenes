@@ -6,7 +6,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,7 +28,7 @@ import javax.swing.event.ChangeEvent;
 public class PanelBlackLight extends PanelEditorImagen{
 
     private Interfaz ventana_principal;
-    private BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Filtros filter = new Filtros();
     
     private JPanel blacklight_panel_izq = new JPanel();
     private JPanel blacklight_panel_der = new JPanel();
@@ -60,7 +60,7 @@ public class PanelBlackLight extends PanelEditorImagen{
         blacklight_label_izq.setIcon(new ImageIcon(ventana_principal.getImage()));
         
         blacklight_slider.addChangeListener((ChangeEvent e) -> {       
-                    poner_imagen_der(bg.filtro_blacklight(ventana_principal.getImage(),blacklight_slider.getValue()));   
+                    poner_imagen_der(filter.filtro_blacklight(ventana_principal.getImage(),blacklight_slider.getValue()));   
              });
         
     

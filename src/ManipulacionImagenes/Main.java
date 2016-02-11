@@ -12,7 +12,7 @@ import Vista.Interfaz;
  *
  * @author rae
  */
-public class EditorGrafico {
+public class Main {
 
     /**
      * @param args the command line arguments

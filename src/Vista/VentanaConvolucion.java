@@ -6,7 +6,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -42,7 +42,7 @@ public class VentanaConvolucion extends JFrame {
         
         boton.addActionListener((ActionEvent e) -> {
            
-             BibliotecaGrafica bg = new BibliotecaGrafica();
+             Filtros filter = new Filtros();
              
              try {
              
@@ -58,7 +58,7 @@ public class VentanaConvolucion extends JFrame {
                     }
                 }
 
-                panel_basico.poner_imagen_der(bg.filtro_convolucion(file_image,matriz_convolucion,factor)); 
+                panel_basico.poner_imagen_der(filter.filtro_convolucion(file_image,matriz_convolucion,factor)); 
                 
                 dispose();
              

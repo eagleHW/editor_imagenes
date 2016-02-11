@@ -1,7 +1,7 @@
 
 package Controlador;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelBasico;
 import java.awt.event.ActionEvent;
@@ -22,7 +22,7 @@ public class MaximoListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        
-        BibliotecaGrafica bg = new BibliotecaGrafica();
+        Filtros filter = new Filtros();
         PanelBasico panel_basico;
        
         ventana_principal.remove(ventana_principal.getPanelPrincipal());
@@ -36,14 +36,14 @@ public class MaximoListener implements ActionListener{
         
             case "3 x 3":
                 
-                panel_basico.poner_imagen_der(bg.filtro_maximo(ventana_principal.getImage(),3));
+                panel_basico.poner_imagen_der(filter.filtro_maximo(ventana_principal.getImage(),3));
                 
                 break;
             
                 
             case "5 x 5":
                     
-                panel_basico.poner_imagen_der(bg.filtro_maximo(ventana_principal.getImage(),5));
+                panel_basico.poner_imagen_der(filter.filtro_maximo(ventana_principal.getImage(),5));
                 
                 
                 break;

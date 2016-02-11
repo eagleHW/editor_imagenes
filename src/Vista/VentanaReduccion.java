@@ -6,7 +6,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -41,13 +41,13 @@ public class VentanaReduccion extends JFrame{
         
         boton.addActionListener((ActionEvent e) -> {
            
-             BibliotecaGrafica bg = new BibliotecaGrafica();
+             Filtros filter = new Filtros();
            
              // valor == tamaño matriz
              int valor = valores[reduccion_combox.getSelectedIndex()];
              
             try {
-                panel_basico.poner_imagen_der(bg.filtro_reduccion(file_image,valor));
+                panel_basico.poner_imagen_der(filter.filtro_reduccion(file_image,valor));
             } catch (IOException ex) {
                 Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }

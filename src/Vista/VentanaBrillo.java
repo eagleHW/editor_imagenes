@@ -1,7 +1,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -51,12 +51,12 @@ public class VentanaBrillo extends JFrame{
         
          boton.addActionListener((ActionEvent e) -> {
            
-             BibliotecaGrafica bg = new BibliotecaGrafica();
+             Filtros filter = new Filtros();
              
              int brillo = brillo_slider.getValue();
                 
             try {
-                panel_basico.poner_imagen_der(bg.filtro_brillo(file_image,brillo));
+                panel_basico.poner_imagen_der(filter.filtro_brillo(file_image,brillo));
             } catch (IOException ex) {
                 Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }

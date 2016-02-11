@@ -2,7 +2,7 @@
 package Vista;
 
 import Controlador.BlendingMouseListener;
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,7 +27,7 @@ import javax.swing.event.ChangeEvent;
 public class PanelBlending extends PanelEditorImagen {
     
     private Interfaz ventana_principal;
-    private BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Filtros filter = new Filtros();
     
     private JPanel blending_panel_izq;
     private JPanel blending_panel_der;
@@ -78,7 +78,7 @@ public class PanelBlending extends PanelEditorImagen {
                 //blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
              
                 blending_slider.addChangeListener((ChangeEvent e) -> {
-                poner_imagen_der(bg.filtro_blending(blending_img_izq_sup, blending_img_izq_inf, blending_slider.getValue()));  
+                poner_imagen_der(filter.filtro_blending(blending_img_izq_sup, blending_img_izq_inf, blending_slider.getValue()));  
                 });
                 
             }catch (IOException ex) {

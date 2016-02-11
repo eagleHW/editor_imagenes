@@ -6,7 +6,7 @@
 
 package Vista;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -117,7 +117,7 @@ public class VentanaRGB extends JFrame {
         
          boton.addActionListener((ActionEvent e) -> {
            
-             BibliotecaGrafica bg = new BibliotecaGrafica();
+             Filtros filter = new Filtros();
              
              int red = red_slider.getValue();
              int green = green_slider.getValue();
@@ -125,9 +125,9 @@ public class VentanaRGB extends JFrame {
                 
             try {
                 if(!warhol){
-                    panel_basico.poner_imagen_der(bg.filtro_rgb(file_image,red,green,blue));
+                    panel_basico.poner_imagen_der(filter.filtro_rgb(file_image,red,green,blue));
                 }else{
-                   panel_warhol.poner_imagen_warhol(num,bg.filtro_rgb(imagen_warhol,red,green,blue) );
+                   panel_warhol.poner_imagen_warhol(num,filter.filtro_rgb(imagen_warhol,red,green,blue) );
                 }
                           
             } catch (IOException ex) {

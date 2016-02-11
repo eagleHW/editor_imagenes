@@ -6,7 +6,7 @@
 
 package Controlador;
 
-import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelBasico;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ public class OleoListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        BibliotecaGrafica bg = new BibliotecaGrafica();
+        Filtros filter = new Filtros();
         PanelBasico panel_basico;
     
         ventana_principal.remove(ventana_principal.getPanelPrincipal());
@@ -41,7 +41,7 @@ public class OleoListener implements ActionListener{
         
             case "Gris":
                 
-                panel_basico.poner_imagen_der(bg.filtro_oleo_bn(ventana_principal.getImage()));
+                panel_basico.poner_imagen_der(filter.filtro_oleo_bn(ventana_principal.getImage()));
                 
                 break;
         
