@@ -8,6 +8,7 @@ import Controlador.GrisesListener;
 import Controlador.MaximoListener;
 import Controlador.MinimoListener;
 import Controlador.OleoListener;
+import Controlador.ReduccionListener;
 import Controlador.RotacionListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.Dimension;
@@ -105,7 +106,6 @@ public class Interfaz extends JFrame {
         JMenuItem itemRGB = new JMenuItem("RGB");
         JMenuItem itemBrillo = new JMenuItem("Brillo");
         JMenuItem itemMosaico = new JMenuItem("Mosaico");
-        JMenuItem itemReduccion = new JMenuItem("Reduccion");
         JMenuItem itemWarhol = new JMenuItem("Warhol");
         JMenuItem itemBlending = new JMenuItem("Blending");
         JMenuItem itemFavicom = new JMenuItem("Favicom");
@@ -143,6 +143,11 @@ public class Interfaz extends JFrame {
         JMenu menuOleo = new JMenu("Oleo");
         crear_submenu_oleo(menuOleo);
         
+        // Creamos el submenu Reduccion
+        
+        JMenu menuReduccion = new JMenu("Reduccion");
+        crear_submenu_reduccion(menuReduccion);
+        
         // Agrega los elementos del menu filtro
         // incluyendo los submenus
         
@@ -151,7 +156,6 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemBrillo);
         menuFiltros.add(menuGrises);
         menuFiltros.add(itemMosaico);
-        menuFiltros.add(itemReduccion);
         menuFiltros.add(itemWarhol);
         menuFiltros.add(menuConvolucion);
         menuFiltros.add(menuRotacion);
@@ -163,6 +167,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuMinimo);
         menuFiltros.add(itemBlackLight);
         menuFiltros.add(menuOleo);
+        menuFiltros.add(menuReduccion);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -172,7 +177,6 @@ public class Interfaz extends JFrame {
         itemRGB.addActionListener(filtros_listener);
         itemBrillo.addActionListener(filtros_listener);
         itemMosaico.addActionListener(filtros_listener);
-        itemReduccion.addActionListener(filtros_listener);
         itemWarhol.addActionListener(filtros_listener);
         itemBlending.addActionListener(filtros_listener);
         itemFavicom.addActionListener(filtros_listener);
@@ -314,6 +318,21 @@ public class Interfaz extends JFrame {
         itemOleoGris.addActionListener(oleo_listener);
         itemOleoColor.addActionListener(oleo_listener);
         
+    }
+   
+    private void crear_submenu_reduccion(JMenu menuReduccion){
+        
+       ReduccionListener reduccion_listener = new ReduccionListener(this);
+       
+       JMenuItem itemReduccionProporcion = new JMenuItem("Proporcion");
+       JMenuItem itemReduccionPorcentaje = new JMenuItem("Porcentaje"); 
+        
+       menuReduccion.add(itemReduccionProporcion);
+       menuReduccion.add(itemReduccionPorcentaje);
+        
+       itemReduccionProporcion.addActionListener(reduccion_listener);
+       itemReduccionPorcentaje.addActionListener(reduccion_listener);
+       
     }
     
     public File getFile(){

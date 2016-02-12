@@ -80,15 +80,6 @@ public class FiltrosListener implements ActionListener{
                    ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_mosaico(ventana_principal.getImage()));
                     
                 break;
-            case "Reduccion": 
-                
-                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
-                 ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
-                 ventana_principal.add(ventana_principal.getPanelPrincipal());
-                 ventana_principal.actualizar_interfaz();
-                 new VentanaReduccion((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
-           
-                break;
             case "Warhol":
                 
                 //System.out.println(ventana_principal.getPanelPrincipal().getClass().getName());

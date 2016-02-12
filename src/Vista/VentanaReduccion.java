@@ -47,7 +47,7 @@ public class VentanaReduccion extends JFrame{
              int valor = valores[reduccion_combox.getSelectedIndex()];
              
             try {
-                panel_basico.poner_imagen_der(filter.filtro_reduccion(file_image,valor));
+                panel_basico.poner_imagen_der(filter.filtro_reduccion_proporcion(file_image,valor));
             } catch (IOException ex) {
                 Logger.getLogger(VentanaRGB.class.getName()).log(Level.SEVERE, null, ex);
             }

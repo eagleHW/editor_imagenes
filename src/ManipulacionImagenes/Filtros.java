@@ -117,7 +117,7 @@ public class Filtros {
 
     }
     
-    public BufferedImage filtro_reduccion(File file_image, int tam_matrix) throws IOException{
+    public BufferedImage filtro_reduccion_proporcion(File file_image, int tam_matrix) throws IOException{
         
         BufferedImage imagen_original = ImageIO.read(file_image);
         BufferedImage imagen_creada;
@@ -462,7 +462,7 @@ public class Filtros {
          for (int i = 0; i < height; i++) {
             for (int j = 0; j < width ; j++) {
           
-                ventana = bg.getCompMatrix(i, j, random.nextInt(4) + 2, random.nextInt(4) + 2 , imagen);
+                ventana = bg.getCompMatrix(i, j, random.nextInt(5) + 1, random.nextInt(5) + 1 , imagen);
                 rgb_matrixs = bg.getRGBMatrixs(ventana);
                 
                 red = bg.getMatrixMin(rgb_matrixs[0]);
@@ -476,6 +476,42 @@ public class Filtros {
         return filtro_convolucion(nueva_imagen,blur_matrix,4);
          
     } 
+    
+    public BufferedImage filtro_reduccion_porcentaje(BufferedImage imagen, int porcentaje){
+        
+        if(porcentaje == 0){
+            return new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
+        }
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        int new_height =  (int) Math.ceil(height * (porcentaje / 100.0));
+        int new_width = (int )Math.ceil(width * (porcentaje / 100.0));
+        
+        new_height = new_height == ((int) Math.ceil( (height-1) * (porcentaje / 100.0))) ? new_height + 1 : new_height;
+        new_width = new_width == ((int) Math.ceil( (width-1) * (porcentaje / 100.0))) ? new_width + 1 : new_width;
+        
+        
+        BufferedImage nueva_imagen = new BufferedImage(new_width,new_height,BufferedImage.TYPE_INT_RGB);
+        
+        int new_i;
+        int new_j;
+        
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                
+                new_i = (int) Math.ceil(i * (porcentaje / 100.0));
+                new_j = (int) Math.ceil(j * (porcentaje / 100.0));
+            
+                nueva_imagen.setRGB(new_j, new_i, imagen.getRGB(j, i) );
+                    
+            }
+        }
+    
+        return nueva_imagen;
+    
+    }
     
     
 }
