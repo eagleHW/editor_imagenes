@@ -68,22 +68,15 @@ public class PanelBlending extends PanelEditorImagen {
             
             blending_img_izq_inf = null; // Eliminar cualquier imagen anterior que halla qeudado 
             blending_slider.setEnabled(false); // Desahbilitar el slider hasta que se carge una imagen
+   
+            blending_img_izq_sup = ventana_principal.getImage();
+            blending_label_izq_sup.setIcon(new ImageIcon(ventana_principal.getImage()));
             
-            try{
-             
-                blending_img_izq_sup = ImageIO.read(ventana_principal.getFile());
-                //blending_img_inf = ImageIO.read(file_imagen);
-                
-                blending_label_izq_sup.setIcon(new ImageIcon(blending_img_izq_sup));
-                //blending_label_inf.setIcon(new ImageIcon(blending_img_inf));
-             
-                blending_slider.addChangeListener((ChangeEvent e) -> {
+            blending_slider.addChangeListener((ChangeEvent e) -> {
                 poner_imagen_der(filter.filtro_blending(blending_img_izq_sup, blending_img_izq_inf, blending_slider.getValue()));  
-                });
+            });
                 
-            }catch (IOException ex) {
-                System.out.println("Error al cargar imagen");
-            }
+   
         
             GridBagConstraints especif = new GridBagConstraints(); 
 

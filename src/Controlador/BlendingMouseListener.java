@@ -38,6 +38,7 @@ public class BlendingMouseListener implements MouseListener{
              panel_blending.poner_imagen_izq_inf_blending(open_file.getSelectedFile());
              panel_blending.enable_blending_slider();
              System.out.println(open_file.getSelectedFile());
+
             
          }
     

@@ -491,8 +491,7 @@ public class Filtros {
         
         new_height = new_height == ((int) Math.ceil( (height-1) * (porcentaje / 100.0))) ? new_height + 1 : new_height;
         new_width = new_width == ((int) Math.ceil( (width-1) * (porcentaje / 100.0))) ? new_width + 1 : new_width;
-        
-        
+            
         BufferedImage nueva_imagen = new BufferedImage(new_width,new_height,BufferedImage.TYPE_INT_RGB);
         
         int new_i;
@@ -511,6 +510,47 @@ public class Filtros {
     
         return nueva_imagen;
     
+    }
+    
+    public BufferedImage filtro_blending_favicom(BufferedImage imagen,BufferedImage favicom, int posc_j, int posc_i, 
+                                    int blending_porcentaje, int reduccion_porcentaje){
+         
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        BufferedImage r_favicom = filtro_reduccion_porcentaje(favicom, reduccion_porcentaje);
+        double d_porcentaje_blending = blending_porcentaje / 100.0;  
+        
+        int red, green, blue;
+        int rgb1, rgb2;
+        
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++) {
+             
+                if ( ( j >= posc_j ) && ( j - posc_j  < r_favicom.getWidth() )  &&
+                             (i >= posc_i) && ( i - posc_i < r_favicom.getHeight() )) {
+                    
+                    rgb1 = imagen.getRGB(j, i);
+                    rgb2 = r_favicom.getRGB(j - posc_j, i - posc_i);
+
+                    red =  (int) (bg.getRedNum(rgb1) * d_porcentaje_blending + bg.getRedNum(rgb2) * (1- d_porcentaje_blending));
+                    green = (int) (bg.getGreenNum(rgb1) * d_porcentaje_blending + bg.getGreenNum(rgb2) * (1- d_porcentaje_blending));
+                    blue = (int) (bg.getBlueNum(rgb1) * d_porcentaje_blending + bg.getBlueNum(rgb2) * (1- d_porcentaje_blending));
+
+                    nueva_imagen.setRGB(j, i, bg.getARGBNum(255,red,green,blue));
+
+                }else{
+                    
+                    nueva_imagen.setRGB(j, i, imagen.getRGB(j, i));
+                    
+                }
+                
+                     
+            }    
+        }
+        
+        return nueva_imagen;
     }
     
     
