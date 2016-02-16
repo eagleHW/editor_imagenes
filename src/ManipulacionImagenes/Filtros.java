@@ -553,5 +553,61 @@ public class Filtros {
         return nueva_imagen;
     }
     
+    public BufferedImage filtro_att(BufferedImage imagen, int num_filas){
+        
+        FiltrosGrises fg = new FiltrosGrises();
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        int height_average_row_pixel = height / num_filas ;  
+        int height_left_out_pixel = height - (height_average_row_pixel * num_filas) - 1;
+        
+        int height_row_pixel;
+        
+        int posc_i_inicial = 0;
+        int num_black_pixels = 0;
+        
+        int pixel_negro = bg.getARGBNum(255,0,0,0);
+              
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);    
+        bg.pasar_blanco(nueva_imagen);
+        
+        BufferedImage alto_contraste_imagen = filtro_alto_contraste(fg.filtro_promedio(imagen));
+                
+        for(int row = 0; row < num_filas; row++){
+            
+            height_row_pixel = height_left_out_pixel > 0 ? height_average_row_pixel + 1 : height_average_row_pixel;
+            height_left_out_pixel--;
+            
+            for(int j = 0 ; j < width ; j++) { 
+                
+                for(int i = 0 ; i < height_row_pixel ; i++ ){
+                                    
+                    num_black_pixels = bg.getRedNum(alto_contraste_imagen.getRGB(j, i + posc_i_inicial)) == 0 ? 
+                                                                                num_black_pixels + 1 : num_black_pixels;
+                
+                }    
+                
+                int value = posc_i_inicial + ( (height_row_pixel - num_black_pixels) / 2 );    
+                
+                for(int i = 0 ; i < height_row_pixel; i++ ){
+                       
+                    if ( num_black_pixels > 0 ) { 
+                        nueva_imagen.setRGB(j, value + i, pixel_negro);
+                        num_black_pixels--;
+                                       
+                    }  
+                
+                }
+                        
+             }        
+            
+             posc_i_inicial += height_row_pixel;
+             System.out.println(posc_i_inicial);
+        }
     
+        return nueva_imagen;
+    
+    }
 }

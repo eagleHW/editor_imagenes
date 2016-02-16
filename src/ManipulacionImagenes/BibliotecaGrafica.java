@@ -459,4 +459,14 @@ public class BibliotecaGrafica {
         return nueva_imagen;
     }
     
+    public void pasar_blanco(BufferedImage imagen){
+        
+        for (int i = 0; i < imagen.getHeight(); i++) {
+            for (int j = 0; j < imagen.getWidth(); j++) {
+              imagen.setRGB(j, i, Integer.MAX_VALUE);
+            }
+        }
+        
+    }
+    
 }

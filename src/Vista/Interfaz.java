@@ -112,6 +112,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemSepia = new JMenuItem("Sepia");
         JMenuItem itemAltoContraste = new JMenuItem("Alto Contraste");
         JMenuItem itemBlackLight = new JMenuItem("BlackLight");
+        JMenuItem itemAtt = new JMenuItem("AT&T");
                 
         // Creamos el submenu Grises
     
@@ -168,6 +169,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemBlackLight);
         menuFiltros.add(menuOleo);
         menuFiltros.add(menuReduccion);
+        menuFiltros.add(itemAtt);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -183,6 +185,7 @@ public class Interfaz extends JFrame {
         itemSepia.addActionListener(filtros_listener);
         itemAltoContraste.addActionListener(filtros_listener);
         itemBlackLight.addActionListener(filtros_listener);
+        itemAtt.addActionListener(filtros_listener);
              
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
@@ -192,7 +195,7 @@ public class Interfaz extends JFrame {
         // Para evitar estar cargando imagen cada vez que pruebo
         try {
             BufferedImage img;
-            File file = new File("/home/rae/little_san_francisco.jpg");
+            File file = new File("/home/rae/little_face_puppy.jpg");
             img = ImageIO.read(file);
             this.file_imagen = file;
             this.imagen = img;

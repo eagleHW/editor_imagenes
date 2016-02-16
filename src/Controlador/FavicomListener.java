@@ -6,6 +6,7 @@
 
 package Controlador;
 
+import ManipulacionImagenes.BibliotecaGrafica;
 import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelFavicom;
@@ -36,7 +37,8 @@ public class FavicomListener implements ChangeListener, ActionListener , MouseLi
     private PanelFavicom panel_favicom;
     private Filtros filter = new Filtros();
     private int user_selection; // Para verificar si el usuario escogio un archivo. 
-    Interfaz ventana_principal;
+    private Interfaz ventana_principal;
+    private BibliotecaGrafica bg = new BibliotecaGrafica();
             
     private int reduccion = 100;
     private int transparencia = 0; // 100 por si primero reduce por lo que el valor de transparencia todavia no se actualiza
@@ -65,7 +67,7 @@ public class FavicomListener implements ChangeListener, ActionListener , MouseLi
                     reduccion =  spinner_number_model.getNumber().intValue();
                     temporal = filter.filtro_reduccion_porcentaje(panel_favicom.get_inf_image(),reduccion);
                     fondo = new BufferedImage(temporal.getWidth(),temporal.getHeight(), BufferedImage.TYPE_INT_RGB);
-                    pasar_blanco(fondo);
+                    bg.pasar_blanco(fondo);
                     temporal = filter.filtro_blending(fondo, temporal , transparencia);
                     panel_favicom.cambiar_imagen_izq(temporal);
            
@@ -75,7 +77,7 @@ public class FavicomListener implements ChangeListener, ActionListener , MouseLi
                     transparencia = spinner_number_model.getNumber().intValue();
                     temporal = filter.filtro_reduccion_porcentaje(panel_favicom.get_inf_image(), reduccion);
                     fondo = new BufferedImage(temporal.getWidth(),temporal.getHeight(), BufferedImage.TYPE_INT_RGB);
-                    pasar_blanco(fondo);
+                    bg.pasar_blanco(fondo);
                     temporal = filter.filtro_blending(fondo, temporal, transparencia);
                     panel_favicom.cambiar_imagen_izq(temporal);
              
@@ -144,16 +146,6 @@ public class FavicomListener implements ChangeListener, ActionListener , MouseLi
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
-    }
-
-    private void pasar_blanco(BufferedImage imagen){
-        
-        for (int i = 0; i < imagen.getHeight(); i++) {
-            for (int j = 0; j < imagen.getWidth(); j++) {
-              imagen.setRGB(j, i, Integer.MAX_VALUE);
-            }
-        }
         
     }
     
