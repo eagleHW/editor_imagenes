@@ -155,27 +155,27 @@ public class Interfaz extends JFrame {
         // Agrega los elementos del menu filtro
         // incluyendo los submenus
         
-        menuFiltros.add(itemAzar);
-        menuFiltros.add(itemRGB);
-        menuFiltros.add(itemBrillo);
-        menuFiltros.add(menuGrises);
-        menuFiltros.add(itemMosaico);
-        menuFiltros.add(itemWarhol);
-        menuFiltros.add(menuConvolucion);
-        menuFiltros.add(menuRotacion);
-        menuFiltros.add(itemBlending);
-        menuFiltros.add(itemFavicom);
-        menuFiltros.add(itemSepia);
         menuFiltros.add(itemAltoContraste);
+        menuFiltros.add(itemAtt);
+        menuFiltros.add(itemAzar);
+        menuFiltros.add(itemBlackLight);
+        menuFiltros.add(itemBlending);
+        menuFiltros.add(itemBrillo);
+        menuFiltros.add(menuConvolucion);
+        menuFiltros.add(itemDithering);
+        menuFiltros.add(itemFavicom);
+        menuFiltros.add(menuGrises);
+        menuFiltros.add(itemLetra);
         menuFiltros.add(menuMaximo);
         menuFiltros.add(menuMinimo);
-        menuFiltros.add(itemBlackLight);
+        menuFiltros.add(itemMosaico);
         menuFiltros.add(menuOleo);
+        menuFiltros.add(itemRGB);
         menuFiltros.add(menuReduccion);
-        menuFiltros.add(itemAtt);
+        menuFiltros.add(menuRotacion);
         menuFiltros.add(itemSemitono);
-        menuFiltros.add(itemLetra);
-        menuFiltros.add(itemDithering);
+        menuFiltros.add(itemSepia);
+        menuFiltros.add(itemWarhol);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
