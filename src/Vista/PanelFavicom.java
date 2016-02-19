@@ -46,7 +46,7 @@ public class PanelFavicom extends PanelEditorImagen{
     private JButton favicom_boton = new JButton("Aceptar");
     
     private JLabel favicom_spinner_label_transparencia = new JLabel("Nivel de transparencia (%)");
-    private SpinnerModel favicom_spinner_model_transparencia = new SpinnerNumberModel(50,0,100,1);
+    private SpinnerModel favicom_spinner_model_transparencia = new SpinnerNumberModel(0,0,100,1);
     private JSpinner favicom_spinner_transparencia = new JSpinner(favicom_spinner_model_transparencia);
     
     private JLabel favicom_spinner_label_reduccion = new JLabel("Tamaño (%)");
