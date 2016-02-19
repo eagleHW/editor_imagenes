@@ -21,7 +21,7 @@ public class SemitonoListener implements ChangeListener, ActionListener {
     private PanelSemitono panel_semitono;
     private Filtros filter = new Filtros();
             
-    private int reduccion = 100;
+    private int reduccion = 50;
     private int ventana = 3;
     
     public SemitonoListener(PanelSemitono panel_semitono, Interfaz ventana_principal){

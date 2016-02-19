@@ -26,7 +26,7 @@ public class LetraListener implements ChangeListener, ActionListener{
     private PanelLetra panel_letra;
     private Filtros filter = new Filtros();
             
-    private int reduccion = 100;
+    private int reduccion = 50;
     private int ventana = 3;
     
     public LetraListener(PanelLetra panel_letra, Interfaz ventana_principal){

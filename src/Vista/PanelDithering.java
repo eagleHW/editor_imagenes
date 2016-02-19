@@ -9,6 +9,7 @@ package Vista;
 import Controlador.DitheringListener;
 import Controlador.SemitonoListener;
 import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,6 +36,10 @@ public class PanelDithering extends PanelEditorImagen {
     
     private Interfaz ventana_principal;
     private BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Filtros filter = new Filtros();
+   
+    private final int VALOR_INICIAL_VENTANA = 3; 
+    private final int VALOR_INICIAL_REDUCCION = 50;
     
     private JPanel dithering_panel_izq_inf_opciones = new JPanel();
     private JPanel dithering_panel_izq_inf = new JPanel();
@@ -52,11 +57,11 @@ public class PanelDithering extends PanelEditorImagen {
     private JButton dithering_boton = new JButton("Aceptar");
     
     private JLabel dithering_label_ventana = new JLabel("Tamaño de la ventana (n*n) :");
-    private SpinnerModel dithering_spinner_model_ventana = new SpinnerNumberModel(3,0,10,1);
+    private SpinnerModel dithering_spinner_model_ventana = new SpinnerNumberModel(VALOR_INICIAL_VENTANA,0,10,1);
     private JSpinner dithering_spinner_ventana = new JSpinner(dithering_spinner_model_ventana);
     
     private JLabel dithering_label_reduccion = new JLabel("Tamaño (%)");
-    private SpinnerModel dithering_spinner_model_reduccion = new SpinnerNumberModel(100,0,100,1);
+    private SpinnerModel dithering_spinner_model_reduccion = new SpinnerNumberModel(VALOR_INICIAL_REDUCCION,0,100,1);
     private JSpinner dithering_spinner_reduccion = new JSpinner(dithering_spinner_model_reduccion);
     
     //Imagenes Semitono
@@ -87,7 +92,8 @@ public class PanelDithering extends PanelEditorImagen {
         try {
             File file_imagen = new File("images/dithering/1.jpg");
             dithering_img_izq_inf = ImageIO.read(file_imagen);
-            dithering_label_izq_inf.setIcon(new ImageIcon(dithering_img_izq_inf));
+            dithering_label_izq_inf.setIcon(new ImageIcon(
+                    filter.filtro_reduccion_porcentaje(dithering_img_izq_inf, VALOR_INICIAL_REDUCCION )));
         } catch (IOException ex) {
             System.out.println("Problemas al cargar la imagen");
         }

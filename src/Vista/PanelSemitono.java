@@ -3,6 +3,7 @@ package Vista;
 
 import Controlador.SemitonoListener;
 import ManipulacionImagenes.BibliotecaGrafica;
+import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,6 +32,10 @@ public class PanelSemitono extends PanelEditorImagen {
 
     private Interfaz ventana_principal;
     private BibliotecaGrafica bg = new BibliotecaGrafica();
+    private Filtros filter = new Filtros();
+    
+    private final int VALOR_INICIAL_VENTANA = 3; 
+    private final int VALOR_INICIAL_REDUCCION = 50;
     
     private JPanel semitono_panel_izq_inf_opciones = new JPanel();
     private JPanel semitono_panel_izq_inf = new JPanel();
@@ -48,11 +53,11 @@ public class PanelSemitono extends PanelEditorImagen {
     private JButton semitono_boton = new JButton("Aceptar");
     
     private JLabel semitono_label_ventana = new JLabel("Tamaño de la ventana (n*n) :");
-    private SpinnerModel semitono_spinner_model_ventana = new SpinnerNumberModel(3,0,10,1);
+    private SpinnerModel semitono_spinner_model_ventana = new SpinnerNumberModel(VALOR_INICIAL_VENTANA,0,10,1);
     private JSpinner semitono_spinner_ventana = new JSpinner(semitono_spinner_model_ventana);
     
     private JLabel semitono_label_reduccion = new JLabel("Tamaño (%)");
-    private SpinnerModel semitono_spinner_model_reduccion = new SpinnerNumberModel(100,0,100,1);
+    private SpinnerModel semitono_spinner_model_reduccion = new SpinnerNumberModel(VALOR_INICIAL_REDUCCION,0,100,1);
     private JSpinner semitono_spinner_reduccion = new JSpinner(semitono_spinner_model_reduccion);
     
     //Imagenes Semitono
@@ -84,7 +89,8 @@ public class PanelSemitono extends PanelEditorImagen {
         try {
             File file_imagen = new File("images/points/1.jpg");
             semitono_img_izq_inf = ImageIO.read(file_imagen);
-            semitono_label_izq_inf.setIcon(new ImageIcon(semitono_img_izq_inf));
+            semitono_label_izq_inf.setIcon(new ImageIcon(
+                    filter.filtro_reduccion_porcentaje(semitono_img_izq_inf, VALOR_INICIAL_REDUCCION )));
         } catch (IOException ex) {
             System.out.println("Problemas al cargar la imagen");
         }

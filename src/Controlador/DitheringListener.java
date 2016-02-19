@@ -27,7 +27,7 @@ public class DitheringListener implements ChangeListener, ActionListener{
     
     private Filtros filter = new Filtros();
             
-    private int reduccion = 100;
+    private int reduccion = 50;
     private int ventana = 3;
     
     
