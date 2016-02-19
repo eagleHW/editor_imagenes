@@ -92,8 +92,6 @@ public class PanelFavicom extends PanelEditorImagen{
             favicom_label_der.setHorizontalAlignment(JLabel.CENTER);
                         
             favicom_label_izq_sup.setIcon(new ImageIcon(ventana_principal.getImage()));
-
-            favicom_label_izq_inf.addMouseListener(favicom_listener);
             
             favicom_label_izq_inf.setIcon(null);
             favicom_label_izq_inf.setText("Click para agregar imagen");
@@ -103,7 +101,9 @@ public class PanelFavicom extends PanelEditorImagen{
             favicom_spinner_posc_x.setName("X");
             favicom_spinner_posc_y.setName("Y");
             
-            favicom_spinner_transparencia.addChangeListener(favicom_listener);
+            favicom_label_izq_inf.addMouseListener(favicom_listener);
+            
+            favicom_spinner_transparencia.addChangeListener(favicom_listener);    
             favicom_spinner_reduccion.addChangeListener(favicom_listener);
             favicom_spinner_posc_x.addChangeListener(favicom_listener);
             favicom_spinner_posc_y.addChangeListener(favicom_listener);

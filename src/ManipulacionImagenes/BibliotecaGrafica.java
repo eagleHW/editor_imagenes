@@ -199,43 +199,6 @@ public class BibliotecaGrafica {
     } 
     
     // Tiene problemas con matrices de tamaño par que salen de los bordes
-    public int[] getMatrix(int y, int x, int height_mat, int width_mat, BufferedImage imagen){
-
-        int height_img = imagen.getHeight();
-        int width_img =  imagen.getWidth();
-
-        int x_init = x - (width_mat / 2);
-        int y_init = y - (height_mat / 2);
-
-        int exc_x = x_init < 0 ? -(x_init) : 0;
-        int exc_y = y_init < 0 ? -(y_init) : 0;
-
-        x_init += exc_x;
-        y_init += exc_y;
-
-        exc_x += x + (width_mat / 2) >= width_img ?
-                            (x + (width_mat / 2)) - (width_img-1) : 0;
-        exc_y += y + (height_mat / 2) >= height_img ?
-                            (y + (height_mat / 2)) - (height_img-1) : 0;
-
-        int tam = 0;
-        int array_posc = 0;
-        int[] pixel_values = new int[(width_mat - exc_x)*(height_mat - exc_y)];
-
-        for(int i = y_init ; i < y_init + ( height_mat - exc_y ) ; i++){
-
-            for(int j = x_init ; j < x_init + ( width_mat - exc_x ); j++){
-
-                   pixel_values[array_posc] = imagen.getRGB(j,i);
-                   array_posc++;
-
-            }
-        }
-
-        return pixel_values;
-    }
-
-    // Tiene problemas con matrices de tamaño par que salen de los bordes
     public void setMatrix(int y, int x, int height_mat, int width_mat,int argb ,BufferedImage imagen ){
 
         int height_img = imagen.getHeight();
@@ -265,7 +228,7 @@ public class BibliotecaGrafica {
         }
 
     }
-  
+   
     public int[][] getCompMatrix(int y, int x, int heigth_mat, int width_mat, BufferedImage imagen ){
     
         int heigth_img = imagen.getHeight();
@@ -468,5 +431,22 @@ public class BibliotecaGrafica {
         }
         
     }
+    
+    public void sobreponer_imagen(int y, int x, BufferedImage imagen_arriba, BufferedImage imagen_abajo){
+        
+        int height = imagen_arriba.getHeight();
+        int width = imagen_arriba.getWidth();
+        
+        for (int i = 0; i < height ; i++) {
+            for (int j = 0; j < width ; j++) {
+                  
+                imagen_abajo.setRGB(j + x ,i + y,  imagen_arriba.getRGB(j, i) );
+                
+            }
+            
+        }
+        
+    }
+
     
 }
