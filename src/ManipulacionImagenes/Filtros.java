@@ -646,7 +646,7 @@ public class Filtros {
                 promedio =  bg.getAverage(bg.getRGBMatrixs(ventana)[0]);        
                                 
                 imagen_arriba =  promedio == 256 ? coleccion_imagenes_reducidas[coleccion_imagenes.length - 1] 
-                        : coleccion_imagenes_reducidas[  promedio/coleccion_imagenes.length  ];
+                        : coleccion_imagenes_reducidas[  (int) (promedio/ (256.0/coleccion_imagenes.length))  ];
            
                 bg.sobreponer_imagen((i / tam_matrix) * coleccion_imagenes_reducidas[0].getHeight(), 
                             (j / tam_matrix) * coleccion_imagenes_reducidas[0].getWidth(), imagen_arriba, nueva_imagen);                    
@@ -692,7 +692,7 @@ public class Filtros {
                 promedio =  bg.getAverage(bg.getRGBMatrixs(ventana)[0]);        
                                 
                 imagen_arriba =  promedio == 256 ? coleccion_imagenes_reducidas[coleccion_imagenes.length - 1] 
-                        : coleccion_imagenes_reducidas[  promedio/coleccion_imagenes.length  ];
+                        : coleccion_imagenes_reducidas[  (int) (promedio/ (256.0/coleccion_imagenes.length))  ];
            
                 bg.sobreponer_imagen((i / tam_matrix) * coleccion_imagenes_reducidas[0].getHeight(), 
                             (j / tam_matrix) * coleccion_imagenes_reducidas[0].getWidth(), imagen_arriba, nueva_imagen);                    
@@ -705,6 +705,7 @@ public class Filtros {
         
     }
 
+    // La coleccion debe ser del mismo tamaño
     public BufferedImage filtro_dithering(BufferedImage imagen, int reduccion, int tam_matrix, BufferedImage[] coleccion_imagenes){
         
         FiltrosGrises fg = new FiltrosGrises();
@@ -739,7 +740,7 @@ public class Filtros {
                 promedio =  bg.getAverage(bg.getRGBMatrixs(ventana)[0]);        
                                 
                 imagen_arriba =  promedio == 256 ? coleccion_imagenes_reducidas[coleccion_imagenes.length - 1] 
-                        : coleccion_imagenes_reducidas[  promedio/ (int)(256.0/coleccion_imagenes.length)  ];
+                        : coleccion_imagenes_reducidas[  (int) (promedio/ (256.0/coleccion_imagenes.length))  ];
            
                 bg.sobreponer_imagen((i / tam_matrix) * coleccion_imagenes_reducidas[0].getHeight(), 
                             (j / tam_matrix) * coleccion_imagenes_reducidas[0].getWidth(), imagen_arriba, nueva_imagen);                    
