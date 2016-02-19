@@ -115,6 +115,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemAtt = new JMenuItem("AT&T");
         JMenuItem itemSemitono = new JMenuItem("Semitono");
         JMenuItem itemLetra = new JMenuItem("Letra");
+        JMenuItem itemDithering = new JMenuItem("Dithering");
                 
         // Creamos el submenu Grises
     
@@ -174,6 +175,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(itemAtt);
         menuFiltros.add(itemSemitono);
         menuFiltros.add(itemLetra);
+        menuFiltros.add(itemDithering);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -192,6 +194,7 @@ public class Interfaz extends JFrame {
         itemAtt.addActionListener(filtros_listener);
         itemSemitono.addActionListener(filtros_listener);
         itemLetra.addActionListener(filtros_listener);
+        itemDithering.addActionListener(filtros_listener);
         
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
@@ -201,7 +204,7 @@ public class Interfaz extends JFrame {
         // Para evitar estar cargando imagen cada vez que pruebo
         try {
             BufferedImage img;
-            File file = new File("/home/rae/nano_dog.jpg");
+            File file = new File("/home/rae/lenna.jpg");
             img = ImageIO.read(file);
             this.file_imagen = file;
             this.imagen = img;

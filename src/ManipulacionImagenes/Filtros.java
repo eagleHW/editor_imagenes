@@ -704,4 +704,51 @@ public class Filtros {
         
         
     }
+
+    public BufferedImage filtro_dithering(BufferedImage imagen, int reduccion, int tam_matrix, BufferedImage[] coleccion_imagenes){
+        
+        FiltrosGrises fg = new FiltrosGrises();
+        BufferedImage[] coleccion_imagenes_reducidas = new BufferedImage[coleccion_imagenes.length];
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        int height_num_matrix = height / tam_matrix;
+        int width_num_matrix = width / tam_matrix;
+        
+        for (int i = 0; i < coleccion_imagenes.length ; i++) {
+        
+            coleccion_imagenes_reducidas[i] = filtro_reduccion_porcentaje(coleccion_imagenes[i], reduccion);
+            
+        }
+        
+        int height_nueva_imagen = height_num_matrix *  coleccion_imagenes_reducidas[0].getHeight();
+        int width_nueva_imagen = width_num_matrix * coleccion_imagenes_reducidas[0].getWidth();
+        
+        BufferedImage imagen_grises = fg.filtro_promedio(imagen);
+        BufferedImage nueva_imagen = new BufferedImage(width_nueva_imagen, height_nueva_imagen, BufferedImage.TYPE_INT_RGB);
+        BufferedImage imagen_arriba;
+        
+        int[][] ventana;
+        int promedio;
+         
+        for (int i = 0; i < height - (height % tam_matrix); i += tam_matrix) {
+            for (int j = 0; j < width - (width % tam_matrix); j += tam_matrix ) {
+                
+                ventana = bg.getEdgeCompMatrix(i, j, tam_matrix, tam_matrix, imagen_grises);
+                promedio =  bg.getAverage(bg.getRGBMatrixs(ventana)[0]);        
+                                
+                imagen_arriba =  promedio == 256 ? coleccion_imagenes_reducidas[coleccion_imagenes.length - 1] 
+                        : coleccion_imagenes_reducidas[  promedio/ (int)(256.0/coleccion_imagenes.length)  ];
+           
+                bg.sobreponer_imagen((i / tam_matrix) * coleccion_imagenes_reducidas[0].getHeight(), 
+                            (j / tam_matrix) * coleccion_imagenes_reducidas[0].getWidth(), imagen_arriba, nueva_imagen);                    
+                
+            }
+        }
+        
+        return nueva_imagen;
+        
+    }
+
 }

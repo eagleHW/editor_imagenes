@@ -6,6 +6,7 @@ import Vista.Interfaz;
 import Vista.PanelBasico;
 import Vista.PanelBlackLight;
 import Vista.PanelBlending;
+import Vista.PanelDithering;
 import Vista.PanelFavicom;
 import Vista.PanelLetra;
 import Vista.PanelSemitono;
@@ -163,6 +164,15 @@ public class FiltrosListener implements ActionListener{
                 
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelLetra(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                
+                break;
+            
+            case "Dithering":
+                
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelDithering(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
                 
