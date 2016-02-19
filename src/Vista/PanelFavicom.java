@@ -12,12 +12,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -74,7 +72,13 @@ public class PanelFavicom extends PanelEditorImagen{
             this.favicom_listener = new FavicomListener(this,ventana_principal);
             
             this.setLayout(new GridLayout(1,2,5,10));
-             
+            
+            favicom_spinner_label_posc_x.setText("X : (MAX_VALUE : " + 
+                                        (ventana_principal.getImage().getWidth() - 1) +" )");
+            
+            favicom_spinner_label_posc_y.setText("Y : (MAX_VALUE : " + 
+                                        (ventana_principal.getImage().getHeight() - 1) +" )");
+            
             favicom_spinner_reduccion.setEnabled(false);
             favicom_spinner_transparencia.setEnabled(false);
             favicom_spinner_posc_x.setEnabled(false);
@@ -254,6 +258,13 @@ public class PanelFavicom extends PanelEditorImagen{
         favicom_label_der.setIcon(null);
         favicom_spinner_model_reduccion.setValue(new Integer(100));
         favicom_spinner_model_transparencia.setValue(new Integer(0));
+        
+        favicom_spinner_label_posc_x.setText("X : (MAX_VALUE : " + 
+                                        (imagen.getWidth() - 1) +" )");
+            
+        favicom_spinner_label_posc_y.setText("Y : (MAX_VALUE : " + 
+                                        (imagen.getHeight() - 1) +" )");
+        
         
     }
 
