@@ -114,6 +114,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemBlackLight = new JMenuItem("BlackLight");
         JMenuItem itemAtt = new JMenuItem("AT&T");
         JMenuItem itemSemitono = new JMenuItem("Semitono");
+        JMenuItem itemLetra = new JMenuItem("Letra");
                 
         // Creamos el submenu Grises
     
@@ -172,6 +173,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuReduccion);
         menuFiltros.add(itemAtt);
         menuFiltros.add(itemSemitono);
+        menuFiltros.add(itemLetra);
         
         // Crea el listener para los filtros
         FiltrosListener filtros_listener = new FiltrosListener(this); 
@@ -189,7 +191,8 @@ public class Interfaz extends JFrame {
         itemBlackLight.addActionListener(filtros_listener);
         itemAtt.addActionListener(filtros_listener);
         itemSemitono.addActionListener(filtros_listener);
-             
+        itemLetra.addActionListener(filtros_listener);
+        
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
         barra.add(menuFiltros);

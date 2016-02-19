@@ -7,6 +7,7 @@ import Vista.PanelBasico;
 import Vista.PanelBlackLight;
 import Vista.PanelBlending;
 import Vista.PanelFavicom;
+import Vista.PanelLetra;
 import Vista.PanelSemitono;
 import Vista.PanelSepia;
 import Vista.PanelWarhol;
@@ -157,7 +158,16 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.actualizar_interfaz();
                 
                 break;
-               
+            
+            case "Letra":
+                
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelLetra(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                
+                break;
+                
             default:
                 System.out.println(e.getActionCommand());    
         
