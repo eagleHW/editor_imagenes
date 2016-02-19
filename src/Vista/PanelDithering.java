@@ -60,7 +60,7 @@ public class PanelDithering extends PanelEditorImagen {
     private SpinnerModel dithering_spinner_model_ventana = new SpinnerNumberModel(VALOR_INICIAL_VENTANA,0,10,1);
     private JSpinner dithering_spinner_ventana = new JSpinner(dithering_spinner_model_ventana);
     
-    private JLabel dithering_label_reduccion = new JLabel("Tamaño (%)");
+    private JLabel dithering_label_reduccion = new JLabel("Tamaño (%) :");
     private SpinnerModel dithering_spinner_model_reduccion = new SpinnerNumberModel(VALOR_INICIAL_REDUCCION,0,100,1);
     private JSpinner dithering_spinner_reduccion = new JSpinner(dithering_spinner_model_reduccion);
     

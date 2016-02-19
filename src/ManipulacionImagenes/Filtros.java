@@ -604,7 +604,6 @@ public class Filtros {
              }        
             
              posc_i_inicial += height_row_pixel;
-             System.out.println(posc_i_inicial);
         }
     
         return nueva_imagen;

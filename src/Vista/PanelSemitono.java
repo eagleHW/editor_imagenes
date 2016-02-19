@@ -56,7 +56,7 @@ public class PanelSemitono extends PanelEditorImagen {
     private SpinnerModel semitono_spinner_model_ventana = new SpinnerNumberModel(VALOR_INICIAL_VENTANA,0,10,1);
     private JSpinner semitono_spinner_ventana = new JSpinner(semitono_spinner_model_ventana);
     
-    private JLabel semitono_label_reduccion = new JLabel("Tamaño (%)");
+    private JLabel semitono_label_reduccion = new JLabel("Tamaño (%) :");
     private SpinnerModel semitono_spinner_model_reduccion = new SpinnerNumberModel(VALOR_INICIAL_REDUCCION,0,100,1);
     private JSpinner semitono_spinner_reduccion = new JSpinner(semitono_spinner_model_reduccion);
     

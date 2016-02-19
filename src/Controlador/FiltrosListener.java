@@ -3,6 +3,7 @@ package Controlador;
 
 import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
+import Vista.PanelATT;
 import Vista.PanelBasico;
 import Vista.PanelBlackLight;
 import Vista.PanelBlending;
@@ -144,11 +145,10 @@ public class FiltrosListener implements ActionListener{
             case "AT&T":
                 
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
-                ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                ventana_principal.setPanelPrincipal(new PanelATT(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
-                ventana_principal.getPanelPrincipal().poner_imagen_der(filter.filtro_att(ventana_principal.getImage(),50));
-                
+            
                 break;
             
             case "Semitono":
