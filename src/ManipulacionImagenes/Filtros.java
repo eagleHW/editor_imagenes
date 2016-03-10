@@ -6,10 +6,21 @@
 
 package ManipulacionImagenes;
 
+import K3Tree.K3Tree;
+import K3Tree.K3TreeNode;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -751,4 +762,107 @@ public class Filtros {
         
     }
 
+    public void filtro_fotomosaico(BufferedImage imagen, int tam_ventana_x, int tam_ventana_y, int tam_resultado_x, int tam_resultado_y, String nombre_archivo){
+        
+        int width = imagen.getWidth();
+        int height = imagen.getHeight();
+        
+        int[][] new_array;
+        int[][][] rgb_arrays;
+        K3Tree arbol = null;
+        K3TreeNode<LinkedList<String>> nodo_arbol = null;
+        PrintWriter writer = null; 
+        String path = "";
+        
+        int red;
+        int blue;
+        int green;
+        
+        try {
+            arbol = cargar_arbol("hashtable.ser");
+            path = new File("").getCanonicalPath();
+        } catch (IOException ex) {
+            System.out.println("Intente actuzalizar");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Clase no encontrada");
+        }   
+                   
+        try {
+            writer = new PrintWriter(nombre_archivo,"UTF-8");
+            writer.println("<!DOCTYPE HTML>");
+            writer.println("<html>");
+            writer.println("<head>");
+            writer.println("<meta charset=\"UTF-8\">");
+            writer.println("<title>Fotograma</title>");
+            writer.println("<style type=\"text/css\">\n" +
+                           "div{display: table-row-group;}\n" +
+                           "img{float: left;}\n" +
+                           "</style>");
+            writer.println("</head>");
+            writer.println("<body>");
+            
+  
+        for (int i = 0; i < height; i+= tam_ventana_y) {
+            
+            writer.println("<div>");
+            
+            for (int j = 0; j < width; j+= tam_ventana_x ) {
+             
+                new_array = bg.getCompMatrix(i, j, tam_ventana_y, tam_ventana_x, imagen);
+                rgb_arrays = bg.getRGBMatrixs(new_array);
+                red = bg.getAverage(rgb_arrays[0]);
+                green = bg.getAverage(rgb_arrays[1]);
+                blue = bg.getAverage(rgb_arrays[2]);
+                nodo_arbol = arbol.search_nearest_neighbour(red, green, blue); 
+                writer.printf("<img src=\"%s%s\" width=\"%d\" height=\"%d\" >\n",path,nodo_arbol.getAtributo().get(0),tam_resultado_x, tam_resultado_y);
+                
+            }
+            
+            writer.println("</div>");
+            
+        }
+            
+            writer.println("</body>");
+            writer.println("</html>");
+            
+            writer.flush();
+            writer.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                 
+    }
+    
+    private K3Tree cargar_arbol(String nombre_archivo)throws IOException, ClassNotFoundException{
+        
+        FileInputStream fileIn = null;
+        ObjectInputStream in = null;
+        HashMap hash = null;
+               
+        try{
+           
+           fileIn = new FileInputStream(nombre_archivo);
+           in = new ObjectInputStream(fileIn);
+           hash = (HashMap) in.readObject();
+           in.close();
+           fileIn.close();
+           
+        } finally{
+            try{
+               in.close();
+               fileIn.close();
+            }catch(Exception e){
+                // Ignorada a proposito
+            }
+            
+        }  
+        
+        return  new K3Tree(hash.values());
+        
+    }
+    
+    
 }

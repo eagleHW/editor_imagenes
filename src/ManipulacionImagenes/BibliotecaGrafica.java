@@ -448,5 +448,32 @@ public class BibliotecaGrafica {
         
     }
 
+    public int getAverageRGB (BufferedImage imagen,int separacion){
+        
+        int height = imagen.getHeight();
+        int width = imagen.getWidth();
+        
+        int pixel; 
+        int sum_red = 0;
+        int sum_green = 0;
+        int sum_blue = 0;
+        int num_puntos_separacion = 0;
+          
+        for (int i = 0; i < height; i += separacion ) {
+            for (int j = 0; j < width; j += separacion) {
+             
+                pixel = imagen.getRGB(j, i); 
+                sum_red += getRedNum(pixel);
+                sum_green += getGreenNum(pixel);
+                sum_blue += getBlueNum(pixel);
+                num_puntos_separacion++; 
+                
+            }
+        }
+        
+        return getARGBNum(255,sum_red /num_puntos_separacion, sum_green / num_puntos_separacion , sum_blue / num_puntos_separacion);
+    }
+            
+    
     
 }

@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Vista/PanelATT.java</file>
-            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/SemitonoListener.java</file>
-            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/ATTListener.java</file>
-            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/FiltrosListener.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/ManipulacionImagenes/Filtros.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/ManipulacionImagenes/Main.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/K3Tree/K3TreeNode.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/ManipulacionImagenes/LectorArchivoFotomosaico.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Vista/PanelFotomosaico.java</file>
+            <file>file:/home/rae/NetBeansProjects/EditorImagenes/src/Controlador/FotomosaicoListener.java</file>
         </group>
     </open-files>
 </project-private>

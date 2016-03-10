@@ -9,13 +9,13 @@ import Vista.PanelBlackLight;
 import Vista.PanelBlending;
 import Vista.PanelDithering;
 import Vista.PanelFavicom;
+import Vista.PanelFotomosaico;
 import Vista.PanelLetra;
 import Vista.PanelSemitono;
 import Vista.PanelSepia;
 import Vista.PanelWarhol;
 import Vista.VentanaBrillo;
 import Vista.VentanaRGB;
-import Vista.VentanaReduccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -177,7 +177,15 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.actualizar_interfaz();
                 
                 break;
+                            
+            case "Fotomosaico":    
                 
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelFotomosaico(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                
+                break;
             default:
                 System.out.println(e.getActionCommand());    
         
