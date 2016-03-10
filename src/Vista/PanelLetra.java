@@ -2,7 +2,6 @@
 package Vista;
 
 import Controlador.LetraListener;
-import Controlador.SemitonoListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;

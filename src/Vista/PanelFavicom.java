@@ -75,7 +75,7 @@ public class PanelFavicom extends PanelEditorImagen{
             
             favicom_spinner_label_posc_x.setText("X : (MAX_VALUE : " + 
                                         (ventana_principal.getImage().getWidth() - 1) +" )");
-            
+                                        
             favicom_spinner_label_posc_y.setText("Y : (MAX_VALUE : " + 
                                         (ventana_principal.getImage().getHeight() - 1) +" )");
             

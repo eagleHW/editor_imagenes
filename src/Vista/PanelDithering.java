@@ -7,7 +7,6 @@
 package Vista;
 
 import Controlador.DitheringListener;
-import Controlador.SemitonoListener;
 import ManipulacionImagenes.BibliotecaGrafica;
 import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;

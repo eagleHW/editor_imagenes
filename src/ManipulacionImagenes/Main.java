@@ -9,13 +9,7 @@ package ManipulacionImagenes;
 import K3Tree.K3Tree;
 import K3Tree.K3TreeNode;
 import Vista.Interfaz;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

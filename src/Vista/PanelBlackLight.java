@@ -86,7 +86,7 @@ public class PanelBlackLight extends PanelEditorImagen{
             especif.weighty = 0.2;
             especif.insets = new Insets(20,10,0,0);
             especif.fill = GridBagConstraints.BOTH;
-            especif.anchor = GridBagConstraints.CENTER;
+                especif.anchor = GridBagConstraints.CENTER;
             
             blacklight_panel_izq.add(blacklight_slider,especif);
         

@@ -6,7 +6,6 @@
 
 package Vista;
 
-import Controlador.BlendingMouseListener;
 import ManipulacionImagenes.Filtros;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
