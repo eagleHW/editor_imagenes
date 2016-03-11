@@ -11,6 +11,7 @@ import ManipulacionImagenes.BibliotecaGrafica;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -31,11 +32,15 @@ public class PanelFotomosaico extends PanelEditorImagen {
     private Interfaz ventana_principal;
     private BibliotecaGrafica bg = new BibliotecaGrafica();
     
-    private JLabel fotomosaico_label = new JLabel();
-    private JScrollPane fotomosaico_scroll_imagen = new JScrollPane(fotomosaico_label);
-   
+    private JLabel fotomosaico_label_der = new JLabel();
+    private JLabel fotomosaico_label_izq = new JLabel();
+    
+    private JScrollPane fotomosaico_scroll_image_der = new JScrollPane(fotomosaico_label_der);
+    private JScrollPane fotomosaico_scroll_image_izq = new JScrollPane(fotomosaico_label_izq);
+    
     private JPanel fotomosaico_panel_izq = new JPanel();
     private JPanel fotomosaico_panel_der = new JPanel(); 
+    private JPanel fotomosaico_panel_spinner = new JPanel();
     
     private JLabel fotomosaico_spinner_label_tamaño_ventana_x = new JLabel("Tamaño ventana X : ");
     private SpinnerModel fotomosaico_spinner_model_tamaño_ventana_x = new SpinnerNumberModel(1,1,20,1);
@@ -61,16 +66,20 @@ public class PanelFotomosaico extends PanelEditorImagen {
     
         this.ventana_principal = ventana_principal;        
         this.fotomosaico_listener = new FotomosaicoListener(this,ventana_principal);
-        this.setLayout(new BorderLayout());
+        
+        this.setLayout(new GridLayout(1,2,5,10));
     
-        fotomosaico_panel_izq.setLayout(new BorderLayout());
-        fotomosaico_panel_der.setLayout(new GridBagLayout());
+        fotomosaico_panel_izq.setLayout(new GridBagLayout());
+        fotomosaico_panel_der.setLayout(new BorderLayout());
+        fotomosaico_panel_spinner.setLayout(new GridBagLayout());
         
-        fotomosaico_panel_izq.add(fotomosaico_scroll_imagen);
-        fotomosaico_label.setIcon(new ImageIcon(ventana_principal.getImage()));
+        fotomosaico_panel_der.add(fotomosaico_scroll_image_der);
         
-        fotomosaico_label.setHorizontalAlignment(JLabel.CENTER);
-
+        fotomosaico_label_izq.setIcon(new ImageIcon(ventana_principal.getImage()));
+        
+        fotomosaico_label_izq.setHorizontalAlignment(JLabel.CENTER);
+        fotomosaico_label_der.setHorizontalAlignment(JLabel.CENTER);
+        
         fotomosaico_spinner_tamaño_ventana_x.setName("tamaño_ventana_x");
         fotomosaico_spinner_tamaño_ventana_y.setName("tamaño_ventana_y");
         fotomosaico_spinner_tamaño_resultado_x.setName("tamaño_resultado_x");
@@ -83,9 +92,31 @@ public class PanelFotomosaico extends PanelEditorImagen {
         
         fotomosaico_boton.addActionListener(fotomosaico_listener);
         
-        
-        
         GridBagConstraints especif = new GridBagConstraints();
+        
+        especif.gridx = 0;
+        especif.gridy = 0;
+        especif.gridwidth = 1;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 1.0;
+        especif.insets = new Insets(20,10,0,0);
+        especif.fill = GridBagConstraints.BOTH;
+        especif.anchor = GridBagConstraints.CENTER;
+        fotomosaico_panel_izq.add(fotomosaico_scroll_image_izq,especif);
+        
+        especif.gridx = 0;
+        especif.gridy = 1;
+        especif.gridwidth = 1;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 0.5;
+        especif.insets = new Insets(20,10,0,0);
+        especif.fill = GridBagConstraints.BOTH;
+        especif.anchor = GridBagConstraints.CENTER;
+        fotomosaico_panel_izq.add(fotomosaico_panel_spinner,especif);
+        
+        // Empieza la configuracion del panel de spinners
         
         especif.gridx = 0;
         especif.gridy = 0;
@@ -96,7 +127,7 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.insets = new Insets(20,10,0,10);
         especif.fill = GridBagConstraints.HORIZONTAL;
         especif.anchor = GridBagConstraints.CENTER;
-        fotomosaico_panel_der.add(fotomosaico_spinner_label_tamaño_ventana_x,especif);
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_label_tamaño_ventana_x,especif);
         
         especif.gridx = 0;
         especif.gridy = 1;
@@ -106,8 +137,8 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.weighty = 1.0;
         especif.insets = new Insets(20,10,0,10);
         especif.fill = GridBagConstraints.HORIZONTAL;
-        especif.anchor = GridBagConstraints.WEST;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_tamaño_ventana_x,especif);
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_tamaño_ventana_x,especif);
         
         especif.gridx = 0;
         especif.gridy = 2;
@@ -118,7 +149,7 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.insets = new Insets(20,10,0,10);
         especif.fill = GridBagConstraints.HORIZONTAL;
         especif.anchor = GridBagConstraints.CENTER; 
-        fotomosaico_panel_der.add(fotomosaico_spinner_label_tamaño_ventana_y,especif);
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_label_tamaño_ventana_y,especif);
         
         especif.gridx = 0;
         especif.gridy = 3;
@@ -129,85 +160,65 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.insets = new Insets(20,10,0,10);
         especif.fill = GridBagConstraints.HORIZONTAL;
         especif.anchor = GridBagConstraints.CENTER;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_tamaño_ventana_y,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 4;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 0.15;
-        especif.insets = new Insets(20,10,0,10);
-        especif.fill = GridBagConstraints.HORIZONTAL;
-        especif.anchor = GridBagConstraints.CENTER;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_label_tamaño_resultado_x,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 5;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 1.0;
-        especif.insets = new Insets(20,10,0,10);
-        especif.fill = GridBagConstraints.HORIZONTAL;
-        especif.anchor = GridBagConstraints.CENTER;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_tamaño_resultado_x,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 6;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 0.15;
-        especif.insets = new Insets(20,10,0,10);
-        especif.fill = GridBagConstraints.HORIZONTAL;
-        especif.anchor = GridBagConstraints.CENTER;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_label_tamaño_resultado_y,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 7;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 1.0;
-        especif.insets = new Insets(20,10,0,10);
-        especif.fill = GridBagConstraints.HORIZONTAL;
-        especif.anchor = GridBagConstraints.CENTER;  
-        fotomosaico_panel_der.add(fotomosaico_spinner_tamaño_resultado_y,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 8;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 15.0;
-        especif.insets = new Insets(20,10,0,10);
-        especif.fill = GridBagConstraints.NONE;
-        especif.anchor = GridBagConstraints.NORTH;  
-        fotomosaico_panel_der.add(fotomosaico_boton,especif);
-        
-        especif.gridx = 0;
-        especif.gridy = 0;
-        especif.gridwidth = 1;
-        especif.gridheight = 1;
-        especif.weightx = 1.0;  
-        especif.weighty = 1.0;
-        especif.insets = new Insets(0,0,0,0);
-        especif.fill = GridBagConstraints.BOTH;
-        especif.anchor = GridBagConstraints.CENTER;
-        this.add(fotomosaico_panel_izq,BorderLayout.CENTER);
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_tamaño_ventana_y,especif);
         
         especif.gridx = 1;
         especif.gridy = 0;
         especif.gridwidth = 1;
         especif.gridheight = 1;
         especif.weightx = 1.0;  
-        especif.weighty = 0.05;
-        especif.insets = new Insets(0,0,0,0);
-        especif.fill = GridBagConstraints.BOTH;
-        especif.anchor = GridBagConstraints.CENTER;     
-        this.add(fotomosaico_panel_der, BorderLayout.EAST);
+        especif.weighty = 0.15;
+        especif.insets = new Insets(20,10,0,10);
+        especif.fill = GridBagConstraints.HORIZONTAL;
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_label_tamaño_resultado_x,especif);
         
+        especif.gridx = 1;
+        especif.gridy = 1;
+        especif.gridwidth = 1;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 1.0;
+        especif.insets = new Insets(20,10,0,10);
+        especif.fill = GridBagConstraints.HORIZONTAL;
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_tamaño_resultado_x,especif);
+        
+        especif.gridx = 1;
+        especif.gridy = 2;
+        especif.gridwidth = 1;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 0.15;
+        especif.insets = new Insets(20,10,0,10);
+        especif.fill = GridBagConstraints.HORIZONTAL;
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_label_tamaño_resultado_y,especif);
+        
+        especif.gridx = 1;
+        especif.gridy = 3;
+        especif.gridwidth = 1;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 1.0;
+        especif.insets = new Insets(20,10,0,10);
+        especif.fill = GridBagConstraints.HORIZONTAL;
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_spinner_tamaño_resultado_y,especif);
+        
+        especif.gridx = 0;
+        especif.gridy = 4;
+        especif.gridwidth = 2;
+        especif.gridheight = 1;
+        especif.weightx = 1.0;  
+        especif.weighty = 15.0;
+        especif.insets = new Insets(20,10,0,10);
+        especif.fill = GridBagConstraints.NONE;
+        especif.anchor = GridBagConstraints.CENTER;  
+        fotomosaico_panel_spinner.add(fotomosaico_boton,especif);
+        
+        this.add(fotomosaico_panel_izq);
+        this.add(fotomosaico_panel_der);
         this.revalidate();
         
     }
@@ -215,14 +226,15 @@ public class PanelFotomosaico extends PanelEditorImagen {
     @Override
     public void poner_imagen_der(BufferedImage imagen) {
    
-        // No aplica
-
+        ventana_principal.setImageGuardar(imagen);  
+        fotomosaico_label_der.setIcon(new ImageIcon(imagen));
+        ventana_principal.actualizar_interfaz();
     
     }
 
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
-        fotomosaico_label.setIcon(new ImageIcon(imagen));
+        fotomosaico_label_izq.setIcon(new ImageIcon(imagen));
     }
     
     

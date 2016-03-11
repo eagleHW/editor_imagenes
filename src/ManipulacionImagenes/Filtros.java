@@ -22,6 +22,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import net.coobird.thumbnailator.Thumbnails;
 
 /**
  *
@@ -762,17 +763,22 @@ public class Filtros {
         
     }
 
-    public void filtro_fotomosaico(BufferedImage imagen, int tam_ventana_x, int tam_ventana_y, int tam_resultado_x, int tam_resultado_y, String nombre_archivo){
+    public BufferedImage filtro_fotomosaico(BufferedImage imagen, int tam_ventana_x, int tam_ventana_y, int tam_resultado_x, int tam_resultado_y, String nombre_archivo){
         
         int width = imagen.getWidth();
         int height = imagen.getHeight();
+        
+        int new_width = ((int)Math.ceil(width/tam_ventana_x)) * tam_resultado_x;
+        int new_height = ((int)Math.ceil(height/tam_ventana_y)) * tam_resultado_y;
+        
+        BufferedImage nueva_imagen = new BufferedImage(new_width,new_height,BufferedImage.TYPE_INT_RGB);
         
         int[][] new_array;
         int[][][] rgb_arrays;
         K3Tree arbol = null;
         K3TreeNode<LinkedList<String>> nodo_arbol = null;
-        PrintWriter writer = null; 
         String path = "";
+        BufferedImage imagen_reducida;
         
         int red;
         int blue;
@@ -786,55 +792,36 @@ public class Filtros {
         } catch (ClassNotFoundException ex) {
             System.out.println("Clase no encontrada");
         }   
-                   
+         
         try {
-            writer = new PrintWriter(nombre_archivo,"UTF-8");
-            writer.println("<!DOCTYPE HTML>");
-            writer.println("<html>");
-            writer.println("<head>");
-            writer.println("<meta charset=\"UTF-8\">");
-            writer.println("<title>Fotograma</title>");
-            writer.println("<style type=\"text/css\">\n" +
-                           "div{display: table-row-group;}\n" +
-                           "img{float: left;}\n" +
-                           "</style>");
-            writer.println("</head>");
-            writer.println("<body>");
             
-  
-        for (int i = 0; i < height; i+= tam_ventana_y) {
-            
-            writer.println("<div>");
-            
-            for (int j = 0; j < width; j+= tam_ventana_x ) {
-             
-                new_array = bg.getCompMatrix(i, j, tam_ventana_y, tam_ventana_x, imagen);
-                rgb_arrays = bg.getRGBMatrixs(new_array);
-                red = bg.getAverage(rgb_arrays[0]);
-                green = bg.getAverage(rgb_arrays[1]);
-                blue = bg.getAverage(rgb_arrays[2]);
-                nodo_arbol = arbol.search_nearest_neighbour(red, green, blue); 
-                writer.printf("<img src=\"%s%s\" width=\"%d\" height=\"%d\" >\n",path,nodo_arbol.getAtributo().get(0),tam_resultado_x, tam_resultado_y);
-                
+            for (int i = 0; i < height - (height % tam_ventana_y); i += tam_ventana_y) {
+                for (int j = 0; j < width - (width % tam_ventana_x); j += tam_ventana_x ) {
+
+                    new_array = bg.getCompMatrix(i, j, tam_ventana_y, tam_ventana_x, imagen);
+                    rgb_arrays = bg.getRGBMatrixs(new_array);
+                    red = bg.getAverage(rgb_arrays[0]);
+                    green = bg.getAverage(rgb_arrays[1]);
+                    blue = bg.getAverage(rgb_arrays[2]);
+                    nodo_arbol = arbol.search_nearest_neighbour(red, green, blue); 
+
+                    imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
+ 
+                    bg.sobreponer_imagen((i / tam_ventana_y) * tam_resultado_y, 
+                                (j/tam_ventana_y) * tam_resultado_x, imagen_reducida, nueva_imagen);
+                   
+
+                }
             }
-            
-            writer.println("</div>");
-            
+   
+        } catch (IOException ex) {
+                    Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            writer.println("</body>");
-            writer.println("</html>");
-            
-            writer.flush();
-            writer.close();
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                 
+        
+        return nueva_imagen;
+        
     }
+    
     
     private K3Tree cargar_arbol(String nombre_archivo)throws IOException, ClassNotFoundException{
         

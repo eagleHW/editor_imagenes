@@ -29,7 +29,8 @@ public class FotomosaicoListener implements ActionListener, ChangeListener{
     
     private PanelFotomosaico panel_fotomosaico;
     private Interfaz ventana_principal;
-    
+    private Filtros filtros = new Filtros();
+        
     public FotomosaicoListener(PanelFotomosaico panel_fotomosaico,Interfaz ventana_principal){
        
         this.panel_fotomosaico = panel_fotomosaico;
@@ -80,15 +81,10 @@ public class FotomosaicoListener implements ActionListener, ChangeListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-   
-         System.out.println("paso");
         
-        Filtros filtros = new Filtros();
-        filtros.filtro_fotomosaico(ventana_principal.getImage(), tamaño_ventana_x, tamaño_ventana_y, 
-                                    tamaño_resultado_x, tamaño_resultado_y, "prueba1.html");
+        panel_fotomosaico.poner_imagen_der(filtros.filtro_fotomosaico(ventana_principal.getImage(),
+                tamaño_ventana_x, tamaño_ventana_y, tamaño_resultado_x, tamaño_resultado_y, "prueba1.html"));
         
-        System.out.println("salio");
-                
     }
 
 }
