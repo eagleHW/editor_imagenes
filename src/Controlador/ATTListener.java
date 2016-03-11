@@ -10,56 +10,33 @@ import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelATT;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author rae
  */
-public class ATTListener implements ChangeListener, ActionListener {
+public class ATTListener extends AutoaceptarListener {
 
-    private Interfaz ventana_principal;
-    private PanelATT panel_att;
     private Filtros filter = new Filtros();
-    
-    private int num_filas = 1;
-    
-    public ATTListener(PanelATT panel_att, Interfaz ventana_principal){
-        
-        this.panel_att = panel_att;
-        this.ventana_principal = ventana_principal;
-        
-    }
-    
-    @Override
-    public void stateChanged(ChangeEvent e) {
-        
-        JSpinner spinner = (JSpinner)e.getSource();
-        SpinnerNumberModel spinner_number_model = (SpinnerNumberModel) spinner.getModel();
-        
-        switch (spinner.getName()) {
-        
-            case "Num_filas" :
-                    num_filas = spinner_number_model.getNumber().intValue();         
-                break;
-            default:
-                  System.out.println("No cayo en ninguna opcion");
-       
-        }
-    }
 
+    public ATTListener(PanelATT panel_att, Interfaz ventana_principal, int valor_inicial){
+        
+        super.panel_editor = panel_att;
+        super.ventana_principal = ventana_principal;
+        super.valor = valor_inicial;
+        
+    } 
+ 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void aplicar_filtro() {
     
-        panel_att.poner_imagen_der(filter.filtro_att(ventana_principal.getImage(), num_filas));
+        panel_editor.poner_imagen_der(filter.filtro_att(ventana_principal.getImage(), valor));
         
     }
-    
-    
-    
     
 }

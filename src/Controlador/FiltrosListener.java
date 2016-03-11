@@ -190,7 +190,7 @@ public class FiltrosListener implements ActionListener{
                 System.out.println(e.getActionCommand());    
         
             }
-           
+                       
         } catch (IOException ex) {
             Logger.getLogger(FiltrosListener.class.getName()).log(Level.SEVERE, null, ex);
         }
