@@ -11,11 +11,8 @@ import K3Tree.K3TreeNode;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -779,6 +776,7 @@ public class Filtros {
         K3TreeNode<LinkedList<String>> nodo_arbol = null;
         String path = "";
         BufferedImage imagen_reducida;
+        HashMap<String,BufferedImage> cache = new HashMap<>(1500); 
         
         int red;
         int blue;
@@ -805,8 +803,19 @@ public class Filtros {
                     blue = bg.getAverage(rgb_arrays[2]);
                     nodo_arbol = arbol.search_nearest_neighbour(red, green, blue); 
 
-                    imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
- 
+                    if(cache.containsKey(path+nodo_arbol.getAtributo().getFirst())){
+                        
+                     imagen_reducida = cache.get(path+nodo_arbol.getAtributo().getFirst());
+                        
+                    }else{
+                        
+                     imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).
+                                                forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
+                     cache.put(path+nodo_arbol.getAtributo().getFirst(), imagen_reducida);
+                        
+                    }
+                    
+                   
                     bg.sobreponer_imagen((i / tam_ventana_y) * tam_resultado_y, 
                                 (j/tam_ventana_y) * tam_resultado_x, imagen_reducida, nueva_imagen);
                    

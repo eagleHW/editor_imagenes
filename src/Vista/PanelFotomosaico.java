@@ -110,7 +110,7 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.gridwidth = 1;
         especif.gridheight = 1;
         especif.weightx = 1.0;  
-        especif.weighty = 0.5;
+        especif.weighty = 0.25;
         especif.insets = new Insets(20,10,0,0);
         especif.fill = GridBagConstraints.BOTH;
         especif.anchor = GridBagConstraints.CENTER;
@@ -211,8 +211,8 @@ public class PanelFotomosaico extends PanelEditorImagen {
         especif.gridwidth = 2;
         especif.gridheight = 1;
         especif.weightx = 1.0;  
-        especif.weighty = 15.0;
-        especif.insets = new Insets(20,10,0,10);
+        especif.weighty = 1.0;
+        especif.insets = new Insets(20,10,20,10);
         especif.fill = GridBagConstraints.NONE;
         especif.anchor = GridBagConstraints.CENTER;  
         fotomosaico_panel_spinner.add(fotomosaico_boton,especif);
@@ -235,6 +235,7 @@ public class PanelFotomosaico extends PanelEditorImagen {
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
         fotomosaico_label_izq.setIcon(new ImageIcon(imagen));
+        fotomosaico_label_der.setIcon(null);
     }
     
     
