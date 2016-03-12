@@ -7,6 +7,7 @@ import Vista.PanelATT;
 import Vista.PanelBasico;
 import Vista.PanelBlackLight;
 import Vista.PanelBlending;
+import Vista.PanelBrillo;
 import Vista.PanelDithering;
 import Vista.PanelFavicom;
 import Vista.PanelFotomosaico;
@@ -14,7 +15,6 @@ import Vista.PanelLetra;
 import Vista.PanelSemitono;
 import Vista.PanelSepia;
 import Vista.PanelWarhol;
-import Vista.VentanaBrillo;
 import Vista.VentanaRGB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,11 +64,10 @@ public class FiltrosListener implements ActionListener{
             case "Brillo":
                 
                     ventana_principal.remove(ventana_principal.getPanelPrincipal());
-                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                    ventana_principal.setPanelPrincipal(new PanelBrillo(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
                     ventana_principal.actualizar_interfaz();
-                    new VentanaBrillo((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
-                  
+                    
                 break;
             case "Grises":
                  

@@ -86,36 +86,32 @@ public class Filtros {
         
     }
     
-    public BufferedImage filtro_brillo(File file_image, int constante) throws IOException{
-
-        BufferedImage imagen = ImageIO.read(file_image);
-
-        int heigth = imagen.getHeight();
+    public BufferedImage filtro_brillo(BufferedImage imagen, int constante){
+        
+        int height = imagen.getHeight();
         int width = imagen.getWidth();
 
-        int alpha;
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+                
         int red;
         int green;
         int blue;
-
         int argb;
 
-        for( int x = 0; x < width; x ++){
-            for(int y = 0; y < heigth; y++){
+        for( int j = 0; j < width; j ++){
+            for(int i = 0; i < height; i++){
 
-                argb = imagen.getRGB(x, y);
-
-                alpha = bg.getAlphaNum(argb);
+                argb = imagen.getRGB(j, i);
 
                 red = bg.getRedNum(argb) + constante;
                 green = bg.getGreenNum(argb) + constante;
                 blue = bg.getBlueNum(argb) + constante;
 
-                imagen.setRGB(x, y, bg.getARGBNum(alpha,red,green,blue));
+                nueva_imagen.setRGB(j, i, bg.getARGBNum(255,red,green,blue));
 
             }
         }
-         return imagen;
+         return nueva_imagen;
 
     }
  
@@ -830,7 +826,6 @@ public class Filtros {
         return nueva_imagen;
         
     }
-    
     
     private K3Tree cargar_arbol(String nombre_archivo)throws IOException, ClassNotFoundException{
         
