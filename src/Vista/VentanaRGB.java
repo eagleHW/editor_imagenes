@@ -12,8 +12,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,23 +26,9 @@ import javax.swing.event.ChangeEvent;
  */
 public class VentanaRGB extends JFrame {
    
-    private PanelBasico panel_basico;
-    private File file_image;
-    
     private BufferedImage imagen_warhol;
     private PanelWarhol panel_warhol;
-    private boolean warhol = false;
     private int num;
-    
-    
-    public VentanaRGB(PanelBasico panel_basico, File file_image){
-        
-        super("Modificar RGB");
-        this.panel_basico = panel_basico;
-        this.file_image = file_image;
-        cargar_elementos();
-        
-    }
     
     public VentanaRGB(PanelWarhol panel_warhol, BufferedImage imagen_warhol , int num){
         
@@ -52,7 +36,6 @@ public class VentanaRGB extends JFrame {
         this.panel_warhol = panel_warhol;
         this.imagen_warhol = imagen_warhol;
         this.num = num;
-        warhol = true;
         
         cargar_elementos();
         
@@ -60,9 +43,6 @@ public class VentanaRGB extends JFrame {
     
     private void cargar_elementos(){
 
-        System.out.println(this.getContentPane());
-        
-        
         // Red Slider
         
         JPanel red_panel = new JPanel(new GridBagLayout()); 
@@ -123,16 +103,7 @@ public class VentanaRGB extends JFrame {
              int green = green_slider.getValue();
              int blue = blue_slider.getValue();
                 
-            try {
-                if(!warhol){
-                    panel_basico.poner_imagen_der(filter.filtro_rgb(file_image,red,green,blue));
-                }else{
-                   panel_warhol.poner_imagen_warhol(num,filter.filtro_rgb(imagen_warhol,red,green,blue) );
-                }
-                          
-            } catch (IOException ex) {
-                System.out.println("Error al cargar imagen");
-            }
+             panel_warhol.poner_imagen_warhol(num,filter.filtro_rgb(imagen_warhol,red,green,blue) );
             
             dispose();
              

@@ -34,9 +34,9 @@ public class WarholMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         
         int num_ventana = Integer.parseInt(((JLabel)e.getSource()).getName()); 
-        BufferedImage imagen = (BufferedImage)((ImageIcon)(((JLabel)e.getSource()).getIcon())).getImage(); 
+        //BufferedImage imagen = (BufferedImage)((ImageIcon)(((JLabel)e.getSource()).getIcon())).getImage(); 
  
-        new VentanaRGB(panel_warhol,imagen,num_ventana);
+        new VentanaRGB(panel_warhol,ventana_principal.getImage(),num_ventana);
        
     }
 

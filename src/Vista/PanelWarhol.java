@@ -40,7 +40,7 @@ public class PanelWarhol extends PanelEditorImagen{
     private JButton button_generar = new JButton("Generar");
     
     // Imagenes Warhol
-    private BufferedImage img0,img1,img2,img3;
+    private BufferedImage[] imgs = {null,null,null,null};
     
     public PanelWarhol(Interfaz ventana_principal){
         
@@ -68,22 +68,21 @@ public class PanelWarhol extends PanelEditorImagen{
             warhol_label_4.setHorizontalAlignment(JLabel.CENTER);
             warhol_label_der.setHorizontalAlignment(JLabel.CENTER);
 
-            img0 = bg.copiar_imagen(ventana_principal.getImage());
-            img1 = bg.copiar_imagen(ventana_principal.getImage());
-            img2 = bg.copiar_imagen(ventana_principal.getImage());
-            img3 = bg.copiar_imagen(ventana_principal.getImage());
+            imgs[0] = ventana_principal.getImage();
+            imgs[1] = ventana_principal.getImage();
+            imgs[2] = ventana_principal.getImage();
+            imgs[3] = ventana_principal.getImage();
 
-            warhol_label_1.setIcon(new ImageIcon(img0));
-            warhol_label_2.setIcon(new ImageIcon(img1));
-            warhol_label_3.setIcon(new ImageIcon(img2));
-            warhol_label_4.setIcon(new ImageIcon(img3));
+            warhol_label_1.setIcon(new ImageIcon(imgs[0]));
+            warhol_label_2.setIcon(new ImageIcon(imgs[1]));
+            warhol_label_3.setIcon(new ImageIcon(imgs[2]));
+            warhol_label_4.setIcon(new ImageIcon(imgs[3]));
       
             warhol_label_1.addMouseListener(warhol_listener);
             warhol_label_2.addMouseListener(warhol_listener);
             warhol_label_3.addMouseListener(warhol_listener);
             warhol_label_4.addMouseListener(warhol_listener);
               
-
             warhol_panel_izq.add(scroll_label_1);
             warhol_panel_izq.add(scroll_label_2);
             warhol_panel_izq.add(scroll_label_3);
@@ -91,7 +90,7 @@ public class PanelWarhol extends PanelEditorImagen{
             
             button_generar.addActionListener((ActionEvent e) -> {
                 
-                poner_imagen_der(bg.pegar_imagenes(img0, img1, img2, img3));
+                poner_imagen_der(bg.pegar_imagenes(imgs[0], imgs[1], imgs[2], imgs[3]));
                 
             });
             
@@ -100,14 +99,12 @@ public class PanelWarhol extends PanelEditorImagen{
             this.revalidate();
 
         
-        
-       
-        
     }
     
     public void poner_imagen_warhol(int i, BufferedImage imagen){    
-        JLabel[] imgs = {warhol_label_1,warhol_label_2,warhol_label_3,warhol_label_4};
-        imgs[i].setIcon(new ImageIcon(imagen));
+        JLabel[] labels = {warhol_label_1,warhol_label_2,warhol_label_3,warhol_label_4};
+        imgs[i] = imagen; 
+        labels[i].setIcon(new ImageIcon(imgs[i]));
     }
    
     @Override
@@ -121,15 +118,15 @@ public class PanelWarhol extends PanelEditorImagen{
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
         
-        img0 = bg.copiar_imagen(ventana_principal.getImage());
-        img1 = bg.copiar_imagen(ventana_principal.getImage());
-        img2 = bg.copiar_imagen(ventana_principal.getImage());
-        img3 = bg.copiar_imagen(ventana_principal.getImage());
+        imgs[0] = ventana_principal.getImage();
+        imgs[1] = ventana_principal.getImage();
+        imgs[2] = ventana_principal.getImage();
+        imgs[3] = ventana_principal.getImage();
 
-        warhol_label_1.setIcon(new ImageIcon(img0));
-        warhol_label_2.setIcon(new ImageIcon(img1));
-        warhol_label_3.setIcon(new ImageIcon(img2));
-        warhol_label_4.setIcon(new ImageIcon(img3));
+        warhol_label_1.setIcon(new ImageIcon(imgs[0]));
+        warhol_label_2.setIcon(new ImageIcon(imgs[1]));
+        warhol_label_3.setIcon(new ImageIcon(imgs[2]));
+        warhol_label_4.setIcon(new ImageIcon(imgs[3]));
         
         warhol_label_der.setIcon(null);
         
