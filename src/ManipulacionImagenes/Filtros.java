@@ -783,23 +783,7 @@ public class Filtros {
         try {
             arbol = cargar_arbol("hashtable.ser");
             path = new File("").getCanonicalPath();
-        } catch (IOException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico\n "
-                    + "Vuelve a cargar los archivos para el fotomosaico", "Error", JOptionPane.ERROR_MESSAGE);
-            
-            System.out.println("Error al deserializar arbol - Filtros.java");
-            
-        } catch (ClassNotFoundException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico", 
-                                                    "Error", JOptionPane.ERROR_MESSAGE);
-            
-            System.out.println("Clase no encontrada - Filtros.java");
-        }   
-         
-        try {
-            
+      
             for (int i = 0; i < height - (height % tam_ventana_y); i += tam_ventana_y) {
                 for (int j = 0; j < width - (width % tam_ventana_x); j += tam_ventana_x ) {
 
@@ -831,8 +815,20 @@ public class Filtros {
             }
    
         } catch (IOException ex) {
-                    Logger.getLogger(Filtros.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico\n "
+                    + "Vuelve a cargar los archivos para el fotomosaico", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Error al deserializar arbol - Filtros.java");
+            System.out.println("Error al reducir imagen - Filtros.java");
+            
+        } catch (ClassNotFoundException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Clase no encontrada - Filtros.java");
+        }   
         
         return nueva_imagen;
         
