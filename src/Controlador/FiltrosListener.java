@@ -12,6 +12,7 @@ import Vista.PanelDithering;
 import Vista.PanelFavicom;
 import Vista.PanelFotomosaico;
 import Vista.PanelLetra;
+import Vista.PanelRGB;
 import Vista.PanelSemitono;
 import Vista.PanelSepia;
 import Vista.PanelWarhol;
@@ -55,11 +56,10 @@ public class FiltrosListener implements ActionListener{
             case "RGB":
                 
                     ventana_principal.remove(ventana_principal.getPanelPrincipal());
-                    ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                    ventana_principal.setPanelPrincipal(new PanelRGB(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
                     ventana_principal.actualizar_interfaz();
-                    new VentanaRGB((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
-                   
+                 
                 break;
             case "Brillo":
                 

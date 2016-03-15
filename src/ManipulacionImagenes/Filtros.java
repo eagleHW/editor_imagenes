@@ -65,24 +65,26 @@ public class Filtros {
         
     }
 
-    public BufferedImage filtro_rgb(BufferedImage imagen, int red, int green, int blue) throws IOException{
+    public BufferedImage filtro_rgb(BufferedImage imagen, int red, int green, int blue){
         
-        int heigth = imagen.getHeight();
+        int height = imagen.getHeight();
         int width = imagen.getWidth();
 
+        BufferedImage nueva_imagen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        
         int comp_rgb = bg.getARGBNum(255,red,green,blue);
 
         int rgb;
 
         for( int x = 0; x < width; x ++){
-            for(int y = 0; y < heigth; y++){
+            for(int y = 0; y < height; y++){
 
                 rgb = imagen.getRGB(x, y);
-                imagen.setRGB(x, y, rgb & comp_rgb);
+                nueva_imagen.setRGB(x, y, rgb & comp_rgb);
 
             }
         }
-         return imagen;
+         return nueva_imagen;
         
     }
     
@@ -122,13 +124,12 @@ public class Filtros {
 
     }
     
-    public BufferedImage filtro_reduccion_proporcion(File file_image, int tam_matrix) throws IOException{
+    public BufferedImage filtro_reduccion_proporcion(BufferedImage imagen, int tam_matrix){
         
-        BufferedImage imagen_original = ImageIO.read(file_image);
         BufferedImage imagen_creada;
         
-        double width = imagen_original.getWidth() / (tam_matrix * 1.0);
-        double heigth = imagen_original.getHeight() / (tam_matrix * 1.0);
+        double width = imagen.getWidth() / (tam_matrix * 1.0);
+        double heigth = imagen.getHeight() / (tam_matrix * 1.0);
         
         int new_width = (int) Math.ceil(width);
         int new_heigth = (int) Math.ceil(heigth);
@@ -140,10 +141,10 @@ public class Filtros {
         int [][][] argbs_matrix;
         int argb = 0;
                 
-        for(int j = 0; j < imagen_original.getWidth(); j += tam_matrix){
-            for(int i = 0; i < imagen_original.getHeight(); i += tam_matrix){
+        for(int j = 0; j < imagen.getWidth(); j += tam_matrix){
+            for(int i = 0; i < imagen.getHeight(); i += tam_matrix){
              
-                matrix = bg.getEdgeCompMatrix(i,j,tam_matrix,tam_matrix,imagen_original);
+                matrix = bg.getEdgeCompMatrix(i,j,tam_matrix,tam_matrix,imagen);
                 argbs_matrix = bg.getRGBMatrixs(matrix);
                 
                 red = bg.getAverage(argbs_matrix[0]);
