@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -57,7 +59,8 @@ public class ArchivoListener implements ActionListener{
         case "Guardar":
             JFileChooser save_file = new JFileChooser();  
             FileFilter filter = new FileNameExtensionFilter("JPEG file", "jpg", "jpeg");
-
+            int confirmacion = 0;
+            
             save_file.removeChoosableFileFilter(save_file.getFileFilter());
             save_file.addChoosableFileFilter(filter);
             
@@ -67,18 +70,35 @@ public class ArchivoListener implements ActionListener{
             
                 File fileToSave = save_file.getSelectedFile();
                  
-        try {
-                ImageIO.write(ventana_principal.getImageGuardar(),"jpg",fileToSave);
-       
-        } catch (IOException ex) {
-          
-            JOptionPane.showMessageDialog(null, "Error al guardar la imagen", 
-                                                    "Error", JOptionPane.ERROR_MESSAGE);
-            
-            System.out.println("Error al guardar la imagen - ArchivoListener.java");
-            
-        }
-                 
+                try {
+
+                    if(Files.exists(fileToSave.toPath(), LinkOption.NOFOLLOW_LINKS)){
+                        
+                        confirmacion = JOptionPane.showConfirmDialog(null, "Ya existe un archivo con este nombre\n¿Deseas sobreescribirlo?",
+                                "Advertencia", JOptionPane.YES_NO_OPTION );
+                        
+                        
+                        
+                        if(confirmacion == JOptionPane.YES_OPTION){
+                            
+                            ImageIO.write(ventana_principal.getImageGuardar(),"jpg",fileToSave);
+                            
+                        }
+                        
+                    }else{
+                    
+                        ImageIO.write(ventana_principal.getImageGuardar(),"jpg",fileToSave);
+                        
+                    }
+                    
+                } catch (IOException ex) {
+
+                    JOptionPane.showMessageDialog(null, "Error al guardar la imagen", 
+                                                            "Error", JOptionPane.ERROR_MESSAGE);
+
+                    System.out.println("Error al guardar la imagen - ArchivoListener.java");
+
+                }
             }    
             break;
             
