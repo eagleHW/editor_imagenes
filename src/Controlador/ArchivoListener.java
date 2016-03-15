@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -70,7 +71,12 @@ public class ArchivoListener implements ActionListener{
                 ImageIO.write(ventana_principal.getImageGuardar(),"jpg",fileToSave);
        
         } catch (IOException ex) {
-          Logger.getLogger(ArchivoListener.class.getName()).log(Level.SEVERE, null, ex);
+          
+            JOptionPane.showMessageDialog(null, "Error al guardar la imagen", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Error al guardar la imagen - ArchivoListener.java");
+            
         }
                  
             }    

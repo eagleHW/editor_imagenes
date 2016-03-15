@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 /**
@@ -360,7 +361,10 @@ public class Interfaz extends JFrame {
             this.file_imagen = file_imagen;   
             this.imagen = ImageIO.read(file_imagen);    
         } catch (IOException ex) {
-            System.out.println("Problema al cargar la imagen");
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar la imagen - Interfaz.java");
         }
         
     } 

@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -214,7 +215,10 @@ public class PanelFavicom extends PanelEditorImagen{
           favicom_label_izq_inf.setIcon(new ImageIcon(favicom_img_izq_inf));
           favicom_label_izq_inf.setText("");
         }catch(IOException ex) {
-            System.out.println("Problema al cargar la imagen");
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar la imagen - PanelFavicom.java");
         }
         
         favicom_spinner_transparencia.setValue(0);

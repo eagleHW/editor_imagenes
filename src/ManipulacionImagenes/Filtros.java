@@ -19,6 +19,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -783,9 +784,18 @@ public class Filtros {
             arbol = cargar_arbol("hashtable.ser");
             path = new File("").getCanonicalPath();
         } catch (IOException ex) {
-            System.out.println("Intente actuzalizar");
+            
+            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico\n "
+                    + "Vuelve a cargar los archivos para el fotomosaico", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Error al deserializar arbol - Filtros.java");
+            
         } catch (ClassNotFoundException ex) {
-            System.out.println("Clase no encontrada");
+            
+            JOptionPane.showMessageDialog(null, "Error al cargar información de imagenes fotomosaico", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Clase no encontrada - Filtros.java");
         }   
          
         try {

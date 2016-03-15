@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -216,8 +217,13 @@ public class PanelBlending extends PanelEditorImagen {
           blending_label_izq_inf.setIcon(new ImageIcon(blending_img_izq_inf));
           blending_label_izq_inf.setText("");
           blending_label_der.setIcon(null);
+
         }catch(IOException ex) {
-            System.out.println("Problema al cargar la imagen");
+            
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar la imagen - PanelBlending.java");
         }
         
         revalidate();

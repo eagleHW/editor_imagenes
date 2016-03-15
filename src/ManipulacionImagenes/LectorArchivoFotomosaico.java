@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +51,7 @@ public class LectorArchivoFotomosaico {
         K3TreeNode<LinkedList<String>> nuevo_elemento;
         BufferedImage imagen;
         String key;
-        String path;
+        String path = "";
         
         int is_jpg = 0;        
         
@@ -101,7 +102,10 @@ public class LectorArchivoFotomosaico {
                          
         }catch(IOException e){
             
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar imagen para fotomosaico\n"
+                    + path.substring(path.lastIndexOf("/fotograma")),"Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar imagen para fotomosaico - LectorArchivoFotomosaico.java");
             
         }
        

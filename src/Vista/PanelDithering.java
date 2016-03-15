@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -94,7 +95,10 @@ public class PanelDithering extends PanelEditorImagen {
             dithering_label_izq_inf.setIcon(new ImageIcon(
                     filter.filtro_reduccion_porcentaje(dithering_img_izq_inf, VALOR_INICIAL_REDUCCION )));
         } catch (IOException ex) {
-            System.out.println("Problemas al cargar la imagen");
+            JOptionPane.showMessageDialog(null, "Error al cargar las imagenes de dithering", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar la imagenes de dithering - PanelDithering.java");
         }
        
         dithering_spinner_ventana.setName("Ventana");
@@ -212,8 +216,11 @@ public class PanelDithering extends PanelEditorImagen {
             
         }catch(IOException ex){
         
-            System.out.println("Error al cargar la imagen");
-        
+            JOptionPane.showMessageDialog(null, "Error al cargar las imagenes de dithering", 
+                                                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println("Problema al cargar la imagenes de dithering - PanelDithering.java");
+            
         }
         
         return coleccion_imagen;
