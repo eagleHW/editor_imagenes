@@ -10,7 +10,7 @@ import ManipulacionImagenes.Filtros;
 import Vista.Interfaz;
 import Vista.PanelBasico;
 import Vista.PanelReduccionPorcentaje;
-import Vista.VentanaReduccion;
+import Vista.PanelReduccionProporcion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,11 +36,9 @@ public class ReduccionListener implements ActionListener {
         switch (e.getActionCommand()) {
             case "Proporcion":
                 
-                ventana_principal.setPanelPrincipal(new PanelBasico(ventana_principal));
+                ventana_principal.setPanelPrincipal(new PanelReduccionProporcion(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
-                ventana_principal.actualizar_interfaz();
-                new VentanaReduccion((PanelBasico)ventana_principal.getPanelPrincipal(), ventana_principal.getFile());
-                
+                ventana_principal.actualizar_interfaz();        
                 break;
             case "Porcentaje":
                 
