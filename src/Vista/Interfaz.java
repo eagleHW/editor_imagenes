@@ -280,14 +280,17 @@ public class Interfaz extends JFrame {
        JMenuItem itemRotacion90 = new JMenuItem("90"); 
        JMenuItem itemRotacion180 = new JMenuItem("180");
        JMenuItem itemRotacion270 = new JMenuItem("270");
+       JMenuItem itemRotacionMatriz = new JMenuItem("Matriz");
         
        menuRotacion.add(itemRotacion90);
        menuRotacion.add(itemRotacion180);
        menuRotacion.add(itemRotacion270);
+       menuRotacion.add(itemRotacionMatriz);
        
        itemRotacion90.addActionListener(rotacion_listener);
        itemRotacion180.addActionListener(rotacion_listener);
        itemRotacion270.addActionListener(rotacion_listener);
+       itemRotacionMatriz.addActionListener(rotacion_listener);
        
     }
     
