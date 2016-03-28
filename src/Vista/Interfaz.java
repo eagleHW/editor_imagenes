@@ -117,7 +117,8 @@ public class Interfaz extends JFrame {
         JMenuItem itemSemitono = new JMenuItem("Semitono");
         JMenuItem itemLetra = new JMenuItem("Letra");
         JMenuItem itemDithering = new JMenuItem("Dithering");
-        JMenuItem itemFotomosaico = new JMenuItem("Fotomosaico");        
+        JMenuItem itemFotomosaico = new JMenuItem("Fotomosaico");   
+        JMenuItem itemResampling = new JMenuItem("Resampling");
         
         // Creamos el submenu Grises
     
@@ -175,6 +176,7 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuOleo);
         menuFiltros.add(itemRGB);
         menuFiltros.add(menuReduccion);
+        menuFiltros.add(itemResampling);
         menuFiltros.add(menuRotacion);
         menuFiltros.add(itemSemitono);
         menuFiltros.add(itemSepia);
@@ -199,6 +201,7 @@ public class Interfaz extends JFrame {
         itemLetra.addActionListener(filtros_listener);
         itemDithering.addActionListener(filtros_listener);
         itemFotomosaico.addActionListener(filtros_listener);
+        itemResampling.addActionListener(filtros_listener);
         
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);

@@ -834,6 +834,61 @@ public class Filtros {
         
     }
     
+    public BufferedImage filtro_resampling(BufferedImage imagen, int n_width, int n_height){
+       
+        int width = imagen.getWidth();
+        int height = imagen.getHeight();
+        
+        int izq_sup, izq_inf, der_sup, der_inf;
+        int red, green, blue;
+        int index;
+        int x, y;
+       
+        double x_ratio = (width-1.0) / n_width;
+        double y_ratio = (height-1.0) / n_height;
+        
+        double x_diff, y_diff;
+        
+        BufferedImage nueva_imagen = new BufferedImage(n_width,n_height, BufferedImage.TYPE_INT_RGB);
+        
+        for (int i = 0; i < n_height; i++) {
+            for (int j = 0; j < n_width; j++) {
+                
+                x = (int) (x_ratio * j);
+                y = (int) (y_ratio * i);
+                
+                x_diff = (x_ratio * j ) - x;
+                y_diff = (y_ratio * i ) - y;
+                
+                index = imagen.getRGB(x, y);
+        
+                izq_sup = index;
+                der_sup = imagen.getRGB(x + 1, y);
+                izq_inf = imagen.getRGB(x , y + 1);
+                der_inf = imagen.getRGB(x + 1 , y + 1);
+                
+                
+                red = (int) (bg.getRedNum(izq_sup) * (1-x_diff) * (1-y_diff) + bg.getRedNum(der_sup) * (x_diff) * (1-y_diff)
+                                    + bg.getRedNum(izq_inf) * (y_diff) * (1-x_diff) + bg.getRedNum(der_inf) * (x_diff * y_diff));
+                
+                green = (int) (bg.getGreenNum(izq_sup) * (1-x_diff) * (1-y_diff) + bg.getGreenNum(der_sup) *  (x_diff) * (1-y_diff) 
+                        + bg.getGreenNum(izq_inf) * (y_diff) * (1-x_diff) + bg.getGreenNum(der_inf) * (x_diff * y_diff) );                        
+                
+                
+                blue = (int)(bg.getBlueNum(izq_sup) * (1-x_diff) * (1-y_diff) + bg.getBlueNum(der_sup) * (x_diff) * (1-y_diff) 
+                        + bg.getBlueNum(izq_inf) * (y_diff) * (1-x_diff) + bg.getBlueNum(der_inf) * (x_diff * y_diff));
+                
+                
+                nueva_imagen.setRGB(j, i, bg.getARGBNum(255, red, green, blue));
+                
+            }
+            
+        }
+        
+        return nueva_imagen;
+    }
+    
+    
     private K3Tree cargar_arbol(String nombre_archivo)throws IOException, ClassNotFoundException{
         
         FileInputStream fileIn = null;

@@ -13,6 +13,7 @@ import Vista.PanelFavicom;
 import Vista.PanelFotomosaico;
 import Vista.PanelLetra;
 import Vista.PanelRGB;
+import Vista.PanelResampling;
 import Vista.PanelSemitono;
 import Vista.PanelSepia;
 import Vista.PanelWarhol;
@@ -181,6 +182,15 @@ public class FiltrosListener implements ActionListener{
                 
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelFotomosaico(ventana_principal));
+                ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.actualizar_interfaz();
+                
+                break;
+                
+            case "Resampling":
+                
+                ventana_principal.remove(ventana_principal.getPanelPrincipal());
+                ventana_principal.setPanelPrincipal(new PanelResampling(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
                 ventana_principal.actualizar_interfaz();
                 
