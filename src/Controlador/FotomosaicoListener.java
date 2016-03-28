@@ -22,19 +22,24 @@ import javax.swing.event.ChangeListener;
  */
 public class FotomosaicoListener implements ActionListener, ChangeListener{
 
-    int tamaño_ventana_x = 1;
-    int tamaño_ventana_y = 1;
-    int tamaño_resultado_x = 1;
-    int tamaño_resultado_y = 1;
+    private int tamaño_ventana_x;
+    private int tamaño_ventana_y;
+    private int tamaño_resultado_x;
+    private int tamaño_resultado_y;
     
     private PanelFotomosaico panel_fotomosaico;
     private Interfaz ventana_principal;
     private Filtros filtros = new Filtros();
         
-    public FotomosaicoListener(PanelFotomosaico panel_fotomosaico,Interfaz ventana_principal){
+    public FotomosaicoListener(PanelFotomosaico panel_fotomosaico,Interfaz ventana_principal, int valor_inicial){
        
         this.panel_fotomosaico = panel_fotomosaico;
         this.ventana_principal = ventana_principal;
+        
+        tamaño_ventana_x = valor_inicial;
+        tamaño_ventana_y = valor_inicial;
+        tamaño_resultado_x = valor_inicial;
+        tamaño_resultado_y = valor_inicial;
         
     }
     
