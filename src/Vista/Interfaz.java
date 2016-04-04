@@ -4,6 +4,7 @@ package Vista;
 import Controlador.ArchivoListener;
 import Controlador.ConvolucionListener;
 import Controlador.FiltrosListener;
+import Controlador.FotomosaicoMenuListener;
 import Controlador.GrisesListener;
 import Controlador.MaximoListener;
 import Controlador.MinimoListener;
@@ -37,6 +38,9 @@ public class Interfaz extends JFrame {
     
     private BibliotecaGrafica bg = new BibliotecaGrafica();
         
+    private JMenuItem itemGuardar;
+    private JMenu menuFiltros;
+    
     private PanelEditorImagen panel_principal;
             
     public Interfaz(){
@@ -45,9 +49,10 @@ public class Interfaz extends JFrame {
 
         // Metodo que se encarga de cargar el menu
         crear_menu();
-                     
+        
+        // Panel al cargar la imagen
         panel_principal = new PanelBasico(this);
-        panel_principal.poner_imagen_izq(imagen);
+        //panel_principal.poner_imagen_izq(imagen);
         this.add(panel_principal);
         
         // Aributos de la ventana principal
@@ -71,8 +76,9 @@ public class Interfaz extends JFrame {
         
         // Crea los elementos del menu Archivo
         JMenuItem itemNuevaImagen = new JMenuItem("Nueva imagen");
-        JMenuItem itemGuardar = new JMenuItem("Guardar");
+        this.itemGuardar = new JMenuItem("Guardar");
         JMenuItem itemSalir = new JMenuItem("Salir");
+        //itemGuardar.setEnabled(false);
         
         // Agrega los elementos del menu Archivo
         menuArchivo.add(itemNuevaImagen);  
@@ -99,8 +105,9 @@ public class Interfaz extends JFrame {
         itemSalir.addActionListener(archivo_listener);
         
         // Crea el menu Filtro
-        JMenu menuFiltros = new JMenu("Filtros");
+        this.menuFiltros = new JMenu("Filtros");
         menuFiltros.setMnemonic('F');
+        //menuFiltros.setEnabled(false);
         
         // Crea los elementos del menu Filtros 
         JMenuItem itemAzar = new JMenuItem("Azar");
@@ -116,8 +123,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemAtt = new JMenuItem("AT&T");
         JMenuItem itemSemitono = new JMenuItem("Semitono");
         JMenuItem itemLetra = new JMenuItem("Letra");
-        JMenuItem itemDithering = new JMenuItem("Dithering");
-        JMenuItem itemFotomosaico = new JMenuItem("Fotomosaico");   
+        JMenuItem itemDithering = new JMenuItem("Dithering"); 
         JMenuItem itemResampling = new JMenuItem("Resampling");
         
         // Creamos el submenu Grises
@@ -155,6 +161,11 @@ public class Interfaz extends JFrame {
         JMenu menuReduccion = new JMenu("Reduccion");
         crear_submenu_reduccion(menuReduccion);
         
+        // Cremos el submenu Fotomosaico
+        
+        JMenu menuFotomosaico = new JMenu("Fotomosaico");
+        crear_submenu_fotomosaico(menuFotomosaico);
+        
         // Agrega los elementos del menu filtro
         // incluyendo los submenus
         
@@ -167,11 +178,12 @@ public class Interfaz extends JFrame {
         menuFiltros.add(menuConvolucion);
         menuFiltros.add(itemDithering);
         menuFiltros.add(itemFavicom);
-        menuFiltros.add(itemFotomosaico);
+        menuFiltros.add(menuFotomosaico);
         menuFiltros.add(menuGrises);
         menuFiltros.add(itemLetra);
         menuFiltros.add(menuMaximo);
         menuFiltros.add(menuMinimo);
+        
         menuFiltros.add(itemMosaico);
         menuFiltros.add(menuOleo);
         menuFiltros.add(itemRGB);
@@ -200,14 +212,13 @@ public class Interfaz extends JFrame {
         itemSemitono.addActionListener(filtros_listener);
         itemLetra.addActionListener(filtros_listener);
         itemDithering.addActionListener(filtros_listener);
-        itemFotomosaico.addActionListener(filtros_listener);
         itemResampling.addActionListener(filtros_listener);
         
         // Añade los menus a la barra de menu
         barra.add(menuArchivo);
         barra.add(menuFiltros);
         
-        
+        /*
         // Para evitar estar cargando imagen cada vez que pruebo
         try {
             BufferedImage img;
@@ -217,7 +228,7 @@ public class Interfaz extends JFrame {
             this.imagen = img;
         } catch (IOException ex) {
             System.out.println("Error al cargar imagen de prueba");
-        }
+        }*/
        
     }
     
@@ -357,6 +368,22 @@ public class Interfaz extends JFrame {
        
     }
     
+    private void crear_submenu_fotomosaico(JMenu menuFotomosaico){
+        
+        FotomosaicoMenuListener fotomosaico_menu_listener = new FotomosaicoMenuListener(this);
+        
+        JMenuItem itemFotomosaico = new JMenuItem("Fotomosaico");
+        JMenuItem itemFotomosaicoActualizar = new JMenuItem("Cargar Imágenes");
+        
+        menuFotomosaico.add(itemFotomosaico);
+        menuFotomosaico.add(itemFotomosaicoActualizar);
+        
+        itemFotomosaico.addActionListener(fotomosaico_menu_listener);
+        itemFotomosaicoActualizar.addActionListener(fotomosaico_menu_listener);
+        
+    }
+    
+    
     public File getFile(){
         return file_imagen;
     }
@@ -386,6 +413,7 @@ public class Interfaz extends JFrame {
     
     public void setImageGuardar(BufferedImage imagen_guardar){
         this.imagen_guardar = imagen_guardar;
+        enable_item_guardar(true);
     }
     
      public PanelEditorImagen getPanelPrincipal(){
@@ -405,5 +433,18 @@ public class Interfaz extends JFrame {
         repaint();
     }
            
+    public void enable_item_guardar(boolean enabled){
+       
+        itemGuardar.setEnabled(enabled);
+        
+    }
+    
+    public void enable_menu_filtros(boolean enabled){
+        
+        menuFiltros.setEnabled(enabled);
+        
+    }
+    
+    
 }
 

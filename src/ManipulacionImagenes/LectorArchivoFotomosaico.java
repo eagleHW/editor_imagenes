@@ -29,18 +29,14 @@ public class LectorArchivoFotomosaico {
     private HashMap<String,K3TreeNode<LinkedList<String>>> hash_map = new HashMap(5000);
     
     
-    public LectorArchivoFotomosaico(String path, boolean actualizar){
+    public LectorArchivoFotomosaico(String path){
     
-    this.path = path;
-    
-    hash_map = new HashMap(5000);
-    leer_archivos(new File(path),hash_map);
-    this.hash_map = hash_map;
-    serializar_hashmap(hash_map,"hashtable.ser");
-    
-    System.out.println("Tamaño hashmap : " + hash_map.size());
+        this.path = path;
 
-            
+        hash_map = new HashMap(5000);
+        leer_archivos(new File(path),hash_map);
+        serializar_hashmap(hash_map,"hashtable.ser");
+
     }
     
    
@@ -53,11 +49,7 @@ public class LectorArchivoFotomosaico {
         String key;
         String path = "";
         
-        int is_jpg = 0;        
-        
-        K3TreeNode[] nodos  = new K3TreeNode[1];
-        
-        
+               
         try{
             
             File[] files = dir.listFiles();
@@ -71,9 +63,7 @@ public class LectorArchivoFotomosaico {
                     
                 }else{
                     if(Files.probeContentType(file.toPath()).equals("image/jpeg")){
-                   
-                        is_jpg++;
-                        
+                                           
                         imagen = ImageIO.read(file);
                         
                         average = bg.getAverageRGB(imagen,5);
@@ -111,20 +101,6 @@ public class LectorArchivoFotomosaico {
        
     }
     
-    private boolean isJPG(File file) throws FileNotFoundException, IOException{
-        
-        DataInputStream input_stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-        try {
-            if (input_stream.readInt() == 0xffd8ffe0) {
-                return true;
-            } else {
-                return false;
-            }
-        } finally {
-            input_stream.close();
-        }
-               
-    }
     
     private void serializar_hashmap(HashMap tabla, String ruta_archivo){
         
