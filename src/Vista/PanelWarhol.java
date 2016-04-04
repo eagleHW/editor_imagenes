@@ -68,6 +68,11 @@ public class PanelWarhol extends PanelEditorImagen{
             warhol_label_4.setHorizontalAlignment(JLabel.CENTER);
             warhol_label_der.setHorizontalAlignment(JLabel.CENTER);
 
+            warhol_label_1.setToolTipText("Click para modificar RGB");
+            warhol_label_2.setToolTipText("Click para modificar RGB");
+            warhol_label_3.setToolTipText("Click para modificar RGB");
+            warhol_label_4.setToolTipText("Click para modificar RGB");
+            
             imgs[0] = ventana_principal.getImage();
             imgs[1] = ventana_principal.getImage();
             imgs[2] = ventana_principal.getImage();

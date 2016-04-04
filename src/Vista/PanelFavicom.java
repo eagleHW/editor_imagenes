@@ -282,6 +282,7 @@ public class PanelFavicom extends PanelEditorImagen{
         favicom_spinner_posc_x.setEnabled(true);
         favicom_spinner_posc_y.setEnabled(true);
         favicom_boton.setEnabled(true);
+        favicom_label_izq_inf.setToolTipText("Click para reemplazar la imagen");
     }
     
     
