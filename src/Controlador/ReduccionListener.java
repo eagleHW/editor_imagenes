@@ -38,12 +38,14 @@ public class ReduccionListener implements ActionListener {
                 
                 ventana_principal.setPanelPrincipal(new PanelReduccionProporcion(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();        
                 break;
             case "Porcentaje":
                 
                 ventana_principal.setPanelPrincipal(new PanelReduccionPorcentaje(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;

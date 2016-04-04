@@ -10,6 +10,7 @@ import K3Tree.K3Tree;
 import K3Tree.K3TreeNode;
 import Vista.Interfaz;
 import java.util.HashMap;
+import javax.swing.UIManager;
 
 /**
  *
@@ -35,7 +36,8 @@ public class Main {
         }
         */
         
-       /////new LectorArchivoFotomosaico("fotograma/",true);
+       /////new LectorArchivoFotomosaico("fotograma/");
+       UIManager.put("OptionPane.yesButtonText", "Si"); 
        new Interfaz(); 
   
         HashMap<String,K3TreeNode> hash = null;

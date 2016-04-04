@@ -59,6 +59,7 @@ public class FiltrosListener implements ActionListener{
                     ventana_principal.remove(ventana_principal.getPanelPrincipal());
                     ventana_principal.setPanelPrincipal(new PanelRGB(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
+                    ventana_principal.enable_item_guardar(false);
                     ventana_principal.actualizar_interfaz();
                  
                 break;
@@ -67,6 +68,7 @@ public class FiltrosListener implements ActionListener{
                     ventana_principal.remove(ventana_principal.getPanelPrincipal());
                     ventana_principal.setPanelPrincipal(new PanelBrillo(ventana_principal));
                     ventana_principal.add(ventana_principal.getPanelPrincipal());
+                    ventana_principal.enable_item_guardar(false);
                     ventana_principal.actualizar_interfaz();
                     
                 break;
@@ -91,6 +93,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelWarhol(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                                   
                 break;
@@ -103,6 +106,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelBlending(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -111,6 +115,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelFavicom(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -120,6 +125,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelSepia(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -139,6 +145,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelBlackLight(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -147,6 +154,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelATT(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
             
                 break;
@@ -156,6 +164,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelSemitono(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -165,6 +174,7 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelLetra(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
@@ -174,24 +184,17 @@ public class FiltrosListener implements ActionListener{
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelDithering(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;
-                            
-            case "Fotomosaico":    
-                
-                ventana_principal.remove(ventana_principal.getPanelPrincipal());
-                ventana_principal.setPanelPrincipal(new PanelFotomosaico(ventana_principal));
-                ventana_principal.add(ventana_principal.getPanelPrincipal());
-                ventana_principal.actualizar_interfaz();
-                
-                break;
-                
+                                            
             case "Resampling":
                 
                 ventana_principal.remove(ventana_principal.getPanelPrincipal());
                 ventana_principal.setPanelPrincipal(new PanelResampling(ventana_principal));
                 ventana_principal.add(ventana_principal.getPanelPrincipal());
+                ventana_principal.enable_item_guardar(false);
                 ventana_principal.actualizar_interfaz();
                 
                 break;

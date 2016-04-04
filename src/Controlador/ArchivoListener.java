@@ -51,7 +51,7 @@ public class ArchivoListener implements ActionListener{
                  
                  ventana_principal.setFile(open_file.getSelectedFile());
                  ventana_principal.getPanelPrincipal().poner_imagen_izq(ventana_principal.getImage());
-                 
+                 ventana_principal.enable_menu_filtros(true);
              
              }
             break;

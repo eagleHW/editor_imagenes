@@ -69,6 +69,7 @@ public class RotacionListener implements ActionListener {
                         ventana_principal.remove(ventana_principal.getPanelPrincipal());
                         ventana_principal.setPanelPrincipal(new PanelRotacionMatriz(ventana_principal));
                         ventana_principal.add(ventana_principal.getPanelPrincipal());
+                        ventana_principal.enable_item_guardar(false);
                         ventana_principal.actualizar_interfaz();
 
                      break;

@@ -35,15 +35,12 @@ public class PanelBasico extends PanelEditorImagen{
             img_izq.setHorizontalAlignment(JLabel.CENTER);
             img_der.setHorizontalAlignment(JLabel.CENTER);
             
-            try {
+            if(ventana_principal.getImage() != null){
                 
-            basico_img_izq = ImageIO.read(ventana_principal.getFile());
-            img_izq.setIcon(new ImageIcon(basico_img_izq));
+                img_izq.setIcon(new ImageIcon(ventana_principal.getImage()));
             
-            } catch (IOException ex) {
-                System.out.println("Error al cargar imagen");
             }
-            
+      
             this.add(scroll_img_izq);
             this.add(scroll_img_der);
      

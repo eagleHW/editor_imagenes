@@ -41,9 +41,9 @@ public class FotomosaicoMenuListener implements ActionListener{
                  
                 break;
                  
-             case "Actualizar" :
+             case "Cargar Imágenes" :
                  
-                 new LectorArchivoFotomosaico("fotograma/");
+                new LectorArchivoFotomosaico("fotograma/");
                  
                 break; 
          }
