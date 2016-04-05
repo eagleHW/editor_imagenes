@@ -78,7 +78,7 @@ public class Interfaz extends JFrame {
         JMenuItem itemNuevaImagen = new JMenuItem("Nueva imagen");
         this.itemGuardar = new JMenuItem("Guardar");
         JMenuItem itemSalir = new JMenuItem("Salir");
-        //itemGuardar.setEnabled(false);
+        itemGuardar.setEnabled(false);
         
         // Agrega los elementos del menu Archivo
         menuArchivo.add(itemNuevaImagen);  
@@ -107,7 +107,7 @@ public class Interfaz extends JFrame {
         // Crea el menu Filtro
         this.menuFiltros = new JMenu("Filtros");
         menuFiltros.setMnemonic('F');
-        //menuFiltros.setEnabled(false);
+        menuFiltros.setEnabled(false);
         
         // Crea los elementos del menu Filtros 
         JMenuItem itemAzar = new JMenuItem("Azar");
