@@ -236,6 +236,9 @@ public class PanelRGB extends PanelEditorImagen{
     public void poner_imagen_izq(BufferedImage imagen) {
     
         rgb_label_izq.setIcon(new ImageIcon(imagen));
+        rgb_model_spinner_red.setValue(new Integer(VALOR_INICIAL));
+        rgb_model_spinner_green.setValue(new Integer(VALOR_INICIAL));
+        rgb_model_spinner_blue.setValue(new Integer(VALOR_INICIAL));
         rgb_label_der.setIcon(null);
     
     }

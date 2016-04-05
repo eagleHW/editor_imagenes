@@ -238,6 +238,8 @@ public class PanelSemitono extends PanelEditorImagen {
     public void poner_imagen_izq(BufferedImage imagen) {
   
         semitono_label_izq_sup.setIcon(new ImageIcon(imagen));
+        semitono_spinner_model_ventana.setValue(new Integer(VALOR_INICIAL_VENTANA));
+        semitono_spinner_model_reduccion.setValue(new Integer(VALOR_INICIAL_REDUCCION));
         semitono_label_der.setIcon(null);
     
     }

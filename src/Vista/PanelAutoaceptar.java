@@ -45,6 +45,8 @@ public class PanelAutoaceptar extends PanelEditorImagen{
     
     private JLabel auto_aceptar_label_spinner;
     private JSpinner auto_aceptar_spinner;
+    private SpinnerNumberModel auto_spinner_model;
+    private int valor_inicial;
     
     private JButton auto_aceptar_boton = new JButton("Aceptar");
     
@@ -56,6 +58,8 @@ public class PanelAutoaceptar extends PanelEditorImagen{
         this.ventana_principal = ventana_principal;
         this.auto_aceptar_spinner = new JSpinner(spinner_model);
         this.auto_aceptar_label_spinner = new JLabel(mensaje_label);
+        this.auto_spinner_model = spinner_model;
+        this.valor_inicial = spinner_model.getNumber().intValue();
         this.listener = listener;        
         this.setLayout(new GridLayout(1,2,5,10));
         
@@ -173,7 +177,9 @@ public class PanelAutoaceptar extends PanelEditorImagen{
     public void poner_imagen_izq(BufferedImage imagen) {
 
         auto_aceptar_label_izq.setIcon(new ImageIcon(imagen));
+        auto_spinner_model.setValue(new Integer(valor_inicial));
         auto_aceptar_label_der.setIcon(null);
+        
         
     }
     

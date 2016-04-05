@@ -152,6 +152,7 @@ public class PanelReduccionProporcion extends PanelEditorImagen {
     public void poner_imagen_izq(BufferedImage imagen) {
 
         reduccion_proporcion_label_izq.setIcon(new ImageIcon(imagen));
+        reduccion_proporcion_combobox.setSelectedIndex(0);
         reduccion_proporcion_label_der.setIcon(null);
         
     }

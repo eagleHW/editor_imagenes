@@ -238,6 +238,8 @@ public class PanelLetra extends PanelEditorImagen{
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
         letra_label_izq_sup.setIcon(new ImageIcon(imagen));
+        letra_spinner_model_ventana.setValue(new Integer(VALOR_INICIAL_VENTANA));
+        letra_spinner_model_reduccion.setValue(new Integer(VALOR_INICIAL_REDUCCION));
         letra_label_der.setIcon(null);
     }
     

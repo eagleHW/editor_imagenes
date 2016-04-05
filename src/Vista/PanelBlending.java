@@ -201,6 +201,7 @@ public class PanelBlending extends PanelEditorImagen {
     public void poner_imagen_der(BufferedImage imagen){
         ventana_principal.setImageGuardar(imagen);  
         blending_label_der.setIcon(new ImageIcon(imagen));
+        blending_spinner_model.setValue(new Integer(VALOR_INICIAL));
     }
 
     public void poner_imagen_izq(BufferedImage imagen) {    
@@ -217,6 +218,7 @@ public class PanelBlending extends PanelEditorImagen {
           blending_label_izq_inf.setIcon(new ImageIcon(blending_img_izq_inf));
           blending_label_izq_inf.setText("");
           blending_label_der.setIcon(null);
+          blending_spinner_model.setValue(new Integer(VALOR_INICIAL));
 
         }catch(IOException ex) {
             

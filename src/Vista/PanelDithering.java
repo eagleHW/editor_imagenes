@@ -246,7 +246,9 @@ public class PanelDithering extends PanelEditorImagen {
         
         dithering_label_izq_sup.setIcon(new ImageIcon(imagen));
         dithering_label_der.setIcon(null);
-    
+        dithering_spinner_model_ventana.setValue(new Integer(VALOR_INICIAL_VENTANA));
+        dithering_spinner_model_reduccion.setValue(new Integer(VALOR_INICIAL_REDUCCION));
+        
     }
     
 }

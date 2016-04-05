@@ -205,6 +205,8 @@ public class PanelResampling extends PanelEditorImagen {
     public void poner_imagen_izq(BufferedImage imagen) {
     
         resampling_label_izq.setIcon(new ImageIcon(imagen));
+        resampling_model_spinner_width.setValue(new Integer(VALOR_INICIAL));
+        resampling_model_spinner_height.setValue(new Integer(VALOR_INICIAL));        
         resampling_label_der.setIcon(null);
         
     }

@@ -245,6 +245,10 @@ public class PanelFotomosaico extends PanelEditorImagen {
     @Override
     public void poner_imagen_izq(BufferedImage imagen) {
         fotomosaico_label_izq.setIcon(new ImageIcon(imagen));
+        fotomosaico_spinner_model_tamaño_ventana_x.setValue(new Integer(VALOR_INICIAL));
+        fotomosaico_spinner_model_tamaño_ventana_y.setValue(new Integer(VALOR_INICIAL));
+        fotomosaico_spinner_model_tamaño_resultado_x.setValue(new Integer(VALOR_INICIAL));
+        fotomosaico_spinner_model_tamaño_resultado_y.setValue(new Integer(VALOR_INICIAL));
         fotomosaico_label_der.setIcon(null);
     }
     

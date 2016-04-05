@@ -836,6 +836,12 @@ public class Filtros {
     
     public BufferedImage filtro_resampling(BufferedImage imagen, int n_width, int n_height){
        
+        if(n_width == 0 || n_height == 0 ){
+        
+            return new BufferedImage(1,1, BufferedImage.TYPE_INT_RGB);
+            
+        }
+        
         int width = imagen.getWidth();
         int height = imagen.getHeight();
         
