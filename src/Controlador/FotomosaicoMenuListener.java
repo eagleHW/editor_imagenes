@@ -11,6 +11,13 @@ import Vista.Interfaz;
 import Vista.PanelFotomosaico;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -42,12 +49,56 @@ public class FotomosaicoMenuListener implements ActionListener{
                 break;
                  
              case "Cargar Imágenes" :
-                 
-                new LectorArchivoFotomosaico("fotograma/");
-                 
-                break; 
+              
+                LectorArchivoFotomosaico lector = new LectorArchivoFotomosaico("fotograma/",ventana_principal);
+                    
+                lector.getDialog().addWindowListener(new WindowListener(){
+
+                @Override
+                public void windowOpened(WindowEvent e) {}
+
+                @Override
+                public void windowClosing(WindowEvent e) {}
+
+                @Override
+                public void windowClosed(WindowEvent e) {
+
+                    lector.cancel(true);
+
+                }
+
+                @Override
+                public void windowIconified(WindowEvent e) {
+                
+                    lector.cancel(true);
+                    
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+
+                @Override
+                public void windowActivated(WindowEvent e) {}
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+
+                    }
+               );
+                    
+                    
+                lector.execute();
+                lector.visible_frame();
+                    
+
+                break;                
          }
         
     }
+    
+
+    
+    
+    
     
 }

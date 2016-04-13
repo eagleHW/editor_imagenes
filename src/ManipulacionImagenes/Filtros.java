@@ -774,6 +774,7 @@ public class Filtros {
         K3TreeNode<LinkedList<String>> nodo_arbol = null;
         String path = "";
         BufferedImage imagen_reducida;
+        BufferedImage imagen_no_reducida;
         HashMap<String,BufferedImage> cache = new HashMap<>(1500); 
         
         int red;
@@ -800,9 +801,14 @@ public class Filtros {
                         
                     }else{
                         
-                     imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).
-                                                forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
-                     cache.put(path+nodo_arbol.getAtributo().getFirst(), imagen_reducida);
+                     //imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).
+                     //                           forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
+                       
+                        
+                        imagen_no_reducida = ImageIO.read(new File(path + nodo_arbol.getAtributo().getFirst()));
+                        imagen_reducida = filtro_resampling(imagen_no_reducida,tam_resultado_x, tam_resultado_y);
+                        
+                        cache.put(path+nodo_arbol.getAtributo().getFirst(), imagen_reducida);
                         
                     }
                     
