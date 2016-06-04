@@ -16,11 +16,8 @@ import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import net.coobird.thumbnailator.Thumbnails;
 
 /**
  *
@@ -800,11 +797,7 @@ public class Filtros {
                      imagen_reducida = cache.get(path+nodo_arbol.getAtributo().getFirst());
                         
                     }else{
-                        
-                     //imagen_reducida =  Thumbnails.of(path + nodo_arbol.getAtributo().getFirst()).
-                     //                           forceSize(tam_resultado_x, tam_resultado_y).asBufferedImage();
-                       
-                        
+                      
                         imagen_no_reducida = ImageIO.read(new File(path + nodo_arbol.getAtributo().getFirst()));
                         imagen_reducida = filtro_resampling(imagen_no_reducida,tam_resultado_x, tam_resultado_y);
                         
